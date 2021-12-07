@@ -34,43 +34,43 @@ describe('RecipeRepo', () => {
     expect(recipeRepo.recipes.length).to.equal(2);
   });
   
-  it.skip('should be class instances', () => {
+  it('should be class instances', () => {
     expect(recipeRepo.recipes[0]).to.be.an.instanceof(Recipe);
-    expect(recipeRepo.recipes[1].ingredients).to.be.an.instanceof(Ingredient);
+    expect(recipeRepo.recipes[1].ingredients[0]).to.be.an.instanceof(Ingredient);
   })
 
-  it.skip('should have a list of current recipes', () => {
+  it('should have a list of current recipes', () => {
     expect(recipeRepo.cookbookRecipes).to.be.an('array');
-    expect(recipeRepo.cookbookRecipes.length).to.be(0);
+    expect(recipeRepo.cookbookRecipes.length).to.equal(0);
   });
 
-  it.skip('should be able to add recipes to the cookbook', () => {
-    let grilledCheese = recipeRepo[0];
+  it('should be able to add recipes to the cookbook', () => {
+    let grilledCheese = recipeRepo.recipes[0];
     recipeRepo.addToCookbook(grilledCheese)
 
     expect(recipeRepo.cookbookRecipes.length).to.equal(1);
     expect(recipeRepo.cookbookRecipes[0]).to.equal(10);
   });
 
-  it.skip('should have a list of filter terms', () => {
+  it('should have a list of filter terms', () => {
     expect(recipeRepo.filterTerms).to.be.an('array');
-    expect(recipeRepo.filterTerms.length).to.be(0);
+    expect(recipeRepo.filterTerms.length).to.equal(0);
   });
 
-  it.skip('should be able to add terms to the list of filter terms', () => {
+  it('should be able to add terms to the list of filter terms', () => {
     recipeRepo.addFilter('dinner');
     expect(recipeRepo.filterTerms[0]).to.equal('dinner');
   });
 
-  it.skip('should be able to return a filtered list of recipe ids', () => {
-    expect(recipeRepo.currentRecipeIds.length).to.be(2);
+  it('should be able to return a filtered list of recipe ids', () => {
+    expect(recipeRepo.currentRecipeIds.length).to.equal(2);
     recipeRepo.addFilter('snack');
     recipeRepo.filterRecipes();
     expect(recipeRepo.currentRecipeIds).to.be.an('array');
     expect(recipeRepo.currentRecipeIds[0]).to.equal(10);
   });
 
-  it.skip('should be able to filter by multiple search terms', () => {
+  it('should be able to filter by multiple search terms', () => {
     recipeRepo.addFilter('sandwich');
     recipeRepo.filterRecipes();
     expect(recipeRepo.currentRecipeIds.length).to.equal(2);
@@ -79,7 +79,7 @@ describe('RecipeRepo', () => {
     expect(recipeRepo.currentRecipeIds.length).to.equal(1);
   });
 
-  it.skip('should be able to clear search terms', () => {
+  it('should be able to clear search terms', () => {
     recipeRepo.addFilter('lunch');
     recipeRepo.filterRecipes();
     expect(recipeRepo.currentRecipeIds.length).to.equal(1);
