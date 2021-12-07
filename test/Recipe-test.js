@@ -38,7 +38,7 @@ describe('Recipe', () => {
   });
 
   it('should have a quantity for each ingredient', () => {
-    expect(recipe.ingredients[0].quantity.amount).to.equal(2);
+    expect(recipe.ingredients[0].quantity).to.equal(2);
   });
 
   it('should have a list of instructions', () => {

@@ -1,12 +1,15 @@
+import ingredientsData from '../data/ingredients-test-data.js';
+
 class Ingredient {
-  constructor(id, name, cost) {
+  constructor(id, quantity) {
     this.id = id;
-    this.name = name;
-    this.estimatedCost = cost;
+    this.name = ingredientsData.find(ingredient => this.id === ingredient.id).name;
+    this.estimatedCostInCents = ingredientsData.find(ingredient => this.id === ingredient.id).estimatedCostInCents;
+    this.quantity = quantity;
   }
 
   calculateCost(quantity) {
-    return quantity * this.estimatedCost;
+    return quantity * this.estimatedCostInCents;
   }
 }
 
