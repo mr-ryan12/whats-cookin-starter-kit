@@ -13,9 +13,8 @@ class Recipe {
   }
 
   calculateCost() {
-    console.log(this.ingredients[0].estimatedCostInCents);
-    this.ingredients.reduce((total, ingredient) => {
-      ingredient.quantity * ingredient.estimatedCostInCents
+    return this.ingredients.reduce((total, ingredient) => {
+      total += ingredient.quantity * ingredient.estimatedCostInCents
       return total;
     }, 0);
   }
