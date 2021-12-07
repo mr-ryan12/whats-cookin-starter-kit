@@ -29,19 +29,33 @@ describe('Recipe', () => {
   it('should have a list of recipes', () => {
     expect(recipeRepo.recipes).to.be.an('array');
     expect(recipeRepo.recipes.length).to.be(2);
-    expect(recipeRepo.recipes[0]).to.be.an.instanceof(Recipe);
   });
+  
+  it('should be class instances', () => {
+    expect(recipeRepo.recipes[0]).to.be.an.instanceof(Recipe);
+    expect(recipeRepo.recipes[1].ingredients).to.be.an.instanceof(Ingredient);
+  })
 
   it('should have a list of current recipes', () => {
     expect(recipeRepo.cookbookRecipes).to.be.an('array');
-    expect(recipeRepo.cookBookRecipes.length).to.be(0);
+    expect(recipeRepo.cookbookRecipes.length).to.be(0);
   });
 
   it('should be able to add recipes to the cookbook', () => {
     let grilledCheese = recipeRepo[0];
     recipeRepo.addToCookbook(grilledCheese)
 
-    expect(recipeRepo.cookbook.length).to.equal(1);
-    expect()
-  })
+    expect(recipeRepo.cookbookRecipes.length).to.equal(1);
+    expect(recipeRepo.cookbookRecipes[0]).to.equal(10);
+  });
+
+  it('should have a list of filter terms', () => {
+    expect(recipeRepo.filterTerms).to.be.an('array');
+    expect(recipeRepo.filterTerms.length).to.be(0);
+  });
+
+  it('should be able to add terms to the list of filter terms', () => {
+    recipeRepo.addFilter('dinner');
+    expect(recipeRepo.filterTerms[0]).to.equal('dinner');
+  });
 })

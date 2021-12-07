@@ -70,10 +70,9 @@ const recipesData = [{
         "number": 2
       }
     ],
-    "name": "Grill Cheese",
+    "name": "Burger",
     "tags": [
-      "snack",
-      "lunch",
+      "dinner",
       "sandwich"
     ]
   }];
