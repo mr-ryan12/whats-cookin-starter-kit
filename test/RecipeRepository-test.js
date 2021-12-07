@@ -1,5 +1,7 @@
 import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
+import Ingredient from '../src/classes/Ingredient';
+import Recipe from '../src/classes/Recipe';
 import recipeData from '../src/data/recipe-test-data.js';
 
 describe('Recipe', () => {
@@ -24,5 +26,22 @@ describe('Recipe', () => {
     expect(RecipeRepository).to.be.a('function');
   });
 
-  it('should ')
+  it('should have a list of recipes', () => {
+    expect(recipeRepo.recipes).to.be.an('array');
+    expect(recipeRepo.recipes.length).to.be(2);
+    expect(recipeRepo.recipes[0]).to.be.an.instanceof(Recipe);
+  });
+
+  it('should have a list of current recipes', () => {
+    expect(recipeRepo.cookbookRecipes).to.be.an('array');
+    expect(recipeRepo.cookBookRecipes.length).to.be(0);
+  });
+
+  it('should be able to add recipes to the cookbook', () => {
+    let grilledCheese = recipeRepo[0];
+    recipeRepo.addToCookbook(grilledCheese)
+
+    expect(recipeRepo.cookbook.length).to.equal(1);
+    expect()
+  })
 })
