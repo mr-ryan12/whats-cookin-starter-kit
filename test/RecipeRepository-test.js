@@ -4,7 +4,7 @@ import Ingredient from '../src/classes/Ingredient';
 import Recipe from '../src/classes/Recipe';
 import recipeData from '../src/data/recipe-test-data.js';
 
-describe('Recipe', () => {
+describe('RecipeRepo', () => {
 
   let recipeRepo;
 
