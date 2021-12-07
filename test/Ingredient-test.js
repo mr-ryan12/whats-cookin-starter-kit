@@ -23,7 +23,7 @@ describe('Recipe', () => {
   });
 
   it('should have an id', () => {
-    expect(butter.id).to.eqaul(3);
+    expect(butter.id).to.equal(3);
   });
 
   it('should have a name', () => {
@@ -31,7 +31,7 @@ describe('Recipe', () => {
   });
 
   it('should have an estimated cost in cents', () => {
-    expect(bread.estimatedCostInCents).to.equal(10);
+    expect(bread.estimatedCost).to.equal(10);
   });
 
   it('should be able to calculate total cost', () => {
