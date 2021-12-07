@@ -60,20 +60,33 @@ describe('Recipe', () => {
   });
 
   it('should be able to return a filtered list of recipe ids', () => {
-    expect(recipeRepo.filteredRecipeIds.length).to.be(2);
+    expect(recipeRepo.currentRecipeIds.length).to.be(2);
     recipeRepo.addFilter('snack');
     recipeRepo.filterRecipes();
-    expect(recipeRepo.filteredRecipeIds).to.be.an('array');
-    expect(recipeRepo.filteredRecipeIds[0]).to.equal(10);
+    expect(recipeRepo.currentRecipeIds).to.be.an('array');
+    expect(recipeRepo.currentRecipeIds[0]).to.equal(10);
   });
 
   it('should be able to filter by multiple search terms', () => {
     recipeRepo.addFilter('sandwich');
-    expect(recipeRepo.filteredRecipeIds.length).to.equal(2);
+    recipeRepo.filterRecipes();
+    expect(recipeRepo.currentRecipeIds.length).to.equal(2);
     recipeRepo.addFilter('dinner');
-    expect(recipeRepo.filteredRecipeIds.length).to.equal(1);
+    recipeRepo.filterRecipes();
+    expect(recipeRepo.currentRecipeIds.length).to.equal(1);
   });
 
+  it('should be able to clear search terms', () => {
+    recipeRepo.addFilter('lunch');
+    recipeRepo.filterRecipes();
+    expect(recipeRepo.currentRecipeIds.length).to.equal(1);
+    recipeRepo.clearFilters();
+    expect(recipeRepo.currentRecipeIds.length).to.equal(2);
 
+  });
+  //clearFilters method will do 2 things: 
+  // 1. clear all the search terms from the array and return an empty array
+  // 2. iterate through all recipes and add all ids to the currentRecipeIds array
+  
   // filterRecipes method will return all recipes that contain the filterTerms (ingredient names, recipe names, recipe tags)
 })
