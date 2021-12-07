@@ -7,6 +7,10 @@ class Recipe {
     this.name = name;
     this.tags = tags;
   }
+
+  calculateCost() {
+    
+  }
 }
 
 export default Recipe;
