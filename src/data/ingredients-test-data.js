@@ -13,6 +13,16 @@ const ingredientsData = [
     "id": 3,
     "name": "butter",
     "estimatedCostInCents": 15
+  },
+  {
+    "id": 4,
+    "name": "burger patty",
+    "estimatedCostInCents": 400
+  },
+  {
+    "id": 5,
+    "name": "bun",
+    "estimatedCostInCents": 20
   }
 ];
 
