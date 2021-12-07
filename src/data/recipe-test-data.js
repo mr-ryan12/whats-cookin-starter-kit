@@ -1,6 +1,6 @@
 const recipesData = [{
-  "id": 1,
-      "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
+  "id": 10,
+      "image": "https://grillchesse.jpg",
       "ingredients": [
         {
           "id": 1,
@@ -41,3 +41,5 @@ const recipesData = [{
         "sandwich"
       ]
   }];
+
+export default recipesData;
