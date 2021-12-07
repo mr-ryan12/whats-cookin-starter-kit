@@ -60,4 +60,15 @@ describe('Recipe', () => {
   it('should be able to calculate total cost', () => {
     expect(recipe.calculateCost()).to.equal(45);
   });
+
+  it('should be able to list ingredient names', () => {
+    expect(recipe.listIngredients()).to.deep.equal(['bread', 'cheese', 'butter']);
+  });
+
+  it('should be able to return the directions', () => {
+    expect(recipe.listInstructions()).to.deep.equal([
+      "Butter two pieces of bread.", 
+      "Grill our bread with cheese in between."
+    ])
+  })
 });

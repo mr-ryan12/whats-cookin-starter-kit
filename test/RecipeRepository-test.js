@@ -85,7 +85,6 @@ describe('RecipeRepo', () => {
     expect(recipeRepo.currentRecipeIds.length).to.equal(1);
     recipeRepo.clearFilters();
     expect(recipeRepo.currentRecipeIds.length).to.equal(2);
-
   });
   //clearFilters method will do 2 things: 
   // 1. clear all the search terms from the array and return an empty array
