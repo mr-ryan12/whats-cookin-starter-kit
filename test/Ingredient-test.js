@@ -31,7 +31,7 @@ describe('Ingredient', () => {
   });
 
   it('should have an estimated cost in cents', () => {
-    expect(bread.estimatedCost).to.equal(10);
+    expect(bread.estimatedCostInCents).to.equal(10);
   });
 
   it('should be able to calculate total cost', () => {
