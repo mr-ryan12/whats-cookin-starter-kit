@@ -9,9 +9,9 @@ describe('Ingredient', () => {
   let butter;
 
   beforeEach(() => {
-    bread = new Ingredient(ingredientsData[0].id, ingredientsData[0].name, ingredientsData[0].estimatedCostInCents);
-    cheese = new Ingredient(ingredientsData[1].id, ingredientsData[1].name, ingredientsData[1].estimatedCostInCents);
-    butter = new Ingredient(ingredientsData[2].id, ingredientsData[2].name, ingredientsData[2].estimatedCostInCents);
+    bread = new Ingredient(ingredientsData[0].id);
+    cheese = new Ingredient(ingredientsData[1].id);
+    butter = new Ingredient(ingredientsData[2].id);
   });
 
   it('should be a function', () => {
