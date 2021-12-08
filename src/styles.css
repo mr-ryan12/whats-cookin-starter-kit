@@ -1,5 +1,5 @@
 body {
-  background-color: blueviolet;
+  background-color:#FFF;
   margin: 0;
 }
 
@@ -37,4 +37,15 @@ h1 {
 
 .search-bar {
   margin: 1%;
+}
+
+.recipe-of-the-day {
+  display: flex;
+  justify-content: center;
+}
+
+.featured-recipe-image {
+
+  height: auto;
+  width: 74%;
 }
