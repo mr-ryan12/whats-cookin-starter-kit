@@ -10,9 +10,11 @@ body {
   justify-content: flex-end;
   margin-top: 10px;
   background-color: blue;
-  position: relative;
+  position: fixed;
+  top: 0;
   height: 8vh;
   margin: 0px;
+  z-index: 9999;
 }
 
 h1 {
@@ -43,6 +45,7 @@ h1 {
   display: flex;
   justify-content: center;
   position: relative;
+  margin-top: 8vh;
 }
 
 .featured-recipe-image {
@@ -59,8 +62,10 @@ h1 {
   bottom: 20%;
 }
 
-.featured-recipe-info-title {
+.featured-recipe-info-title,
+.featured-recipe-name {
   font-size: 25px;
+  text-align: center;
 }
 
 .favorite-save-btn-container {
