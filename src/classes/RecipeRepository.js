@@ -2,33 +2,37 @@ class RecipeRepository {
   constructor(recipes = []) {
     this.recipes = recipes;
     this.cookbookRecipes = [];
-    this.filterTerms = [];
-    this.currentRecipeIds = this.recipes.map(recipe => recipe.id);
+    this.filterTerm = '';
+    this.currentRecipes = this.recipes;
   }
 
   addToCookbook(recipe) {
-    this.cookbookRecipes.push(recipe.id);
+    this.cookbookRecipes.push(recipe);
   }
 
   addFilter(term) {
-    this.filterTerms.push(term);
+    this.filterTerm = term;
   }
 
-  filterRecipes() {
-    this.recipes.reduce((acc, recipe) => {
-      // Filter all recipes where the name contains ANY of the search term
+  filterRecipesByTag(tag) {
+    this.currentRecipes = this.currentRecipes.filter(recipe => recipe.tags.includes(tag));
+  }
 
-      // Filter all recipes that include the specified tags
+  filterRecipesByName() {
+    this.currentRecipes = this.currentRecipes.filter(recipe => {
+      return recipe.name.includes(this.filterTerm);
+    })
+  }
 
-      // Filter all recipes where the ingredient names contain ANY of the terms
-      return acc;
-    }, []);
+  filterRecipesByIngredient() {
+    this.currentRecipes = this.currentRecipes.filter(recipe => {
+      return recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm);
+    })
   }
 
   clearFilters() {
     this.filterTerms = [];
-    this.currentRecipeIds = [];
-    this.recipes.forEach(recipe => this.currentRecipeIds.push(recipe.id));
+    this.currentRecipes = this.recipes;
   }
 }
 
