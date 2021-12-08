@@ -42,10 +42,39 @@ h1 {
 .recipe-of-the-day {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .featured-recipe-image {
-
   height: auto;
   width: 74%;
+}
+
+.featured-recipe-info-container {
+  background-color: grey;
+  height: 22%;
+  width: 16%;
+  position: absolute;
+  left: 23%;
+  bottom: 20%;
+}
+
+.featured-recipe-info-title {
+  font-size: 25px;
+}
+
+.favorite-save-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  bottom: 0;
+}
+
+.heart-btn,
+.save-recipe-btn {
+  height: 10%;
+  width: 10%;
+  border: none;
+  background: transparent;
+  font-size: 210%;
+  margin: 5%;
 }
