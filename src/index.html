@@ -12,7 +12,7 @@
         <button class="nav-btn" id="all-recipes-btn">All Recipes</button>
         <button class="nav-btn" id="favorites-btn">Favorites</button>
         <button class="nav-btn" id="cookbook-btn">Cookbook</button>
-        <select name="tags" id="tags">
+        <select name="tags" class="nav-btn" id="tags">
           <option value="">Choose a Tag</option>
           <option value="antipasti">Antipasti</option>
           <option value="antipasto">Antipasto</option>
@@ -33,7 +33,6 @@
           <option value="snack">Snack</option>
           <option value="spread">Spread</option>
           <option value="starter">Starter</option>
-
         </select>
       </section>
       <input class="search-bar" id="search-bar" placeholder="Search by name or ingredient">
@@ -44,10 +43,10 @@
         <section class="featured-recipe-info-container">
           <h3 class="featured-recipe-info-title">Featured Recipe!</h3>
           <h4 class="featured-recipe-name">Hot Buttered Cookies!</h4>
-          <section class="featured-favorite-save-btn-container">
-            <button class="featured-heart-btn"><i class="fa fa-heart"></i></button>
-            <button class="featured-save-recipe-btn"><i class="fa fa-bookmark"></i></button>
-          </section>
+        </section>
+        <section class="featured-favorite-save-btn-container">
+          <button class="featured-heart-btn"><i class="fa fa-heart"></i></button>
+          <button class="featured-save-recipe-btn"><i class="fa fa-bookmark"></i></button>
         </section>
       </section>
       <section class="recipe-cards-display-container" id="recipe-cards-display-container">
