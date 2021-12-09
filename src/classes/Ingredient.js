@@ -1,4 +1,4 @@
-import ingredientsData from '../data/ingredients-test-data.js';
+import ingredientsData from '../data/ingredients.js';
 
 class Ingredient {
   constructor(id, quantity) {

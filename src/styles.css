@@ -67,6 +67,7 @@ h1 {
 .featured-recipe-name {
   font-size: 25px;
   text-align: center;
+  margin: 2%;
 }
 
 .favorite-save-btn-container {
@@ -85,7 +86,25 @@ h1 {
   margin: 5%;
 }
 
-.checkbox-filter-container {
-  height: 10vh;
+.recipe-cards-display-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 3%;
 }
 
+.recipe-card {
+  width: 30%;
+  height: 50%;
+  border: 2px solid red;
+  margin: 1%;
+}
+
+.recipe-card-image {
+  height: 100%;
+  width: 100%;
+}
+
+.recipe-card-title {
+  text-align: center;
+} 
