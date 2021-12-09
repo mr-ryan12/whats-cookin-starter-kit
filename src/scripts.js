@@ -32,13 +32,13 @@ const recipeRepo = new RecipeRepository(buildRecipeRepo());
 const displayAllRecipes = () => {
   recipeRepo.recipes.forEach(recipe => {
     recipeContainer.innerHTML += `
-      <section class="recipe-card">
-        <img src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="cookies" class="recipe-card-image">
-        <h2 class="recipe-card-title">Cookies!</h2>
+      <section class="recipe-card" id=${recipe.id}>
+        <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
         <section class="favorite-save-btn-container">
           <button class="heart-btn"><i class="fa fa-heart"></i></button>
           <button class="save-recipe-btn"><i class="fa fa-bookmark"></i></button>
         </section>
+        <h2 class="recipe-card-title">${recipe.name}</h2>
       </section>`
   })
 }

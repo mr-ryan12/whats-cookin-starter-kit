@@ -70,14 +70,13 @@ h1 {
   margin: 2%;
 }
 
-.favorite-save-btn-container {
+.featured-favorite-save-btn-container {
   display: flex;
   justify-content: flex-end;
-  bottom: 0;
 }
 
-.heart-btn,
-.save-recipe-btn {
+.featured-heart-btn,
+.featured-save-recipe-btn {
   height: 10%;
   width: 10%;
   border: none;
@@ -94,17 +93,41 @@ h1 {
 }
 
 .recipe-card {
+  position: relative;
   width: 30%;
-  height: 50%;
+  height: 50vh;
   border: 2px solid red;
   margin: 1%;
 }
 
 .recipe-card-image {
-  height: 100%;
+  height: auto;
   width: 100%;
 }
 
 .recipe-card-title {
+  font-size: 200%;
   text-align: center;
+  margin-top: 0;
 } 
+
+.heart-btn,
+.save-recipe-btn {
+  position: absolute;
+  background: teal;
+  align-items: center;
+  border: none;
+  height: 12%;
+  width: 12%;
+  border-radius: 50%;
+  font-size: 200%;
+  top: 55%;
+}
+
+.save-recipe-btn {
+  right: 1%;
+}
+
+.heart-btn {
+  right: 15%;
+}
