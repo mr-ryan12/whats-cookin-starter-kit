@@ -28,13 +28,14 @@ h1 {
 
 .button-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   margin: 1%;
   width: 40%;
 }
 
 .nav-btn {
-  width: 25%;
+  width: 8vw;
+  margin: 0 1% 0 1%;
 }
 
 .search-bar {
@@ -83,3 +84,8 @@ h1 {
   font-size: 210%;
   margin: 5%;
 }
+
+.checkbox-filter-container {
+  height: 10vh;
+}
+
