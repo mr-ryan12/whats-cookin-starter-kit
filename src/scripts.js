@@ -6,28 +6,9 @@ import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
 import recipeData from './data/recipes';
 
+const recipeRepo = new RecipeRepository(recipeData);
 const recipeContainer = document.getElementById('recipe-cards-display-container');
-window.addEventListener('load', () => {
-  buildRecipeRepo();
-  displayAllRecipes();
-})
 
-const buildRecipeRepo = () => {
-  const recipeList = recipeData.reduce((acc, recipe) => {
-    acc.push(new Recipe(
-      recipe.id,
-      recipe.image,
-      recipe.ingredients,
-      recipe.instructions,
-      recipe.name,
-      recipe.tags
-    ));
-    return acc;
-  }, []);
-  return recipeList;
-}
-
-const recipeRepo = new RecipeRepository(buildRecipeRepo());
 
 const displayAllRecipes = () => {
   recipeRepo.recipes.forEach(recipe => {
@@ -42,3 +23,5 @@ const displayAllRecipes = () => {
       </section>`
   })
 }
+
+window.onload = displayAllRecipes();

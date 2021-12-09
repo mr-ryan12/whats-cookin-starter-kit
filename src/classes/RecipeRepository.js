@@ -1,6 +1,18 @@
+import Recipe from './Recipe';
+
 class RecipeRepository {
-  constructor(recipes = []) {
-    this.recipes = recipes;
+  constructor(recipes) {
+    this.recipes = recipes.reduce((acc, recipe) => {
+      acc.push(new Recipe(
+        recipe.id,
+        recipe.image,
+        recipe.ingredients,
+        recipe.instructions,
+        recipe.name,
+        recipe.tags
+      ));
+      return acc;
+    }, []);
     this.cookbookRecipes = [];
     this.filterTerm = '';
     this.currentRecipes = this.recipes;
