@@ -1,3 +1,153 @@
 body {
-  background-color: blueviolet;
+  background-color:#FFF;
+  margin: 0;
+}
+
+.nav-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 10px;
+  background-color: #FFF;
+  position: fixed;
+  top: 0;
+  height: 8vh;
+  margin: 0px;
+  z-index: 9999;
+  border-bottom: 1px solid grey;
+}
+
+h1 {
+  position: absolute;
+  left: 10px;
+}
+
+.search-bar {
+  width: 20%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1%;
+  width: 40%;
+}
+
+.nav-btn {
+  cursor: pointer;
+  width: 8vw;
+  margin: 0 1% 0 1%;
+}
+
+.search-bar {
+  margin: 1%;
+}
+
+.recipe-of-the-day {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 8vh;
+}
+
+.featured-recipe-image {
+  height: auto;
+  width: 74%;
+}
+
+.featured-recipe-info-container {
+  background-color: #FFF;
+  height: 22%;
+  width: 16%;
+  position: absolute;
+  left: 23%;
+  bottom: 20%;
+}
+
+.featured-recipe-info-title,
+.featured-recipe-name {
+  font-size: 25px;
+  text-align: center;
+  margin: 2%;
+  margin-top: 10%;
+}
+
+.featured-favorite-save-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.featured-heart-btn,
+.featured-save-recipe-btn {
+  position: absolute;
+  background: teal;
+  border: none;
+  height: 7vh;
+  width: 7vh;
+  bottom: 1vh;
+  border-radius: 50%;
+  font-size: 200%;
+  border: none;
+  font-size: 210%;
+}
+
+.featured-save-recipe-btn {
+  right: 26vh;
+}
+
+.featured-heart-btn {
+  right: 35vh;
+}
+
+.recipe-cards-display-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 3%;
+}
+
+.recipe-card {
+  box-shadow: 10px 10px 5px grey;
+  position: relative;
+  width: 30%;
+  height: 50vh;
+  margin: 1%;
+}
+
+.recipe-card-image {
+  height: auto;
+  width: 100%;
+}
+
+.recipe-card-title {
+  font-size: 200%;
+  text-align: center;
+  margin-top: 0;
+} 
+
+.heart-btn,
+.save-recipe-btn {
+  position: absolute;
+  background: teal;
+  border: none;
+  height: 12%;
+  width: 12%;
+  border-radius: 50%;
+  font-size: 200%;
+  top: 56%;
+}
+
+.save-recipe-btn {
+  right: 1%;
+}
+
+.heart-btn {
+  right: 15%;
+}
+
+.recipe-card:hover {
+  transform: scale(1.02);
+  transition-duration: .15s;
+  cursor: pointer;
 }

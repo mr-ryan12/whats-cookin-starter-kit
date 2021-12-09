@@ -2,9 +2,54 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Whats Cookin</title>
   </head>
   <body>
-    <h1>Whats Cookin</h1>
+    <nav class="nav-bar">
+      <h1>Whats Cookin</h1>
+      <section class="button-container">
+        <button class="nav-btn" id="all-recipes-btn">All Recipes</button>
+        <button class="nav-btn" id="favorites-btn">Favorites</button>
+        <button class="nav-btn" id="cookbook-btn">Cookbook</button>
+        <select name="tags" class="nav-btn" id="tags">
+          <option value="">Choose a Tag</option>
+          <option value="antipasti">Antipasti</option>
+          <option value="antipasto">Antipasto</option>
+          <option value="appetizer">Appetizer</option>
+          <option value="breakfast">Breakfast</option>
+          <option value="brunch">Brunch</option>
+          <option value="condiment">Condiment</option>
+          <option value="dinner">Dinner</option>
+          <option value="dip">Dip</option>
+          <option value="hor d\'oeuvre">Hor d'oeuvre</option>
+          <option value="lunch">Lunch</option>
+          <option value="main course">Main Course</option>
+          <option value="main dish">Main Dish</option>
+          <option value="morning meal">Morning Meal</option>
+          <option value="salad">Salad</option>
+          <option value="sauce">Sauce</option>
+          <option value="side dish">Side Dish</option>
+          <option value="snack">Snack</option>
+          <option value="spread">Spread</option>
+          <option value="starter">Starter</option>
+        </select>
+      </section>
+      <input class="search-bar" id="search-bar" placeholder="Search by name or ingredient">
+    </nav>
+    <main>
+      <section class="recipe-of-the-day">
+        <img src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="cookies" class="featured-recipe-image">
+        <section class="featured-recipe-info-container">
+          <h3 class="featured-recipe-info-title">Featured Recipe!</h3>
+          <h4 class="featured-recipe-name">Hot Buttered Cookies!</h4>
+        </section>
+        <section class="featured-favorite-save-btn-container">
+          <button class="featured-heart-btn"><i class="fa fa-heart"></i></button>
+          <button class="featured-save-recipe-btn"><i class="fa fa-bookmark"></i></button>
+        </section>
+      </section>
+      <section class="recipe-cards-display-container" id="recipe-cards-display-container"></section>
+    </main>
   </body>
 </html>
