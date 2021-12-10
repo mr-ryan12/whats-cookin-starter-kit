@@ -152,6 +152,27 @@ h1 {
   cursor: pointer;
 }
 
+.recipe-view {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.recipe-info { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.recipe-view-img {
+  width: 50%;
+}
+
+.recipe-view-img > img {
+  width: 100%;
+}
+
 .hidden { 
   display: none;
 }

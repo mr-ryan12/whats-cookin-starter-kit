@@ -26,7 +26,7 @@ const displayCurrentRecipes = () => {
 
 window.onload = displayCurrentRecipes();
 
-const show = element => element.classList.remove('hidden');
-const hide = element => element.classList.add('hidden');
+// const show = element => element.classList.remove('hidden');
+// const hide = element => element.classList.add('hidden');
 
 
