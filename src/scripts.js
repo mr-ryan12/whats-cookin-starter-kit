@@ -18,8 +18,6 @@ const ingredientsList = document.querySelector('.ingredients-list');
 const directionsList = document.querySelector('.directions-list');
 const recipeViewImage = document.querySelector('.recipe-view-img');
 
-
-
 const displayCurrentRecipes = () => {
   recipeRepo.recipes.forEach(recipe => {
     recipeContainer.innerHTML += `
@@ -54,14 +52,16 @@ const showRecipeView = (event) => {
     <img src="${recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId).name}">`
   show([recipeView]);
   hide([homePage, browsePage]);
+  displayIngredients(event);
 }
 
-// const displayIngredients = () => {
-//   ingredientsList.innerHTML += `
-//     <ul>${recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId).ingredients.forEach(ingredient => {
-
-//     }</ul>`
-// }
+const displayIngredients = (event) => {
+  const recipeId = event.target.parentNode.id;
+  const currentRecipe = recipeRepo.recipes.find(recipe => 'id' + recipe.id === recipeId);
+  currentRecipe.ingredients.forEach(ingredient => {
+    ingredientsList.innerHTML += `<li>${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}</li>`
+  })
+}
 
 
 window.onload = displayCurrentRecipes();
