@@ -10,7 +10,7 @@ const recipeRepo = new RecipeRepository(recipeData);
 const recipeContainer = document.getElementById('recipe-cards-display-container');
 
 
-const displayAllRecipes = () => {
+const displayCurrentRecipes = () => {
   recipeRepo.recipes.forEach(recipe => {
     recipeContainer.innerHTML += `
       <section class="recipe-card" id=${recipe.id}>
@@ -24,4 +24,9 @@ const displayAllRecipes = () => {
   })
 }
 
-window.onload = displayAllRecipes();
+window.onload = displayCurrentRecipes();
+
+const show = element => element.classList.remove('hidden');
+const hide = element => element.classList.add('hidden');
+
+

@@ -151,3 +151,7 @@ h1 {
   transition-duration: .15s;
   cursor: pointer;
 }
+
+.hidden { 
+  display: none;
+}
