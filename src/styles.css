@@ -44,7 +44,7 @@ h1 {
   margin: 1%;
 }
 
-.recipe-of-the-day {
+.home-page {
   display: flex;
   justify-content: center;
   position: relative;
@@ -100,7 +100,7 @@ h1 {
   right: 35vh;
 }
 
-.recipe-cards-display-container {
+.browse-page {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;

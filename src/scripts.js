@@ -7,9 +7,12 @@ import User from './classes/User';
 import recipeData from './data/recipes';
 
 const recipeRepo = new RecipeRepository(recipeData);
-const recipeContainer = document.getElementById('recipe-cards-display-container');
+const recipeContainer = document.getElementById('browse-page');
 const recipeTitle = document.querySelector('#recipe-title');
 const price = document.querySelector('#price');
+const homePage = document.querySelector('.home-page');
+const browsePage = document.getElementById('browse-page');
+const recipeView = document.querySelector('.recipe-view');
 const ingredientsList = document.querySelector('.ingredients-list');
 const directionsList = document.querySelector('.directions-list');
 
@@ -31,12 +34,14 @@ const displayCurrentRecipes = () => {
 
 
 const showRecipeView = (event) => {
-  const recipeId = event.target.id;
+  const recipeId = event.target.parentNode.id;
   console.log(recipeId);
   recipeTitle.innerText = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId).name;
   price.innerText = recipeRepo.recipes.find(recipe => {
-    "id" + recipe.id === recipeId
+    return "id" + recipe.id === recipeId
   }).calculateCost();
+  show([recipeView]);
+  hide([homePage, browsePage]);
 }
 
 const addEventListenerToRecipeCards = () => {
@@ -47,9 +52,11 @@ const addEventListenerToRecipeCards = () => {
 }
 
 
+
 window.onload = displayCurrentRecipes();
 
-// const show = element => element.classList.remove('hidden');
-// const hide = element => element.classList.add('hidden');
+const show = elements => elements.forEach(element => element.classList.remove('hidden'));
+const hide = elements => elements.forEach(element => element.classList.add('hidden'));
+
 
 
