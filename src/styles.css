@@ -178,15 +178,31 @@ h1 {
 
 h2 {
   font-size: 5vh;
+  margin: 1vh;
 }
 
 h4 {
   font-size: 3vh;
+  margin: 1vh;
 }
 
-p {
+h5 {
   font-size: 2.5vh;
+  height: 3vh;
 }
+
+.ingredients-view,
+.directions-view {
+  display: flex;
+  width: 30vw;
+  background-color: lightgrey;
+  margin: 1vh;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 
 .hidden { 
   display: none;
