@@ -8,12 +8,16 @@ import recipeData from './data/recipes';
 
 const recipeRepo = new RecipeRepository(recipeData);
 const recipeContainer = document.getElementById('recipe-cards-display-container');
+const recipeTitle = document.querySelector('#recipe-title');
+const price = document.querySelector('#price');
+const ingredientsList = document.querySelector('.ingredients-list');
+const directionsList = document.querySelector('.directions-list');
 
 
 const displayCurrentRecipes = () => {
   recipeRepo.recipes.forEach(recipe => {
     recipeContainer.innerHTML += `
-      <section class="recipe-card" id=${recipe.id}>
+      <section class="recipe-card" id="id${recipe.id}">
         <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
         <section class="favorite-save-btn-container">
           <button class="heart-btn"><i class="fa fa-heart"></i></button>
@@ -21,8 +25,27 @@ const displayCurrentRecipes = () => {
         </section>
         <h2 class="recipe-card-title">${recipe.name}</h2>
       </section>`
-  })
+  });
+  addEventListenerToRecipeCards();
 }
+
+
+const showRecipeView = (event) => {
+  const recipeId = event.target.id;
+  console.log(recipeId);
+  recipeTitle.innerText = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId).name;
+  price.innerText = recipeRepo.recipes.find(recipe => {
+    "id" + recipe.id === recipeId
+  }).calculateCost();
+}
+
+const addEventListenerToRecipeCards = () => {
+  const recipeCardId = document.querySelectorAll(".recipe-card");
+  recipeCardId.forEach(recipeCard => {
+    recipeCard.addEventListener('click', showRecipeView)
+  });
+}
+
 
 window.onload = displayCurrentRecipes();
 
