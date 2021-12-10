@@ -53,6 +53,7 @@ const showRecipeView = (event) => {
   show([recipeView]);
   hide([homePage, browsePage]);
   displayIngredients(event);
+  displayDirections(event);
 }
 
 const displayIngredients = (event) => {
@@ -63,6 +64,13 @@ const displayIngredients = (event) => {
   })
 }
 
+const displayDirections = (event) => {
+  const recipeId = event.target.parentNode.id;
+  const currentRecipe = recipeRepo.recipes.find(recipe => 'id' + recipe.id === recipeId);
+  currentRecipe.instructions.forEach(direction => {
+    directionsList.innerHTML += `<li>${direction.instruction}</li>`
+  })
+}
 
 window.onload = displayCurrentRecipes();
 

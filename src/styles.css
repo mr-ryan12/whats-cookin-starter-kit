@@ -195,6 +195,7 @@ h4 {
 h5 {
   font-size: 2.5vh;
   height: 3vh;
+  margin-bottom: 0;
 }
 
 .ingredients-view,
@@ -208,7 +209,9 @@ h5 {
   align-items: center;
 }
 
-
+ol {
+  width: 75%;
+}
 
 .hidden { 
   display: none;
