@@ -107,23 +107,29 @@ h1 {
   margin: 3%;
 }
 
+.individual-recipe-card {
+  width: 30%;
+  height: 100%;
+  margin: 1%;
+}
+
 .recipe-card {
   box-shadow: 10px 10px 5px grey;
   position: relative;
-  width: 30%;
-  height: 50vh;
-  margin: 1%;
+  margin: 0 0 2vh 0;
+  height: 72%;
 }
 
 .recipe-card-image {
   height: auto;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .recipe-card-title {
-  font-size: 200%;
+  font-size: 150%;
   text-align: center;
-  margin-top: 0;
 } 
 
 .heart-btn,

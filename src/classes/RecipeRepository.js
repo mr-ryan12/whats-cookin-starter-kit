@@ -1,7 +1,7 @@
 import Recipe from './Recipe';
 
 class RecipeRepository {
-  constructor(recipes) {
+  constructor(recipes, ingredientsData) {
     this.recipes = recipes.reduce((acc, recipe) => {
       acc.push(new Recipe(
         recipe.id,
@@ -9,7 +9,8 @@ class RecipeRepository {
         recipe.ingredients,
         recipe.instructions,
         recipe.name,
-        recipe.tags
+        recipe.tags,
+        ingredientsData
       ));
       return acc;
     }, []);
