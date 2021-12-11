@@ -73,6 +73,7 @@ const showRecipeView = (event) => {
 }
 
 const displayIngredients = (event) => {
+  ingredientsList.innerHTML = '';
   const recipeId = event.target.parentNode.id;
   const currentRecipe = recipeRepo.recipes.find(recipe => 'id' + recipe.id === recipeId);
   currentRecipe.ingredients.forEach(ingredient => {
@@ -81,6 +82,7 @@ const displayIngredients = (event) => {
 }
 
 const displayDirections = (event) => {
+  directionsList.innerHTML = '';
   const recipeId = event.target.parentNode.id;
   const currentRecipe = recipeRepo.recipes.find(recipe => 'id' + recipe.id === recipeId);
   currentRecipe.instructions.forEach(direction => {

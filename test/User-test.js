@@ -72,4 +72,4 @@ describe('User', () => {
     user.removeFromCookbook(wings);
     expect(user.cookbook.length).to.equal(1);
   });
-})
+});
