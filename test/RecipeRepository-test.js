@@ -5,7 +5,7 @@ import Recipe from '../src/classes/Recipe';
 import recipeData from '../src/data/recipe-test-data.js';
 import ingredientsData from '../src/data/ingredients-test-data';
 
-describe.only('RecipeRepo', () => {
+describe('RecipeRepo', () => {
 
   let recipeList;
   let recipeRepo;
@@ -113,9 +113,4 @@ describe.only('RecipeRepo', () => {
     recipeRepo.clearFilters();
     expect(recipeRepo.currentRecipes.length).to.equal(2);
   });
-  //clearFilters method will do 2 things: 
-  // 1. clear all the search terms from the array and return an empty array
-  // 2. iterate through all recipes and add all ids to the currentRecipes array
-  
-  // filterRecipes method will return all recipes that contain the filterTerms (ingredient names, recipe names, recipe tags)
 })
