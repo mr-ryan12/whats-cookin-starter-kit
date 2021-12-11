@@ -3,6 +3,7 @@ import RecipeRepository from '../src/classes/RecipeRepository';
 import Ingredient from '../src/classes/Ingredient';
 import Recipe from '../src/classes/Recipe';
 import recipeData from '../src/data/recipe-test-data.js';
+import ingredientsData from '../src/data/ingredients-test-data';
 
 describe('RecipeRepo', () => {
 
@@ -17,12 +18,13 @@ describe('RecipeRepo', () => {
         recipe.ingredients,
         recipe.instructions,
         recipe.name,
-        recipe.tags
+        recipe.tags,
+        ingredientsData
       ));
       return acc;
     }, []);
 
-    recipeRepo = new RecipeRepository(recipeList)
+    recipeRepo = new RecipeRepository(recipeList, ingredientsData)
   });
 
   it('Should be a function', () => {
@@ -62,40 +64,53 @@ describe('RecipeRepo', () => {
     expect(recipeRepo.filterTerm).to.equal('dinner');
   });
 
+
+  it('should be able to have a tag', () => {
+    expect(recipeRepo.tag).to.be.a('string');
+  });
+
+  it('should be able to change the tag', () => {
+    recipeRepo.addTag('snack');
+    expect(recipeRepo.tag).to.equal('snack');
+  })
+
   it('should be able to filter recipes by ingredient', () => {
     expect(recipeRepo.currentRecipes.length).to.equal(2);
     recipeRepo.addFilter('cheese');
-    recipeRepo.filterRecipesByIngredient();
+    recipeRepo.filterRecipes();
     expect(recipeRepo.currentRecipes).to.be.an('array');
     expect(recipeRepo.currentRecipes[0].id).to.equal(10);
   });
 
   it('should be able to filter recipes by name', () => {
     expect(recipeRepo.currentRecipes.length).to.equal(2);
-    recipeRepo.addFilter('Burger');
-    recipeRepo.filterRecipesByName();
+    recipeRepo.addFilter('Wing');
+    recipeRepo.filterRecipes();
     expect(recipeRepo.currentRecipes).to.be.an('array');
     expect(recipeRepo.currentRecipes[0].id).to.equal(11);
   });
 
+  it('should filter by name regardless of case', () => {
+    recipeRepo.addFilter('wInG');
+    recipeRepo.filterRecipes();
+    expect(recipeRepo.currentRecipes[0].id).to.equal(11);
+  })
+
   it('should be able to filter by tag', () => {
-    recipeRepo.filterRecipesByTag('sandwich');
+    recipeRepo.addTag('snack')
+    recipeRepo.filterRecipes();
     expect(recipeRepo.currentRecipes.length).to.equal(2);
     recipeRepo.clearFilters();
-    recipeRepo.filterRecipesByTag('dinner');
+    recipeRepo.addTag('dinner')
+    recipeRepo.filterRecipes();
     expect(recipeRepo.currentRecipes.length).to.equal(1);
   });
 
   it('should be able to clear search terms', () => {
-    recipeRepo.addFilter('Burger');
-    recipeRepo.filterRecipesByName();
+    recipeRepo.addFilter('Wing');
+    recipeRepo.filterRecipes();
     expect(recipeRepo.currentRecipes.length).to.equal(1);
     recipeRepo.clearFilters();
     expect(recipeRepo.currentRecipes.length).to.equal(2);
   });
-  //clearFilters method will do 2 things: 
-  // 1. clear all the search terms from the array and return an empty array
-  // 2. iterate through all recipes and add all ids to the currentRecipes array
-  
-  // filterRecipes method will return all recipes that contain the filterTerms (ingredient names, recipe names, recipe tags)
 })

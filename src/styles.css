@@ -8,6 +8,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: center;
   margin-top: 10px;
   background-color: rgb(0, 128, 128);
   position: fixed;
@@ -31,7 +32,7 @@ h1 {
   display: flex;
   justify-content: flex-end;
   margin: 1%;
-  width: 40%;
+  width: 50%;
 }
 
 .submit-btn,
@@ -97,6 +98,7 @@ h1 {
   right: 35vh;
 }
 
+.cookbook,
 .browse-page {
   display: flex;
   justify-content: space-around;
@@ -147,6 +149,14 @@ h1 {
 
 .heart-btn {
   right: 15%;
+}
+
+.red {
+  color: red;
+}
+
+.yellow {
+  color: yellow;
 }
 
 .recipe-card:hover {
