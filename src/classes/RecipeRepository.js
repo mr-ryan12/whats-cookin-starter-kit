@@ -32,25 +32,6 @@ class RecipeRepository {
     this.tag = tag;
   }
 
-  filterRecipesByTag() {
-    this.tag !== '' ? 
-    this.currentRecipes = this.currentRecipes.filter(recipe => recipe.tags.includes(this.tag)) : null;
-  }
-
-  filterRecipesByName() {
-    this.filterTerm !== '' ?
-    this.currentRecipes = this.currentRecipes.filter(recipe => {
-      return recipe.name.toLowerCase().includes(this.filterTerm);
-    }) : null;
-  }
-
-  filterRecipesByIngredient() {
-    this.filterTerm !== '' ?
-    this.currentRecipes = this.currentRecipes.filter(recipe => {
-      return recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm);
-    }) : null;
-  }
-
   filterRecipes() {
     this.tag !== '' && this.filterTerm === '' ?
     this.currentRecipes = this.currentRecipes.filter(recipe => recipe.tags.includes(this.tag)) :
@@ -67,7 +48,8 @@ class RecipeRepository {
   }
 
   clearFilters() {
-    this.filterTerms = [];
+    this.filterTerm = '';
+    this.tag = '';
     this.currentRecipes = this.recipes;
   }
 }

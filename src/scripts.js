@@ -45,6 +45,10 @@ const createCurrentRecipes = () => {
 const displayBrowsePage = () => {
   hide([homePage, recipeView]);
   show([browsePage]);
+  recipeRepo.clearFilters();
+  searchBar.value = '';
+  tagInput.selectedIndex = 0;
+  createCurrentRecipes();
 }
 
 const addEventListenerToRecipeCards = () => {
@@ -53,8 +57,6 @@ const addEventListenerToRecipeCards = () => {
     recipeCard.addEventListener('click', showRecipeView)
   });
 }
-
-
 
 const showRecipeView = (event) => {
   const recipeId = event.target.parentNode.id;
