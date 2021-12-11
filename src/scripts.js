@@ -26,11 +26,14 @@ const submitButton = document.getElementById('submit-btn');
 const tagInput = document.getElementById('tags');
 const searchBar = document.getElementById('search-bar');
 
+// const recipeCardImage = document.querySelectorAll('.recipe-card-image');
+
 //Event Listeners
 window.addEventListener('load', () => createCurrentRecipes);
 allRecipesButton.addEventListener('click', displayBrowsePage);
 submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
+
 
 //Functions
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
@@ -69,10 +72,16 @@ function displayBrowsePage() {
 }
 
 function addEventListenerToRecipeCards() {
-  const recipeCardId = document.querySelectorAll(".recipe-card");
-  recipeCardId.forEach(recipeCard => {
-    recipeCard.addEventListener('click', showRecipeView)
+  const recipeCardImages = document.querySelectorAll(".recipe-card-image");
+  const heartButtons = document.querySelectorAll('.heart-btn');
+  const saveButtons = document.querySelectorAll('.save-recipe-btn');
+  recipeCardImages.forEach(recipeCardImage => {
+    recipeCardImage.addEventListener('click', showRecipeView)
   });
+  heartButtons.forEach(button => button.addEventListener('click', (event) => {
+    toggleFavorites(event);
+  }));
+  // saveButtons.forEach(button => button.addEventListener('click', addToCookbook));
 }
 
 function showRecipeView(event) {
@@ -126,4 +135,10 @@ function filterFavorites() {
   tagInput.selectedIndex = 0;
 }
 
-
+function toggleFavorites(event) {
+  const recipeId = event.target.parentNode.parentNode.parentNode.id;
+  const thisRecipe = recipeRepo.currentRecipes.find(recipe => "id" + recipe.id === recipeId);
+  user.favorites.includes(thisRecipe) ? 
+    user.removeFromFavorites(thisRecipe) :
+    user.addToFavorites(thisRecipe);
+}
