@@ -3,21 +3,21 @@ const recipesData = [{
   "image": "https://grillchesse.jpg",
   "ingredients": [
     {
-      "id": 1,
+      "id": 18069,
       "quantity": {
         "amount": 2,
         "unit": "sl"
       }
     },
     {
-      "id": 2,
+      "id": 1041009,
       "quantity": {
         "amount": 2,
         "unit": "sl"
       }
     },
     {
-      "id": 3,
+      "id": 1145,
       "quantity": {
         "amount": 1,
         "unit": "tsp"
