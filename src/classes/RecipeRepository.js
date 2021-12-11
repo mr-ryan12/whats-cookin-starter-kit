@@ -25,7 +25,7 @@ class RecipeRepository {
   }
 
   addFilter(term) {
-    this.filterTerm = term;
+    this.filterTerm = term.toLowerCase();
   }
 
   addTag(tag) {
@@ -40,7 +40,7 @@ class RecipeRepository {
   filterRecipesByName() {
     this.filterTerm !== '' ?
     this.currentRecipes = this.currentRecipes.filter(recipe => {
-      return recipe.name.includes(this.filterTerm);
+      return recipe.name.toLowerCase().includes(this.filterTerm);
     }) : null;
   }
 
@@ -56,12 +56,12 @@ class RecipeRepository {
     this.currentRecipes = this.currentRecipes.filter(recipe => recipe.tags.includes(this.tag)) :
     this.tag === '' && this.filterTerm !== '' ?
     this.currentRecipes = this.currentRecipes.filter(recipe => {
-      return recipe.name.includes(this.filterTerm) ||
+      return recipe.name.toLowerCase().includes(this.filterTerm) ||
       recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm);
     }) : this.tag !== '' && this.filterTerm !== '' ?
     this.currentRecipes = this.currentRecipes.filter(recipe => {
       return recipe.tags.includes(this.tag) ||
-      recipe.name.includes(this.filterTerm) ||
+      recipe.name.toLowerCase().includes(this.filterTerm) ||
       recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm)
     }) : null;
   }
