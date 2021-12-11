@@ -168,13 +168,11 @@ h1 {
   width: 50%;
   margin-top: 8vh;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  overflow: auto;
 }
 
 .recipe-view-img {
   width: 50%;
   margin-top: 8vh;
-  overflow: hidden;
 }
 
 .recipe-view-img > img {
