@@ -1,20 +1,20 @@
 import Ingredient from "./Ingredient";
 
 class Recipe {
-  constructor(id, image, ingredients = [], instructions = [], name, tags = []) {
+  constructor(id, image, ingredients = [], instructions = [], name, tags = [], ingredientsData) {
     this.id = id;
     this.image = image;
     this.ingredients = ingredients.map(ingredient => {
-      return new Ingredient(ingredient.id, ingredient.quantity.amount)
+      return new Ingredient(ingredient.id, ingredient.quantity, ingredientsData)
     });
     this.instructions = instructions;
     this.name = name;
     this.tags = tags;
   }
 
-  calculateCost() {
+  calculateRecipeCost() {
     return this.ingredients.reduce((total, ingredient) => {
-      total += ingredient.quantity * ingredient.estimatedCostInCents
+      total += ingredient.calculateCost();
       return total;
     }, 0);
   }

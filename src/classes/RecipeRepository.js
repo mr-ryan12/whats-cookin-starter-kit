@@ -1,7 +1,7 @@
 import Recipe from './Recipe';
 
 class RecipeRepository {
-  constructor(recipes) {
+  constructor(recipes, ingredientsData) {
     this.recipes = recipes.reduce((acc, recipe) => {
       acc.push(new Recipe(
         recipe.id,
@@ -9,12 +9,14 @@ class RecipeRepository {
         recipe.ingredients,
         recipe.instructions,
         recipe.name,
-        recipe.tags
+        recipe.tags,
+        ingredientsData
       ));
       return acc;
     }, []);
     this.cookbookRecipes = [];
     this.filterTerm = '';
+    this.tag = '';
     this.currentRecipes = this.recipes;
   }
 
@@ -23,27 +25,31 @@ class RecipeRepository {
   }
 
   addFilter(term) {
-    this.filterTerm = term;
+    this.filterTerm = term.toLowerCase();
   }
 
-  filterRecipesByTag(tag) {
-    this.currentRecipes = this.currentRecipes.filter(recipe => recipe.tags.includes(tag));
+  addTag(tag) {
+    this.tag = tag;
   }
 
-  filterRecipesByName() {
+  filterRecipes() {
+    this.tag !== '' && this.filterTerm === '' ?
+    this.currentRecipes = this.currentRecipes.filter(recipe => recipe.tags.includes(this.tag)) :
+    this.tag === '' && this.filterTerm !== '' ?
     this.currentRecipes = this.currentRecipes.filter(recipe => {
-      return recipe.name.includes(this.filterTerm);
-    })
-  }
-
-  filterRecipesByIngredient() {
+      return recipe.name.toLowerCase().includes(this.filterTerm) ||
+      recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm);
+    }) : this.tag !== '' && this.filterTerm !== '' ?
     this.currentRecipes = this.currentRecipes.filter(recipe => {
-      return recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm);
-    })
+      return recipe.tags.includes(this.tag) ||
+      recipe.name.toLowerCase().includes(this.filterTerm) ||
+      recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm)
+    }) : null;
   }
 
   clearFilters() {
-    this.filterTerms = [];
+    this.filterTerm = '';
+    this.tag = '';
     this.currentRecipes = this.recipes;
   }
 }
