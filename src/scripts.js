@@ -17,9 +17,12 @@ const recipeView = document.querySelector('.recipe-view');
 const ingredientsList = document.querySelector('.ingredients-list');
 const directionsList = document.querySelector('.directions-list');
 const recipeViewImage = document.querySelector('.recipe-view-img');
+const allRecipesButton = document.getElementById('all-recipes-btn');
+const favoritesPageButton = document.getElementById('favorites-btn');
+const cookbookPageButton = document.getElementById('cookbook-btn');
 
-const displayCurrentRecipes = () => {
-  recipeRepo.recipes.forEach(recipe => {
+const createCurrentRecipes = () => {
+  recipeRepo.currentRecipes.forEach(recipe => {
     recipeContainer.innerHTML += `
       <section class="individual-recipe-card">
         <section class="recipe-card" id="id${recipe.id}">
@@ -35,12 +38,19 @@ const displayCurrentRecipes = () => {
   addEventListenerToRecipeCards();
 }
 
+const displayBrowsePage = () => {
+  hide([homePage, recipeView]);
+  show([browsePage]);
+}
+
 const addEventListenerToRecipeCards = () => {
   const recipeCardId = document.querySelectorAll(".recipe-card");
   recipeCardId.forEach(recipeCard => {
     recipeCard.addEventListener('click', showRecipeView)
   });
 }
+
+
 
 const showRecipeView = (event) => {
   const recipeId = event.target.parentNode.id;
@@ -72,7 +82,9 @@ const displayDirections = (event) => {
   })
 }
 
-window.onload = displayCurrentRecipes();
+window.onload = createCurrentRecipes();
+allRecipesButton.addEventListener('click', displayBrowsePage);
+
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
