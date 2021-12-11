@@ -26,11 +26,6 @@ const tagInput = document.getElementById('tags');
 const searchBar = document.getElementById('search-bar');
 const cookbook = document.getElementById('cookbook');
 const greeting = document.getElementById('greeting');
-// const recipeCardImages = [];
-// const heartButtons = [];
-// const saveButtons = [];
-
-// const recipeCardImage = document.querySelectorAll('.recipe-card-image');
 
 //Event Listeners
 window.addEventListener('load', createCurrentRecipes);
@@ -38,7 +33,6 @@ allRecipesButton.addEventListener('click', displayBrowsePage);
 submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
 cookbookButton.addEventListener('click', viewCookbook);
-
 
 //Functions
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
