@@ -3,7 +3,7 @@ import Recipe from '../src/classes/Recipe';
 import recipesData from '../src/data/recipe-test-data';
 import ingredientsData from '../src/data/ingredients-test-data';
 
-describe.only('Recipe', () => {
+describe('Recipe', () => {
 
   let recipe;
   beforeEach(() => {
