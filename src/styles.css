@@ -97,6 +97,7 @@ h1 {
   right: 35vh;
 }
 
+.cookbook,
 .browse-page {
   display: flex;
   justify-content: space-around;

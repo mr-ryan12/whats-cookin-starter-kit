@@ -10,7 +10,6 @@ import usersData from './data/users';
 
 const recipeRepo = new RecipeRepository(recipeData, ingredientsData);
 const user = new User(usersData[getRandomIndex(usersData)]);
-const recipeContainer = document.getElementById('browse-page');
 const recipeTitle = document.querySelector('#recipe-title');
 const price = document.querySelector('#price');
 const homePage = document.querySelector('.home-page');
@@ -21,10 +20,11 @@ const directionsList = document.querySelector('.directions-list');
 const recipeViewImage = document.querySelector('.recipe-view-img');
 const allRecipesButton = document.getElementById('all-recipes-btn');
 const favoritesButton = document.getElementById('favorites-btn');
-const cookbookPageButton = document.getElementById('cookbook-btn');
+const cookbookButton = document.getElementById('cookbook-btn');
 const submitButton = document.getElementById('submit-btn');
 const tagInput = document.getElementById('tags');
 const searchBar = document.getElementById('search-bar');
+const cookbook = document.getElementById('cookbook');
 
 // const recipeCardImage = document.querySelectorAll('.recipe-card-image');
 
@@ -33,6 +33,7 @@ window.addEventListener('load', () => createCurrentRecipes);
 allRecipesButton.addEventListener('click', displayBrowsePage);
 submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
+cookbookButton.addEventListener('click', viewCookbook);
 
 
 //Functions
@@ -45,9 +46,9 @@ function getRandomIndex(array) {
 }
 
 function createCurrentRecipes() {
-  recipeContainer.innerHTML = '';
+  browsePage.innerHTML = '';
   recipeRepo.currentRecipes.forEach(recipe => {
-    recipeContainer.innerHTML += `
+    browsePage.innerHTML += `
       <section class="individual-recipe-card">
         <section class="recipe-card" id="id${recipe.id}">
           <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
@@ -63,7 +64,7 @@ function createCurrentRecipes() {
 }
 
 function displayBrowsePage() {
-  hide([homePage, recipeView]);
+  hide([homePage, recipeView, cookbook]);
   show([browsePage]);
   recipeRepo.clearFilters();
   searchBar.value = '';
@@ -95,7 +96,7 @@ function showRecipeView(event) {
   recipeViewImage.innerHTML = `
     <img src="${recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId).name}">`
   show([recipeView]);
-  hide([homePage, browsePage]);
+  hide([homePage, browsePage, cookbook]);
   displayIngredients(event);
   displayDirections(event);
 }
@@ -123,7 +124,7 @@ function filterRecipes() {
   recipeRepo.addFilter(searchBar.value);
   recipeRepo.filterRecipes();
   createCurrentRecipes();
-  hide([homePage, recipeView]);
+  hide([homePage, recipeView, cookbook]);
   show([browsePage]);
 }
 
@@ -131,7 +132,7 @@ function filterFavorites() {
   recipeRepo.clearFilters();
   recipeRepo.currentRecipes = user.favorites;
   createCurrentRecipes();
-  hide([homePage, recipeView]);
+  hide([homePage, recipeView, cookbook]);
   show([browsePage]);
   searchBar.value = '';
   tagInput.selectedIndex = 0;
@@ -151,5 +152,30 @@ function toggleCookbook(event) {
   user.cookbook.includes(thisRecipe) ? 
     user.removeFromCookbook(thisRecipe) :
     user.addToCookbook(thisRecipe);
-    // console.log(user.cookbook);
+}
+
+function viewCookbook() {
+  createCookbook();
+  hide([homePage, recipeView, browsePage]);
+  show([cookbook]);
+  searchBar.value = '';
+  tagInput.selectedIndex = 0;
+}
+
+function createCookbook() {
+  cookbook.innerHTML = '';
+  user.cookbook.forEach(recipe => {
+    cookbook.innerHTML += `
+      <section class="individual-recipe-card">
+        <section class="recipe-card" id="id${recipe.id}">
+          <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
+          <section class="favorite-save-btn-container">
+            <button class="heart-btn"><i class="fa fa-heart"></i></button>
+            <button class="save-recipe-btn"><i class="fa fa-bookmark"></i></button>
+          </section>
+        </section>
+        <h2 class="recipe-card-title">${recipe.name}</h2>
+      </section>`
+  });
+  addEventListenerToRecipeCards();
 }

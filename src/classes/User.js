@@ -22,7 +22,6 @@ class User {
 
   removeFromCookbook(recipe) {
     const index = this.cookbook.indexOf(recipe);
-    // console.log(index)
     this.cookbook.splice(index, 1);
   }
 }
