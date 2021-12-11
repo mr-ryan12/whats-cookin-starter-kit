@@ -25,11 +25,12 @@ const submitButton = document.getElementById('submit-btn');
 const tagInput = document.getElementById('tags');
 const searchBar = document.getElementById('search-bar');
 const cookbook = document.getElementById('cookbook');
+const greeting = document.getElementById('greeting');
 
 // const recipeCardImage = document.querySelectorAll('.recipe-card-image');
 
 //Event Listeners
-window.addEventListener('load', () => createCurrentRecipes);
+window.addEventListener('load', createCurrentRecipes);
 allRecipesButton.addEventListener('click', displayBrowsePage);
 submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
@@ -61,6 +62,7 @@ function createCurrentRecipes() {
       </section>`
   });
   addEventListenerToRecipeCards();
+  greeting.innerText = `Welcome, ${user.name}!`
 }
 
 function displayBrowsePage() {
