@@ -16,7 +16,7 @@ class User {
       recipe.id === recipeToRemove.id;
       return index;
     });
-    this.favorites.splice(index, 1)
+    this.favorites.splice(index, 1);
   }
 
   addToCookbook(recipe) {
@@ -28,7 +28,7 @@ class User {
       recipe.id === recipeToRemove.id;
       return index;
     });
-    this.cookbook.splice(index, 1)
+    this.cookbook.splice(index, 1);
   }
 }
 

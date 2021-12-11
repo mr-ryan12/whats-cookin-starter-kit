@@ -6,8 +6,10 @@ import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
 import recipeData from './data/recipes';
 import ingredientsData from './data/ingredients';
+import usersData from './data/users';
 
 const recipeRepo = new RecipeRepository(recipeData, ingredientsData);
+const user = new User(usersData[getRandomIndex(usersData)]);
 const recipeContainer = document.getElementById('browse-page');
 const recipeTitle = document.querySelector('#recipe-title');
 const price = document.querySelector('#price');
@@ -18,13 +20,28 @@ const ingredientsList = document.querySelector('.ingredients-list');
 const directionsList = document.querySelector('.directions-list');
 const recipeViewImage = document.querySelector('.recipe-view-img');
 const allRecipesButton = document.getElementById('all-recipes-btn');
-const favoritesPageButton = document.getElementById('favorites-btn');
+const favoritesButton = document.getElementById('favorites-btn');
 const cookbookPageButton = document.getElementById('cookbook-btn');
 const submitButton = document.getElementById('submit-btn');
 const tagInput = document.getElementById('tags');
 const searchBar = document.getElementById('search-bar');
 
-const createCurrentRecipes = () => {
+//Event Listeners
+window.addEventListener('load', () => createCurrentRecipes);
+allRecipesButton.addEventListener('click', displayBrowsePage);
+submitButton.addEventListener('click', filterRecipes);
+favoritesButton.addEventListener('click', filterFavorites);
+
+//Functions
+const show = elements => elements.forEach(element => element.classList.remove('hidden'));
+
+const hide = elements => elements.forEach(element => element.classList.add('hidden'));
+
+function getRandomIndex(array) {
+  return Math.floor(Math.random() * array.length);
+}
+
+function createCurrentRecipes() {
   recipeContainer.innerHTML = '';
   recipeRepo.currentRecipes.forEach(recipe => {
     recipeContainer.innerHTML += `
@@ -42,7 +59,7 @@ const createCurrentRecipes = () => {
   addEventListenerToRecipeCards();
 }
 
-const displayBrowsePage = () => {
+function displayBrowsePage() {
   hide([homePage, recipeView]);
   show([browsePage]);
   recipeRepo.clearFilters();
@@ -51,14 +68,14 @@ const displayBrowsePage = () => {
   createCurrentRecipes();
 }
 
-const addEventListenerToRecipeCards = () => {
+function addEventListenerToRecipeCards() {
   const recipeCardId = document.querySelectorAll(".recipe-card");
   recipeCardId.forEach(recipeCard => {
     recipeCard.addEventListener('click', showRecipeView)
   });
 }
 
-const showRecipeView = (event) => {
+function showRecipeView(event) {
   const recipeId = event.target.parentNode.id;
   recipeTitle.innerText = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId).name;
   price.innerText = `$${(recipeRepo.recipes.find(recipe => {
@@ -72,7 +89,7 @@ const showRecipeView = (event) => {
   displayDirections(event);
 }
 
-const displayIngredients = (event) => {
+function displayIngredients(event) {
   ingredientsList.innerHTML = '';
   const recipeId = event.target.parentNode.id;
   const currentRecipe = recipeRepo.recipes.find(recipe => 'id' + recipe.id === recipeId);
@@ -81,7 +98,7 @@ const displayIngredients = (event) => {
   })
 }
 
-const displayDirections = (event) => {
+function displayDirections(event) {
   directionsList.innerHTML = '';
   const recipeId = event.target.parentNode.id;
   const currentRecipe = recipeRepo.recipes.find(recipe => 'id' + recipe.id === recipeId);
@@ -90,7 +107,7 @@ const displayDirections = (event) => {
   })
 }
 
-const filterRecipes = () => {
+function filterRecipes() {
   recipeRepo.addTag(tagInput.value);
   recipeRepo.addFilter(searchBar.value);
   recipeRepo.filterRecipes();
@@ -99,10 +116,14 @@ const filterRecipes = () => {
   show([browsePage]);
 }
 
-window.onload = createCurrentRecipes();
-allRecipesButton.addEventListener('click', displayBrowsePage);
-submitButton.addEventListener('click', filterRecipes);
+function filterFavorites() {
+  recipeRepo.clearFilters();
+  recipeRepo.currentRecipes = user.favorites;
+  createCurrentRecipes();
+  hide([homePage, recipeView]);
+  show([browsePage]);
+  searchBar.value = '';
+  tagInput.selectedIndex = 0;
+}
 
 
-const show = elements => elements.forEach(element => element.classList.remove('hidden'));
-const hide = elements => elements.forEach(element => element.classList.add('hidden'));
