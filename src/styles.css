@@ -151,6 +151,14 @@ h1 {
   right: 15%;
 }
 
+.red {
+  color: red;
+}
+
+.yellow {
+  color: yellow;
+}
+
 .recipe-card:hover {
   transform: scale(1.02);
   transition-duration: .15s;

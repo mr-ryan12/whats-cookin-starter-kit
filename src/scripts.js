@@ -26,6 +26,9 @@ const tagInput = document.getElementById('tags');
 const searchBar = document.getElementById('search-bar');
 const cookbook = document.getElementById('cookbook');
 const greeting = document.getElementById('greeting');
+// const recipeCardImages = [];
+// const heartButtons = [];
+// const saveButtons = [];
 
 // const recipeCardImage = document.querySelectorAll('.recipe-card-image');
 
@@ -141,19 +144,29 @@ function filterFavorites() {
 }
 
 function toggleFavorites(event) {
+  const heartButtons = document.querySelectorAll('.fa-heart');
   const recipeId = event.target.parentNode.parentNode.parentNode.id;
   const thisRecipe = recipeRepo.currentRecipes.find(recipe => "id" + recipe.id === recipeId);
   user.favorites.includes(thisRecipe) ? 
     user.removeFromFavorites(thisRecipe) :
     user.addToFavorites(thisRecipe);
+  heartButtons.forEach(button => {
+    button.parentNode.parentNode.parentNode.id === recipeId ?
+      button.classList.toggle('red') : null;
+  })
 }
 
 function toggleCookbook(event) {
+  const saveButtons = document.querySelectorAll('.fa-bookmark');
   const recipeId = event.target.parentNode.parentNode.parentNode.id;
   const thisRecipe = recipeRepo.currentRecipes.find(recipe => "id" + recipe.id === recipeId);
   user.cookbook.includes(thisRecipe) ? 
     user.removeFromCookbook(thisRecipe) :
     user.addToCookbook(thisRecipe);
+  saveButtons.forEach(button => {
+    button.parentNode.parentNode.parentNode.id === recipeId ?
+      button.classList.toggle('yellow') : null;
+  })
 }
 
 function viewCookbook() {
