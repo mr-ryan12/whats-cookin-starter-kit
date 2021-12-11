@@ -16,6 +16,7 @@ class RecipeRepository {
     }, []);
     this.cookbookRecipes = [];
     this.filterTerm = '';
+    this.tag = '';
     this.currentRecipes = this.recipes;
   }
 
@@ -27,20 +28,42 @@ class RecipeRepository {
     this.filterTerm = term;
   }
 
-  filterRecipesByTag(tag) {
-    this.currentRecipes = this.currentRecipes.filter(recipe => recipe.tags.includes(tag));
+  addTag(tag) {
+    this.tag = tag;
+  }
+
+  filterRecipesByTag() {
+    this.tag !== '' ? 
+    this.currentRecipes = this.currentRecipes.filter(recipe => recipe.tags.includes(this.tag)) : null;
   }
 
   filterRecipesByName() {
+    this.filterTerm !== '' ?
     this.currentRecipes = this.currentRecipes.filter(recipe => {
       return recipe.name.includes(this.filterTerm);
-    })
+    }) : null;
   }
 
   filterRecipesByIngredient() {
+    this.filterTerm !== '' ?
     this.currentRecipes = this.currentRecipes.filter(recipe => {
       return recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm);
-    })
+    }) : null;
+  }
+
+  filterRecipes() {
+    this.tag !== '' && this.filterTerm === '' ?
+    this.currentRecipes = this.currentRecipes.filter(recipe => recipe.tags.includes(this.tag)) :
+    this.tag === '' && this.filterTerm !== '' ?
+    this.currentRecipes = this.currentRecipes.filter(recipe => {
+      return recipe.name.includes(this.filterTerm) ||
+      recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm);
+    }) : this.tag !== '' && this.filterTerm !== '' ?
+    this.currentRecipes = this.currentRecipes.filter(recipe => {
+      return recipe.tags.includes(this.tag) ||
+      recipe.name.includes(this.filterTerm) ||
+      recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm)
+    }) : null;
   }
 
   clearFilters() {

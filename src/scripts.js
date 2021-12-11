@@ -20,8 +20,12 @@ const recipeViewImage = document.querySelector('.recipe-view-img');
 const allRecipesButton = document.getElementById('all-recipes-btn');
 const favoritesPageButton = document.getElementById('favorites-btn');
 const cookbookPageButton = document.getElementById('cookbook-btn');
+const submitButton = document.getElementById('submit-btn');
+const tagInput = document.getElementById('tags');
+const searchBar = document.getElementById('search-bar');
 
 const createCurrentRecipes = () => {
+  recipeContainer.innerHTML = '';
   recipeRepo.currentRecipes.forEach(recipe => {
     recipeContainer.innerHTML += `
       <section class="individual-recipe-card">
@@ -82,8 +86,18 @@ const displayDirections = (event) => {
   })
 }
 
+const filterRecipes = () => {
+  recipeRepo.addTag(tagInput.value);
+  recipeRepo.addFilter(searchBar.value);
+  recipeRepo.filterRecipes();
+  createCurrentRecipes();
+  hide([homePage, recipeView]);
+  show([browsePage]);
+}
+
 window.onload = createCurrentRecipes();
 allRecipesButton.addEventListener('click', displayBrowsePage);
+submitButton.addEventListener('click', filterRecipes);
 
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
