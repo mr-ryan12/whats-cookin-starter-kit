@@ -1,8 +1,9 @@
 import { expect } from 'chai';
 import Recipe from '../src/classes/Recipe';
 import recipesData from '../src/data/recipe-test-data';
+import ingredientsData from '../src/data/ingredients-test-data';
 
-describe('Recipe', () => {
+describe.only('Recipe', () => {
 
   let recipe;
   beforeEach(() => {
@@ -12,7 +13,8 @@ describe('Recipe', () => {
       recipesData[0].ingredients,
       recipesData[0].instructions,
       recipesData[0].name,
-      recipesData[0].tags
+      recipesData[0].tags,
+      ingredientsData
     );
   });
 
@@ -38,7 +40,7 @@ describe('Recipe', () => {
   });
 
   it('should have a quantity for each ingredient', () => {
-    expect(recipe.ingredients[0].quantity).to.equal(2);
+    expect(recipe.ingredients[0].quantity.amount).to.equal(2);
   });
 
   it('should have a list of instructions', () => {
@@ -58,11 +60,11 @@ describe('Recipe', () => {
   });
 
   it('should be able to calculate total cost', () => {
-    expect(recipe.calculateCost()).to.equal(45);
+    expect(recipe.calculateRecipeCost()).to.equal(4043);
   });
 
   it('should be able to list ingredient names', () => {
-    expect(recipe.listIngredients()).to.deep.equal(['bread', 'cheese', 'butter']);
+    expect(recipe.listIngredients()).to.deep.equal(['gluten-free white sandwich bread', 'cheese', 'unsalted butter']);
   });
 
   it('should be able to return the directions', () => {

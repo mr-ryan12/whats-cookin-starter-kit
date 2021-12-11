@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import Ingredient from '../src/classes/Ingredient';
 import ingredientsData from '../src/data/ingredients-test-data.js';
 
-describe.only('Ingredient', () => {
+describe('Ingredient', () => {
 
   let bread;
   let cheese;

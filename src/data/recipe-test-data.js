@@ -46,34 +46,34 @@ const recipesData = [{
     "image": "https://burger.jpg",
     "ingredients": [
       {
-        "id": 4,
+        "id": 5100,
         "quantity": {
-          "amount": 1,
-          "unit": "patty"
+          "amount": 6,
+          "unit": "wings"
         }
       },
       {
-        "id": 5,
+        "id": 6150,
         "quantity": {
           "amount": 2,
-          "unit": "sl"
+          "unit": "tbsp"
         }
       },
     ],
     "instructions": [
       {
-        "instruction": "Butter two pieces of bread.",
+        "instruction": "Fry the wings",
         "number": 1
       },
       {
-        "instruction": "Grill our bread with cheese in between.",
+        "instruction": "Dip the wings in the sauce",
         "number": 2
       }
     ],
-    "name": "Burger",
+    "name": "BBQ Wings",
     "tags": [
       "dinner",
-      "sandwich"
+      "snack"
     ]
   }];
 
