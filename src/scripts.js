@@ -81,7 +81,9 @@ function addEventListenerToRecipeCards() {
   heartButtons.forEach(button => button.addEventListener('click', (event) => {
     toggleFavorites(event);
   }));
-  // saveButtons.forEach(button => button.addEventListener('click', addToCookbook));
+  saveButtons.forEach(button => button.addEventListener('click', event => {
+    toggleCookbook(event);
+  }));
 }
 
 function showRecipeView(event) {
@@ -141,4 +143,13 @@ function toggleFavorites(event) {
   user.favorites.includes(thisRecipe) ? 
     user.removeFromFavorites(thisRecipe) :
     user.addToFavorites(thisRecipe);
+}
+
+function toggleCookbook(event) {
+  const recipeId = event.target.parentNode.parentNode.parentNode.id;
+  const thisRecipe = recipeRepo.currentRecipes.find(recipe => "id" + recipe.id === recipeId);
+  user.cookbook.includes(thisRecipe) ? 
+    user.removeFromCookbook(thisRecipe) :
+    user.addToCookbook(thisRecipe);
+    // console.log(user.cookbook);
 }

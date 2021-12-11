@@ -12,10 +12,7 @@ class User {
   }
 
   removeFromFavorites(recipeToRemove) {
-    const index = this.favorites.find((recipe, index) => {
-      recipe.id === recipeToRemove.id;
-      return index;
-    });
+    const index = this.favorites.indexOf(recipeToRemove);
     this.favorites.splice(index, 1);
   }
 
@@ -23,11 +20,9 @@ class User {
     this.cookbook.push(recipe);
   }
 
-  removeFromCookbook(recipeToRemove) {
-    const index = this.cookbook.find((recipe, index) => {
-      recipe.id === recipeToRemove.id;
-      return index;
-    });
+  removeFromCookbook(recipe) {
+    const index = this.cookbook.indexOf(recipe);
+    // console.log(index)
     this.cookbook.splice(index, 1);
   }
 }
