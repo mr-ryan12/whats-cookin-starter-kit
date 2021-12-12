@@ -82,6 +82,7 @@ function createCurrentRecipes() {
   });
   addEventListenerToRecipeCards();
   greeting.innerText = `Welcome, ${user.name}!`
+  displayRedHearts();
 }
 
 function displayBrowsePage() {
@@ -171,6 +172,30 @@ function toggleFavorites(event) {
       button.classList.toggle('red') : null;
   })
 }
+
+function displayRedHearts() {
+  const heartButtons = document.querySelectorAll('.fa-heart');
+  recipeRepo.currentRecipes.forEach(recipe => {
+    user.favorites.includes(recipe) ? 
+      heartButtons.forEach(button => {
+        button.parentNode.parentNode.parentNode.id === 'id' + recipe.id ? 
+          button.classList.add('red') : null;
+      }) : null;
+  });
+}
+
+/**
+ *  when to call it: createCurrentRecipes()
+ *  - querySelect all btns 
+ *  - iterate thru recipeRepo.currentRecipes 
+ *  - each iteration 
+ *     - if(user.favorites.includes(currentRecipe) {
+ *            - will have another iteration that iterates thru all the buttons
+ *            if(button.parentNode.parentNode.parentNode.id === currentRecipe.id) {
+ *                  - Then will add the classList.add('red')
+ *                 }
+ *          }
+ */
 
 function toggleCookbook(event) {
   const saveButtons = document.querySelectorAll('.fa-bookmark');
