@@ -5,11 +5,33 @@ import Recipe from './classes/Recipe';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
 import recipeData from './data/recipes';
-import ingredientsData from './data/ingredients';
+// import ingredientsData from './data/ingredients';
 import usersData from './data/users';
+import {usersApi, recipesApi, ingredientsApi} from './apiCalls';
 
-const recipeRepo = new RecipeRepository(recipeData, ingredientsData);
-const user = new User(usersData[getRandomIndex(usersData)]);
+
+
+
+
+usersApi.then(data => {
+  localStorage.setItem('user', JSON.stringify(data.usersData[getRandomIndex(data.usersData)]))
+});
+
+recipesApi.then(data => {
+  localStorage.setItem('recipes', JSON.stringify(data.recipesData))
+});
+
+ingredientsApi.then(data => {
+  localStorage.setItem('ingredients', JSON.stringify(data.ingredientsData))
+});
+
+
+
+const recipeRepo = new RecipeRepository(
+  JSON.parse(localStorage.getItem('recipes')), 
+  JSON.parse(localStorage.getItem('ingredients')));
+const user = new User(JSON.parse(localStorage.getItem('user')))
+// console.log(user);
 const recipeTitle = document.querySelector('#recipe-title');
 const price = document.querySelector('#price');
 const homePage = document.querySelector('.home-page');
