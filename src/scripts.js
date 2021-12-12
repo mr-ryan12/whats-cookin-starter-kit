@@ -82,7 +82,8 @@ function createCurrentRecipes() {
   });
   addEventListenerToRecipeCards();
   greeting.innerText = `Welcome, ${user.name}!`
-  displayRedHearts();
+  displayRedHearts(recipeRepo.currentRecipes);
+  displayYellowBookmarks(recipeRepo.currentRecipes);
 }
 
 function displayBrowsePage() {
@@ -173,13 +174,24 @@ function toggleFavorites(event) {
   })
 }
 
-function displayRedHearts() {
+function displayRedHearts(list) {
   const heartButtons = document.querySelectorAll('.fa-heart');
-  recipeRepo.currentRecipes.forEach(recipe => {
+  list.forEach(recipe => {
     user.favorites.includes(recipe) ? 
       heartButtons.forEach(button => {
         button.parentNode.parentNode.parentNode.id === 'id' + recipe.id ? 
           button.classList.add('red') : null;
+      }) : null;
+  });
+}
+
+function displayYellowBookmarks(list) {
+  const saveButtons = document.querySelectorAll('.fa-bookmark');
+  list.forEach(recipe => {
+    user.cookbook.includes(recipe) ? 
+      saveButtons.forEach(button => {
+        button.parentNode.parentNode.parentNode.id === 'id' + recipe.id ? 
+          button.classList.add('yellow') : null;
       }) : null;
   });
 }
@@ -234,4 +246,6 @@ function createCookbook() {
       </section>`
   });
   addEventListenerToRecipeCards();
+  displayYellowBookmarks(user.cookbook);
+  displayRedHearts(user.cookbook);
 }
