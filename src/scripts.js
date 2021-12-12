@@ -138,6 +138,7 @@ function displayDirections(event) {
 }
 
 function filterRecipes() {
+  reassignCurrentRecipes();
   recipeRepo.addTag(tagInput.value);
   recipeRepo.addFilter(searchBar.value);
   recipeRepo.filterRecipes();
@@ -145,7 +146,8 @@ function filterRecipes() {
   hide([homePage, recipeView, cookbook]);
   show([browsePage]);
   recipeRepo.clearFilters();
-  reassignCurrentRecipes();
+  searchBar.value = '';
+  tagInput.selectedIndex = 0;
 }
 
 function reassignCurrentRecipes() {

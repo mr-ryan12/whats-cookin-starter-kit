@@ -1,5 +1,4 @@
 import Recipe from './Recipe';
-import User from './User';
 
 class RecipeRepository {
   constructor(recipes, ingredientsData) {
@@ -43,9 +42,9 @@ class RecipeRepository {
       recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm);
     }) : this.tag !== '' && this.filterTerm !== '' ?
     this.currentRecipes = this.currentRecipes.filter(recipe => {
-      return recipe.tags.includes(this.tag) ||
-      recipe.name.toLowerCase().includes(this.filterTerm) ||
-      recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm)
+      return recipe.tags.includes(this.tag) &&
+      (recipe.name.toLowerCase().includes(this.filterTerm) ||
+      recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm))
     }) : null;
   }
 
