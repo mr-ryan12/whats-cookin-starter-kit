@@ -80,9 +80,11 @@ function createCurrentRecipes() {
 }
 
 function displayBrowsePage() {
+  recipeRepo.filterState = 'all';
   hide([homePage, recipeView, cookbook]);
   show([browsePage]);
   recipeRepo.clearFilters();
+  reassignCurrentRecipes();
   searchBar.value = '';
   tagInput.selectedIndex = 0;
   createCurrentRecipes();
@@ -143,11 +145,20 @@ function filterRecipes() {
   hide([homePage, recipeView, cookbook]);
   show([browsePage]);
   recipeRepo.clearFilters();
+  reassignCurrentRecipes();
+}
+
+function reassignCurrentRecipes() {
+  recipeRepo.filterState === 'all' ?
+  recipeRepo.currentRecipes = recipeRepo.recipes : 
+  recipeRepo.filterState === 'favorites' ?
+  recipeRepo.currentRecipes = user.favorites : null;
 }
 
 function filterFavorites() {
+  recipeRepo.filterState = 'favorites'
   recipeRepo.clearFilters();
-  recipeRepo.currentRecipes = user.favorites;
+  reassignCurrentRecipes();
   createCurrentRecipes();
   hide([homePage, recipeView, cookbook]);
   show([browsePage]);

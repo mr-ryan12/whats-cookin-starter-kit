@@ -1,4 +1,5 @@
 import Recipe from './Recipe';
+import User from './User';
 
 class RecipeRepository {
   constructor(recipes, ingredientsData) {
@@ -18,6 +19,7 @@ class RecipeRepository {
     this.filterTerm = '';
     this.tag = '';
     this.currentRecipes = this.recipes;
+    this.filterState = '';
   }
 
   addToCookbook(recipe) {
@@ -50,7 +52,6 @@ class RecipeRepository {
   clearFilters() {
     this.filterTerm = '';
     this.tag = '';
-    this.currentRecipes = this.recipes;
   }
 }
 
