@@ -1,9 +1,4 @@
-// Your fetch requests will live here!
-// Write fetch call
-// Export function to scripts.js
-// Import function in scripts.js
-// Invoke function in scripts.js
-
+// Fetch requests
 
 const usersApi = 
 fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users")
@@ -17,12 +12,4 @@ const ingredientsApi =
   fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients")
     .then(response => response.json())
   
-
-// let usersData = fetchUsers()
-
-  // .then(() => console.log(usersData))
-  // .catch(err => console.log('IT BROKE!!!!'))
-
-console.log('here')
-
 export {usersApi, recipesApi, ingredientsApi};

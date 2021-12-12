@@ -9,9 +9,9 @@ let recipeRepo;
 Promise.all([usersApi, recipesApi, ingredientsApi])
   .then(data => {
     user = new User(data[0].usersData[getRandomIndex(data[0].usersData)])
-    console.log(data)
     recipeRepo = new RecipeRepository(data[1].recipeData, data[2].ingredientsData)
-    createCurrentRecipes()
+    createCurrentRecipes();
+    assignFeaturedRecipe();
   })
   .catch(err => console.log('something went wrong', err))
 
@@ -45,6 +45,17 @@ const hide = elements => elements.forEach(element => element.classList.add('hidd
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
+}
+
+const featuredRecipeImg = document.querySelector('.featured-recipe-image');
+const featuredRecipeName = document.querySelector('.featured-recipe-name');
+const featuredHeartBtn = document.querySelector('.featured-heart-btn');
+const featuredSaveBtn = document.querySelector('.featured-save-recipe-btn');
+
+function assignFeaturedRecipe() {
+  const featuredRecipe = recipeRepo.recipes[getRandomIndex(recipeRepo.recipes)];
+  featuredRecipeImg.src = featuredRecipe.image;
+  featuredRecipeName.innerText = featuredRecipe.name;
 }
 
 function createCurrentRecipes() {
@@ -147,7 +158,7 @@ function filterFavorites() {
 function toggleFavorites(event) {
   const heartButtons = document.querySelectorAll('.fa-heart');
   const recipeId = event.target.parentNode.parentNode.parentNode.id;
-  const thisRecipe = recipeRepo.currentRecipes.find(recipe => "id" + recipe.id === recipeId);
+  const thisRecipe = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId);
   user.favorites.includes(thisRecipe) ? 
     user.removeFromFavorites(thisRecipe) :
     user.addToFavorites(thisRecipe);
@@ -182,7 +193,7 @@ function displayYellowBookmarks(list) {
 function toggleCookbook(event) {
   const saveButtons = document.querySelectorAll('.fa-bookmark');
   const recipeId = event.target.parentNode.parentNode.parentNode.id;
-  const thisRecipe = recipeRepo.currentRecipes.find(recipe => "id" + recipe.id === recipeId);
+  const thisRecipe = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId);
   user.cookbook.includes(thisRecipe) ? 
     user.removeFromCookbook(thisRecipe) :
     user.addToCookbook(thisRecipe);
