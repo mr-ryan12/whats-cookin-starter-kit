@@ -18,7 +18,7 @@ usersApi.then(data => {
 });
 
 recipesApi.then(data => {
-  localStorage.setItem('recipes', JSON.stringify(data.recipesData))
+  localStorage.setItem('recipes', JSON.stringify(data.recipeData))
 });
 
 ingredientsApi.then(data => {

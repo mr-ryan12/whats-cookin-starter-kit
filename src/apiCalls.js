@@ -25,4 +25,4 @@ const ingredientsApi =
 
 console.log('here')
 
-export default {usersApi, recipesApi, ingredientsApi};
+export {usersApi, recipesApi, ingredientsApi};
