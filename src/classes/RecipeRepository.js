@@ -18,6 +18,7 @@ class RecipeRepository {
     this.filterTerm = '';
     this.tag = '';
     this.currentRecipes = this.recipes;
+    this.filterState = '';
   }
 
   addToCookbook(recipe) {
@@ -41,16 +42,15 @@ class RecipeRepository {
       recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm);
     }) : this.tag !== '' && this.filterTerm !== '' ?
     this.currentRecipes = this.currentRecipes.filter(recipe => {
-      return recipe.tags.includes(this.tag) ||
-      recipe.name.toLowerCase().includes(this.filterTerm) ||
-      recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm)
+      return recipe.tags.includes(this.tag) &&
+      (recipe.name.toLowerCase().includes(this.filterTerm) ||
+      recipe.ingredients.find(ingredient => ingredient.name === this.filterTerm))
     }) : null;
   }
 
   clearFilters() {
     this.filterTerm = '';
     this.tag = '';
-    this.currentRecipes = this.recipes;
   }
 }
 

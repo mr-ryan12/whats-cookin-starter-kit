@@ -1,15 +1,20 @@
 import './styles.css';
-import apiCalls from './apiCalls';
-import Ingredient from './classes/Ingredient';
-import Recipe from './classes/Recipe';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
-import recipeData from './data/recipes';
-import ingredientsData from './data/ingredients';
-import usersData from './data/users';
+import {usersApi, recipesApi, ingredientsApi} from './apiCalls';
 
-const recipeRepo = new RecipeRepository(recipeData, ingredientsData);
-const user = new User(usersData[getRandomIndex(usersData)]);
+let user;
+let recipeRepo;
+
+Promise.all([usersApi, recipesApi, ingredientsApi])
+  .then(data => {
+    user = new User(data[0].usersData[getRandomIndex(data[0].usersData)])
+    recipeRepo = new RecipeRepository(data[1].recipeData, data[2].ingredientsData)
+    createCurrentRecipes();
+    assignFeaturedRecipe();
+  })
+  .catch(err => console.log('something went wrong', err))
+
 const recipeTitle = document.querySelector('#recipe-title');
 const price = document.querySelector('#price');
 const homePage = document.querySelector('.home-page');
@@ -28,7 +33,6 @@ const cookbook = document.getElementById('cookbook');
 const greeting = document.getElementById('greeting');
 
 //Event Listeners
-window.addEventListener('load', createCurrentRecipes);
 allRecipesButton.addEventListener('click', displayBrowsePage);
 submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
@@ -41,6 +45,17 @@ const hide = elements => elements.forEach(element => element.classList.add('hidd
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
+}
+
+const featuredRecipeImg = document.querySelector('.featured-recipe-image');
+const featuredRecipeName = document.querySelector('.featured-recipe-name');
+const featuredHeartBtn = document.querySelector('.featured-heart-btn');
+const featuredSaveBtn = document.querySelector('.featured-save-recipe-btn');
+
+function assignFeaturedRecipe() {
+  const featuredRecipe = recipeRepo.recipes[getRandomIndex(recipeRepo.recipes)];
+  featuredRecipeImg.src = featuredRecipe.image;
+  featuredRecipeName.innerText = featuredRecipe.name;
 }
 
 function createCurrentRecipes() {
@@ -60,12 +75,16 @@ function createCurrentRecipes() {
   });
   addEventListenerToRecipeCards();
   greeting.innerText = `Welcome, ${user.name}!`
+  displayRedHearts(recipeRepo.currentRecipes);
+  displayYellowBookmarks(recipeRepo.currentRecipes);
 }
 
 function displayBrowsePage() {
+  recipeRepo.filterState = 'all';
   hide([homePage, recipeView, cookbook]);
   show([browsePage]);
   recipeRepo.clearFilters();
+  reassignCurrentRecipes();
   searchBar.value = '';
   tagInput.selectedIndex = 0;
   createCurrentRecipes();
@@ -119,17 +138,29 @@ function displayDirections(event) {
 }
 
 function filterRecipes() {
+  reassignCurrentRecipes();
   recipeRepo.addTag(tagInput.value);
   recipeRepo.addFilter(searchBar.value);
   recipeRepo.filterRecipes();
   createCurrentRecipes();
   hide([homePage, recipeView, cookbook]);
   show([browsePage]);
+  recipeRepo.clearFilters();
+  searchBar.value = '';
+  tagInput.selectedIndex = 0;
+}
+
+function reassignCurrentRecipes() {
+  recipeRepo.filterState === 'all' ?
+  recipeRepo.currentRecipes = recipeRepo.recipes : 
+  recipeRepo.filterState === 'favorites' ?
+  recipeRepo.currentRecipes = user.favorites : null;
 }
 
 function filterFavorites() {
+  recipeRepo.filterState = 'favorites'
   recipeRepo.clearFilters();
-  recipeRepo.currentRecipes = user.favorites;
+  reassignCurrentRecipes();
   createCurrentRecipes();
   hide([homePage, recipeView, cookbook]);
   show([browsePage]);
@@ -140,7 +171,7 @@ function filterFavorites() {
 function toggleFavorites(event) {
   const heartButtons = document.querySelectorAll('.fa-heart');
   const recipeId = event.target.parentNode.parentNode.parentNode.id;
-  const thisRecipe = recipeRepo.currentRecipes.find(recipe => "id" + recipe.id === recipeId);
+  const thisRecipe = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId);
   user.favorites.includes(thisRecipe) ? 
     user.removeFromFavorites(thisRecipe) :
     user.addToFavorites(thisRecipe);
@@ -150,10 +181,32 @@ function toggleFavorites(event) {
   })
 }
 
+function displayRedHearts(list) {
+  const heartButtons = document.querySelectorAll('.fa-heart');
+  list.forEach(recipe => {
+    user.favorites.includes(recipe) ? 
+      heartButtons.forEach(button => {
+        button.parentNode.parentNode.parentNode.id === 'id' + recipe.id ? 
+          button.classList.add('red') : null;
+      }) : null;
+  });
+}
+
+function displayYellowBookmarks(list) {
+  const saveButtons = document.querySelectorAll('.fa-bookmark');
+  list.forEach(recipe => {
+    user.cookbook.includes(recipe) ? 
+      saveButtons.forEach(button => {
+        button.parentNode.parentNode.parentNode.id === 'id' + recipe.id ? 
+          button.classList.add('yellow') : null;
+      }) : null;
+  });
+}
+
 function toggleCookbook(event) {
   const saveButtons = document.querySelectorAll('.fa-bookmark');
   const recipeId = event.target.parentNode.parentNode.parentNode.id;
-  const thisRecipe = recipeRepo.currentRecipes.find(recipe => "id" + recipe.id === recipeId);
+  const thisRecipe = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId);
   user.cookbook.includes(thisRecipe) ? 
     user.removeFromCookbook(thisRecipe) :
     user.addToCookbook(thisRecipe);
@@ -187,4 +240,6 @@ function createCookbook() {
       </section>`
   });
   addEventListenerToRecipeCards();
+  displayYellowBookmarks(user.cookbook);
+  displayRedHearts(user.cookbook);
 }
