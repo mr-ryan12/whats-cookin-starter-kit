@@ -1,30 +1,7 @@
 import './styles.css';
-import apiCalls from './apiCalls';
-import Ingredient from './classes/Ingredient';
-import Recipe from './classes/Recipe';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
-import recipeData from './data/recipes';
-// import ingredientsData from './data/ingredients';
-import usersData from './data/users';
 import {usersApi, recipesApi, ingredientsApi} from './apiCalls';
-
-
-
-
-
-// usersApi.then(data => {
-//   data.usersData[getRandomIndex(data.usersData)]
-// });
-
-// recipesApi.then(data => {
-//   localStorage.setItem('recipes', JSON.stringify(data.recipeData))
-// });
-
-// ingredientsApi.then(data => {
-//   localStorage.setItem('ingredients', JSON.stringify(data.ingredientsData))
-// });
-
 
 let user;
 let recipeRepo;
@@ -38,12 +15,6 @@ Promise.all([usersApi, recipesApi, ingredientsApi])
   })
   .catch(err => console.log('something went wrong', err))
 
-
-// const recipeRepo = new RecipeRepository(
-//   JSON.parse(localStorage.getItem('recipes')), 
-//   JSON.parse(localStorage.getItem('ingredients')));
-// const user = new User(JSON.parse(localStorage.getItem('user')))
-// console.log(user);
 const recipeTitle = document.querySelector('#recipe-title');
 const price = document.querySelector('#price');
 const homePage = document.querySelector('.home-page');
@@ -62,7 +33,6 @@ const cookbook = document.getElementById('cookbook');
 const greeting = document.getElementById('greeting');
 
 //Event Listeners
-// window.addEventListener('load', createCurrentRecipes);
 allRecipesButton.addEventListener('click', displayBrowsePage);
 submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
@@ -208,19 +178,6 @@ function displayYellowBookmarks(list) {
       }) : null;
   });
 }
-
-/**
- *  when to call it: createCurrentRecipes()
- *  - querySelect all btns 
- *  - iterate thru recipeRepo.currentRecipes 
- *  - each iteration 
- *     - if(user.favorites.includes(currentRecipe) {
- *            - will have another iteration that iterates thru all the buttons
- *            if(button.parentNode.parentNode.parentNode.id === currentRecipe.id) {
- *                  - Then will add the classList.add('red')
- *                 }
- *          }
- */
 
 function toggleCookbook(event) {
   const saveButtons = document.querySelectorAll('.fa-bookmark');
