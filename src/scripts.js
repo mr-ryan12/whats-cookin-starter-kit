@@ -13,24 +13,36 @@ import {usersApi, recipesApi, ingredientsApi} from './apiCalls';
 
 
 
-usersApi.then(data => {
-  localStorage.setItem('user', JSON.stringify(data.usersData[getRandomIndex(data.usersData)]))
-});
+// usersApi.then(data => {
+//   data.usersData[getRandomIndex(data.usersData)]
+// });
 
-recipesApi.then(data => {
-  localStorage.setItem('recipes', JSON.stringify(data.recipeData))
-});
+// recipesApi.then(data => {
+//   localStorage.setItem('recipes', JSON.stringify(data.recipeData))
+// });
 
-ingredientsApi.then(data => {
-  localStorage.setItem('ingredients', JSON.stringify(data.ingredientsData))
-});
+// ingredientsApi.then(data => {
+//   localStorage.setItem('ingredients', JSON.stringify(data.ingredientsData))
+// });
 
 
+let user;
+let recipeRepo;
 
-const recipeRepo = new RecipeRepository(
-  JSON.parse(localStorage.getItem('recipes')), 
-  JSON.parse(localStorage.getItem('ingredients')));
-const user = new User(JSON.parse(localStorage.getItem('user')))
+Promise.all([usersApi, recipesApi, ingredientsApi])
+  .then(data => {
+    user = new User(data[0].usersData[getRandomIndex(data[0].usersData)])
+    console.log(data)
+    recipeRepo = new RecipeRepository(data[1].recipeData, data[2].ingredientsData)
+    createCurrentRecipes()
+  })
+  .catch(err => console.log('something went wrong', err))
+
+
+// const recipeRepo = new RecipeRepository(
+//   JSON.parse(localStorage.getItem('recipes')), 
+//   JSON.parse(localStorage.getItem('ingredients')));
+// const user = new User(JSON.parse(localStorage.getItem('user')))
 // console.log(user);
 const recipeTitle = document.querySelector('#recipe-title');
 const price = document.querySelector('#price');
@@ -50,7 +62,7 @@ const cookbook = document.getElementById('cookbook');
 const greeting = document.getElementById('greeting');
 
 //Event Listeners
-window.addEventListener('load', createCurrentRecipes);
+// window.addEventListener('load', createCurrentRecipes);
 allRecipesButton.addEventListener('click', displayBrowsePage);
 submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
@@ -149,6 +161,7 @@ function filterRecipes() {
   createCurrentRecipes();
   hide([homePage, recipeView, cookbook]);
   show([browsePage]);
+  recipeRepo.clearFilters();
 }
 
 function filterFavorites() {
