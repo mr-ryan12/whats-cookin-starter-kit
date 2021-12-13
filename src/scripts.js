@@ -8,13 +8,14 @@ let recipeRepo;
 
 Promise.all([usersApi, recipesApi, ingredientsApi])
   .then(data => {
-    user = new User(data[0].usersData[getRandomIndex(data[0].usersData)])
-    recipeRepo = new RecipeRepository(data[1].recipeData, data[2].ingredientsData)
+    user = new User(data[0].usersData[getRandomIndex(data[0].usersData)]);
+    recipeRepo = new RecipeRepository(data[1].recipeData, data[2].ingredientsData);
     createCurrentRecipes();
     assignFeaturedRecipe();
   })
-  .catch(err => console.log('something went wrong', err))
+  .catch(err => console.log('something went wrong', err));
 
+// Query Selectors
 const recipeTitle = document.querySelector('#recipe-title');
 const price = document.querySelector('#price');
 const homePage = document.querySelector('.home-page');
@@ -35,7 +36,7 @@ const featuredRecipeImg = document.querySelector('.featured-recipe-image');
 const featuredRecipeName = document.querySelector('.featured-recipe-name');
 const whatsCookin = document.getElementById('whats-cookin');
 
-//Event Listeners
+// Event Listeners
 allRecipesButton.addEventListener('click', displayBrowsePage);
 submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
@@ -45,7 +46,6 @@ whatsCookin.addEventListener('click', displayHomeView);
 
 //Functions
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
-
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
 
 function getRandomIndex(array) {
@@ -124,7 +124,7 @@ function displayIngredients(event) {
   const recipeId = event.target.parentNode.id;
   const currentRecipe = recipeRepo.recipes.find(recipe => 'id' + recipe.id === recipeId);
   currentRecipe.ingredients.forEach(ingredient => {
-    ingredientsList.innerHTML += `<li>${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}</li>`
+    ingredientsList.innerHTML += `<li>${Math.round(ingredient.quantity.amount * 100) / 100} ${ingredient.quantity.unit} ${ingredient.name}</li>`
   })
 }
 
