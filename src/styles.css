@@ -144,13 +144,11 @@ h1 {
 .featured-heart-btn,
 .featured-save-recipe-btn {
   position: absolute;
-  background: teal;
-  border: none;
+  background: none;
   height: 7vh;
   width: 7vh;
   bottom: 1vh;
   border-radius: 50%;
-  border: none;
   font-size: 210%;
   cursor: pointer;
   margin-top: 4%;
@@ -166,11 +164,11 @@ h1 {
 }
 
 .featured-heart-btn {
-  right: 34%;
+  right: 29%;
 }
 
 .featured-save-recipe-btn {
-  right: 28%;
+  right: 25%;
 }
 
 i {
