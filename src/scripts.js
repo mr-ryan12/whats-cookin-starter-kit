@@ -33,6 +33,7 @@ const cookbook = document.getElementById('cookbook');
 const greeting = document.getElementById('greeting');
 const featuredRecipeImg = document.querySelector('.featured-recipe-image');
 const featuredRecipeName = document.querySelector('.featured-recipe-name');
+const whatsCookin = document.getElementById('whats-cookin');
 
 //Event Listeners
 allRecipesButton.addEventListener('click', displayBrowsePage);
@@ -40,6 +41,7 @@ submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
 cookbookButton.addEventListener('click', viewCookbook);
 featuredRecipeImg.addEventListener('click', showRecipeView);
+whatsCookin.addEventListener('click', displayHomeView)
 
 //Functions
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
@@ -237,4 +239,9 @@ function createCookbook() {
   addEventListenerToRecipeCards();
   displayYellowBookmarks(user.cookbook);
   displayRedHearts(user.cookbook);
+}
+
+function displayHomeView() {
+  hide([browsePage, recipeView, cookbook]);
+  show([homePage]);
 }
