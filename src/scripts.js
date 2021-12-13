@@ -59,7 +59,7 @@ function createDropdownTags() {
   const allTags = recipeRepo.recipes.reduce((acc, recipe) => {
     recipe.tags.forEach(tag => {
       !acc.includes(tag) ? 
-      acc.push(tag) : null;
+        acc.push(tag) : null;
     });
     return acc;
   }, []);
@@ -83,8 +83,8 @@ function createCurrentRecipes() {
       <section class="individual-recipe-card">
         <section class="recipe-card" id="${recipe.id}">
           <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
-            <i class="fa fa-heart heart-btn"></i>
-            <i class="fa fa-bookmark save-recipe-btn"></i>
+          <i class="fa fa-heart heart-btn"></i>
+          <i class="fa fa-bookmark save-recipe-btn"></i>
         </section>
         <h2 class="recipe-card-title">${recipe.name}</h2>
       </section>`
@@ -129,7 +129,9 @@ function showRecipeView(event) {
     return `${recipe.id}` === recipeId
   }).calculateRecipeCost() / 100).toFixed(2)}`;
   recipeViewImage.innerHTML = `
-    <img src="${recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId).name}">`
+    <img src="${recipeRepo.recipes.find(recipe => 
+    `${recipe.id}` === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => 
+  `${recipe.id}` === recipeId).name}">`
   show([recipeView]);
   hide([homePage, browsePage, cookbook]);
   displayIngredients(event);
@@ -141,7 +143,9 @@ function displayIngredients(event) {
   const recipeId = event.target.parentNode.id;
   const currentRecipe = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
   currentRecipe.ingredients.forEach(ingredient => {
-    ingredientsList.innerHTML += `<li>${Math.round(ingredient.quantity.amount * 100) / 100} ${ingredient.quantity.unit} ${ingredient.name}</li>`
+    ingredientsList.innerHTML += 
+      `<li>${Math.round(ingredient.quantity.amount * 100) / 100} 
+      ${ingredient.quantity.unit} ${ingredient.name}</li>`
   })
 }
 
@@ -169,9 +173,9 @@ function filterRecipes() {
 
 function reassignCurrentRecipes() {
   recipeRepo.filterState === 'all' ?
-  recipeRepo.currentRecipes = recipeRepo.recipes : 
-  recipeRepo.filterState === 'favorites' ?
-  recipeRepo.currentRecipes = user.favorites : null;
+    recipeRepo.currentRecipes = recipeRepo.recipes : 
+    recipeRepo.filterState === 'favorites' ?
+      recipeRepo.currentRecipes = user.favorites : null;
 }
 
 function filterFavorites() {
@@ -276,7 +280,7 @@ function updateNavBarButtonColor() {
   allRecipesButton.classList.remove('beige');
   favoritesButton.classList.remove('beige');
   recipeRepo.filterState === 'all' ?
-  allRecipesButton.classList.add('beige') :
-  recipeRepo.filterState === 'favorites' ?
-  favoritesButton.classList.add('beige') : null;
+    allRecipesButton.classList.add('beige') :
+    recipeRepo.filterState === 'favorites' ?
+      favoritesButton.classList.add('beige') : null;
 }
