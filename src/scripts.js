@@ -31,12 +31,15 @@ const tagInput = document.getElementById('tags');
 const searchBar = document.getElementById('search-bar');
 const cookbook = document.getElementById('cookbook');
 const greeting = document.getElementById('greeting');
+const featuredRecipeImg = document.querySelector('.featured-recipe-image');
+const featuredRecipeName = document.querySelector('.featured-recipe-name');
 
 //Event Listeners
 allRecipesButton.addEventListener('click', displayBrowsePage);
 submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
 cookbookButton.addEventListener('click', viewCookbook);
+featuredRecipeImg.addEventListener('click', showRecipeView);
 
 //Functions
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
@@ -47,15 +50,11 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-const featuredRecipeImg = document.querySelector('.featured-recipe-image');
-const featuredRecipeName = document.querySelector('.featured-recipe-name');
-const featuredHeartBtn = document.querySelector('.featured-heart-btn');
-const featuredSaveBtn = document.querySelector('.featured-save-recipe-btn');
-
 function assignFeaturedRecipe() {
   const featuredRecipe = recipeRepo.recipes[getRandomIndex(recipeRepo.recipes)];
   featuredRecipeImg.src = featuredRecipe.image;
   featuredRecipeName.innerText = featuredRecipe.name;
+  homePage.id = 'id' + featuredRecipe.id;
 }
 
 function createCurrentRecipes() {
