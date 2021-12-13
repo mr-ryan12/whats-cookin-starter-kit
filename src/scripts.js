@@ -12,6 +12,7 @@ Promise.all([usersApi, recipesApi, ingredientsApi])
     recipeRepo = new RecipeRepository(data[1].recipeData, data[2].ingredientsData);
     createCurrentRecipes();
     assignFeaturedRecipe();
+    createDropdownTags();
   })
   .catch(err => console.log('something went wrong', err));
 
@@ -35,6 +36,7 @@ const greeting = document.getElementById('greeting');
 const featuredRecipeImg = document.querySelector('.featured-recipe-image');
 const featuredRecipeName = document.querySelector('.featured-recipe-name');
 const whatsCookin = document.getElementById('whats-cookin');
+const tags = document.getElementById('tags');
 
 // Event Listeners
 allRecipesButton.addEventListener('click', displayBrowsePage);
@@ -50,6 +52,20 @@ const hide = elements => elements.forEach(element => element.classList.add('hidd
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
+}
+
+function createDropdownTags() {
+  tags.innerHTML = '<option>Choose a Tag</option>'
+  const allTags = recipeRepo.recipes.reduce((acc, recipe) => {
+    recipe.tags.forEach(tag => {
+      !acc.includes(tag) ? 
+      acc.push(tag) : null;
+    });
+    return acc;
+  }, []);
+  allTags.forEach(tag => {
+    tags.innerHTML += `<option value="${tag}">${tag}</option>`
+  });
 }
 
 function assignFeaturedRecipe() {
