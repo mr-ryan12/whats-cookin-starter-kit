@@ -64,10 +64,8 @@ function createCurrentRecipes() {
       <section class="individual-recipe-card">
         <section class="recipe-card" id="id${recipe.id}">
           <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
-          <section class="favorite-save-btn-container">
-            <button class="heart-btn"><i class="fa fa-heart"></i></button>
-            <button class="save-recipe-btn"><i class="fa fa-bookmark"></i></button>
-          </section>
+            <i class="fa fa-heart heart-btn"></i>
+            <i class="fa fa-bookmark save-recipe-btn"></i>
         </section>
         <h2 class="recipe-card-title">${recipe.name}</h2>
       </section>`
@@ -169,13 +167,13 @@ function filterFavorites() {
 
 function toggleFavorites(event) {
   const heartButtons = document.querySelectorAll('.fa-heart');
-  const recipeId = event.target.parentNode.parentNode.parentNode.id;
+  const recipeId = event.target.parentNode.id;
   const thisRecipe = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId);
   user.favorites.includes(thisRecipe) ? 
     user.removeFromFavorites(thisRecipe) :
     user.addToFavorites(thisRecipe);
   heartButtons.forEach(button => {
-    button.parentNode.parentNode.parentNode.id === recipeId ?
+    button.parentNode.id === recipeId ?
       button.classList.toggle('red') : null;
   })
 }
@@ -185,7 +183,7 @@ function displayRedHearts(list) {
   list.forEach(recipe => {
     user.favorites.includes(recipe) ? 
       heartButtons.forEach(button => {
-        button.parentNode.parentNode.parentNode.id === 'id' + recipe.id ? 
+        button.parentNode.id === 'id' + recipe.id ? 
           button.classList.add('red') : null;
       }) : null;
   });
@@ -196,7 +194,7 @@ function displayYellowBookmarks(list) {
   list.forEach(recipe => {
     user.cookbook.includes(recipe) ? 
       saveButtons.forEach(button => {
-        button.parentNode.parentNode.parentNode.id === 'id' + recipe.id ? 
+        button.parentNode.id === 'id' + recipe.id ? 
           button.classList.add('yellow') : null;
       }) : null;
   });
@@ -204,13 +202,13 @@ function displayYellowBookmarks(list) {
 
 function toggleCookbook(event) {
   const saveButtons = document.querySelectorAll('.fa-bookmark');
-  const recipeId = event.target.parentNode.parentNode.parentNode.id;
+  const recipeId = event.target.parentNode.id;
   const thisRecipe = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId);
   user.cookbook.includes(thisRecipe) ? 
     user.removeFromCookbook(thisRecipe) :
     user.addToCookbook(thisRecipe);
   saveButtons.forEach(button => {
-    button.parentNode.parentNode.parentNode.id === recipeId ?
+    button.parentNode.id === recipeId ?
       button.classList.toggle('yellow') : null;
   })
 }
@@ -230,10 +228,8 @@ function createCookbook() {
       <section class="individual-recipe-card">
         <section class="recipe-card" id="id${recipe.id}">
           <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
-          <section class="favorite-save-btn-container">
-            <button class="heart-btn"><i class="fa fa-heart"></i></button>
-            <button class="save-recipe-btn"><i class="fa fa-bookmark"></i></button>
-          </section>
+            <i class="fa fa-heart heart-btn"></i>
+            <i class="fa fa-bookmark save-recipe-btn"></i>
         </section>
         <h2 class="recipe-card-title">${recipe.name}</h2>
       </section>`
