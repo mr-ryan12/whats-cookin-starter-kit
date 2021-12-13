@@ -55,7 +55,7 @@ function getRandomIndex(array) {
 }
 
 function createDropdownTags() {
-  tags.innerHTML = '<option>Choose a Tag</option>'
+  tags.innerHTML = '<option value="">Choose a Tag</option>'
   const allTags = recipeRepo.recipes.reduce((acc, recipe) => {
     recipe.tags.forEach(tag => {
       !acc.includes(tag) ? 
