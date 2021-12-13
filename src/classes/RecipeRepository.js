@@ -33,6 +33,10 @@ class RecipeRepository {
     this.tag = tag;
   }
 
+  updateFilterState(state) {
+    this.filterState = state;
+  }
+
   filterRecipes() {
     this.tag !== '' && this.filterTerm === '' ?
     this.currentRecipes = this.currentRecipes.filter(recipe => recipe.tags.includes(this.tag)) :

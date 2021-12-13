@@ -41,7 +41,7 @@ submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
 cookbookButton.addEventListener('click', viewCookbook);
 featuredRecipeImg.addEventListener('click', showRecipeView);
-whatsCookin.addEventListener('click', displayHomeView)
+whatsCookin.addEventListener('click', displayHomeView);
 
 //Functions
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
@@ -79,7 +79,8 @@ function createCurrentRecipes() {
 }
 
 function displayBrowsePage() {
-  recipeRepo.filterState = 'all';
+  recipeRepo.updateFilterState('all');
+  updateNavBarButtonColor();
   hide([homePage, recipeView, cookbook]);
   show([browsePage]);
   recipeRepo.clearFilters();
@@ -157,7 +158,8 @@ function reassignCurrentRecipes() {
 }
 
 function filterFavorites() {
-  recipeRepo.filterState = 'favorites'
+  recipeRepo.updateFilterState('favorites');
+  updateNavBarButtonColor();
   recipeRepo.clearFilters();
   reassignCurrentRecipes();
   createCurrentRecipes();
@@ -216,6 +218,9 @@ function toggleCookbook(event) {
 }
 
 function viewCookbook() {
+  cookbookButton.classList.add('beige');
+  allRecipesButton.classList.remove('beige');
+  favoritesButton.classList.remove('beige');
   createCookbook();
   hide([homePage, recipeView, browsePage]);
   show([cookbook]);
@@ -242,6 +247,19 @@ function createCookbook() {
 }
 
 function displayHomeView() {
+  cookbookButton.classList.remove('beige');
+  allRecipesButton.classList.remove('beige');
+  favoritesButton.classList.remove('beige');
   hide([browsePage, recipeView, cookbook]);
   show([homePage]);
+}
+
+function updateNavBarButtonColor() {
+  cookbookButton.classList.remove('beige');
+  allRecipesButton.classList.remove('beige');
+  favoritesButton.classList.remove('beige');
+  recipeRepo.filterState === 'all' ?
+  allRecipesButton.classList.add('beige') :
+  recipeRepo.filterState === 'favorites' ?
+  favoritesButton.classList.add('beige') : null;
 }

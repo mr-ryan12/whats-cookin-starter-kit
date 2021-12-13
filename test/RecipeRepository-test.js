@@ -109,8 +109,19 @@ describe('RecipeRepo', () => {
   it('should be able to clear search terms', () => {
     recipeRepo.addFilter('Wing');
     recipeRepo.filterRecipes();
-    expect(recipeRepo.currentRecipes.length).to.equal(1);
+    expect(recipeRepo.filterTerm).to.equal('wing');
     recipeRepo.clearFilters();
-    expect(recipeRepo.currentRecipes.length).to.equal(2);
+    expect(recipeRepo.filterTerm).to.equal('');
   });
-})
+
+  it('should have a filter state', () => {
+    expect(recipeRepo.filterState).to.be.a('string');
+    expect(recipeRepo.filterState).to.equal('');
+  });
+
+  it('should be able to change the filter state', () => {
+    expect(recipeRepo.filterState).to.equal('');
+    recipeRepo.updateFilterState('favorites');
+    expect(recipeRepo.filterState).to.equal('favorites');
+  });
+});

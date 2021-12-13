@@ -6,7 +6,7 @@ import userData from '../src/data/users';
 import recipesData from '../src/data/recipe-test-data.js';
 import ingredientsData from '../src/data/ingredients-test-data';
 
-describe.only('User', () => {
+describe('User', () => {
 
   let user;
   let grilledCheese;
