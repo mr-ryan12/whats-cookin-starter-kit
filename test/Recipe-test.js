@@ -64,7 +64,11 @@ describe('Recipe', () => {
   });
 
   it('should be able to list ingredient names', () => {
-    expect(recipe.listIngredients()).to.deep.equal(['gluten-free white sandwich bread', 'cheese', 'unsalted butter']);
+    expect(recipe.listIngredients()).to.deep.equal([
+      'gluten-free white sandwich bread',
+      'cheese',
+      'unsalted butter'
+    ]);
   });
 
   it('should be able to return the directions', () => {
