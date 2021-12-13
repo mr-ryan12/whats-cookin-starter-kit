@@ -7,7 +7,7 @@
   </head>
   <body>
     <nav class="nav-bar">
-      <h1>Whats Cookin</h1>
+      <h1 class="whats-cookin" id="whats-cookin">Whats Cookin</h1>
       <p class="greeting" id="greeting"></p>
       <section class="button-container">
         <button class="nav-btn" id="all-recipes-btn">All Recipes</button>
@@ -41,14 +41,12 @@
     </nav>
     <main>
       <section class="home-page">
-        <img src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="cookies" class="featured-recipe-image">
+        <img src="" alt="cookies" class="featured-recipe-image">
+          <i class="fa fa-heart heart-btn featured-heart-btn"></i>
+          <i class="fa fa-bookmark save-recipe-btn featured-save-recipe-btn"></i>
         <section class="featured-recipe-info-container">
           <h3 class="featured-recipe-info-title">Featured Recipe!</h3>
-          <h4 class="featured-recipe-name">Hot Buttered Cookies!</h4>
-        </section>
-        <section class="featured-favorite-save-btn-container">
-          <button class="featured-heart-btn"><i class="fa fa-heart"></i></button>
-          <button class="featured-save-recipe-btn"><i class="fa fa-bookmark"></i></button>
+          <h4 class="featured-recipe-name"></h4>
         </section>
       </section>
       <section class="hidden browse-page" id="browse-page"></section>

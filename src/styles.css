@@ -1,6 +1,7 @@
 body {
   background-color:#FFF;
   margin: 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .nav-bar {
@@ -10,7 +11,7 @@ body {
   justify-content: flex-end;
   align-items: center;
   margin-top: 10px;
-  background-color: rgb(0, 128, 128);
+  background-color: rgba(0, 128, 128, .5);
   position: fixed;
   top: 0;
   height: 8vh;
@@ -26,6 +27,12 @@ h1 {
 
 .search-bar {
   width: 80%;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-bar::-webkit-input-placeholder {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .button-container {
@@ -40,27 +47,32 @@ h1 {
   cursor: pointer;
   width: 8vw;
   margin: 0 1% 0 1%;
+  font-family: inherit;
+  border: none;
+  border-radius: 5px;
 }
 
 .home-page {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   position: relative;
   margin-top: 8vh;
 }
 
 .featured-recipe-image {
   height: auto;
-  width: 74%;
+  width: 50%;
+  cursor: pointer;
 }
 
 .featured-recipe-info-container {
   background-color: #FFF;
-  height: 22%;
-  width: 16%;
-  position: absolute;
+  width: 100%;
   left: 23%;
   bottom: 20%;
+  text-align: center;
 }
 
 .featured-recipe-info-title,
@@ -68,26 +80,11 @@ h1 {
   font-size: 3vh;
   text-align: center;
   margin: 2%;
-  margin-top: 10%;
 }
 
 .featured-favorite-save-btn-container {
   display: flex;
   justify-content: flex-end;
-}
-
-.featured-heart-btn,
-.featured-save-recipe-btn {
-  position: absolute;
-  background: teal;
-  border: none;
-  height: 7vh;
-  width: 7vh;
-  bottom: 1vh;
-  border-radius: 50%;
-  font-size: 200%;
-  border: none;
-  font-size: 210%;
 }
 
 .featured-save-recipe-btn {
@@ -122,8 +119,9 @@ h1 {
 .recipe-card-image {
   height: auto;
   width: 100%;
-  margin: 0;
   padding: 0;
+  margin: -4px;
+  width: 102%;
 }
 
 .recipe-card-title {
@@ -134,13 +132,27 @@ h1 {
 .heart-btn,
 .save-recipe-btn {
   position: absolute;
-  background: teal;
+  background: none;
   border: none;
-  height: 12%;
-  width: 12%;
+  height: 6vh;
+  width: 6vh;
   border-radius: 50%;
-  font-size: 200%;
-  top: 56%;
+  font-size: 175%;
+  top: 77%;
+}
+
+.featured-heart-btn,
+.featured-save-recipe-btn {
+  position: absolute;
+  background: none;
+  height: 7vh;
+  width: 7vh;
+  bottom: 1vh;
+  border-radius: 50%;
+  font-size: 210%;
+  cursor: pointer;
+  margin-top: 4%;
+  top: 57%;
 }
 
 .save-recipe-btn {
@@ -151,12 +163,28 @@ h1 {
   right: 15%;
 }
 
+.featured-heart-btn {
+  right: 29%;
+}
+
+.featured-save-recipe-btn {
+  right: 25%;
+}
+
+i {
+  color: #D3D3D3;
+}
+
 .red {
   color: red;
 }
 
 .yellow {
   color: yellow;
+}
+
+.beige {
+  background-color: #D3D3D3;
 }
 
 .recipe-card:hover {
@@ -218,6 +246,10 @@ h5 {
 
 ol {
   width: 75%;
+}
+
+.whats-cookin {
+  cursor: pointer;
 }
 
 .hidden { 
