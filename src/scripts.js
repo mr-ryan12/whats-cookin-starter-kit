@@ -12,6 +12,7 @@ Promise.all([usersApi, recipesApi, ingredientsApi])
     recipeRepo = new RecipeRepository(data[1].recipeData, data[2].ingredientsData);
     createCurrentRecipes();
     assignFeaturedRecipe();
+    createDropdownTags();
   })
   .catch(err => console.log('something went wrong', err));
 
@@ -35,6 +36,7 @@ const greeting = document.getElementById('greeting');
 const featuredRecipeImg = document.querySelector('.featured-recipe-image');
 const featuredRecipeName = document.querySelector('.featured-recipe-name');
 const whatsCookin = document.getElementById('whats-cookin');
+const tags = document.getElementById('tags');
 
 // Event Listeners
 allRecipesButton.addEventListener('click', displayBrowsePage);
@@ -52,11 +54,26 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
+function createDropdownTags() {
+  tags.innerHTML = '<option value="">Choose a Tag</option>'
+  const allTags = recipeRepo.recipes.reduce((acc, recipe) => {
+    recipe.tags.forEach(tag => {
+      !acc.includes(tag) ? 
+        acc.push(tag) : null;
+    });
+    return acc;
+  }, []);
+  allTags.sort()
+  allTags.forEach(tag => {
+    tags.innerHTML += `<option value="${tag}">${tag}</option>`
+  });
+}
+
 function assignFeaturedRecipe() {
   const featuredRecipe = recipeRepo.recipes[getRandomIndex(recipeRepo.recipes)];
   featuredRecipeImg.src = featuredRecipe.image;
   featuredRecipeName.innerText = featuredRecipe.name;
-  homePage.id = 'id' + featuredRecipe.id;
+  homePage.id = `${featuredRecipe.id}`;
 }
 
 function createCurrentRecipes() {
@@ -64,10 +81,10 @@ function createCurrentRecipes() {
   recipeRepo.currentRecipes.forEach(recipe => {
     browsePage.innerHTML += `
       <section class="individual-recipe-card">
-        <section class="recipe-card" id="id${recipe.id}">
+        <section class="recipe-card" id="${recipe.id}">
           <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
-            <i class="fa fa-heart heart-btn"></i>
-            <i class="fa fa-bookmark save-recipe-btn"></i>
+          <i class="fa fa-heart heart-btn"></i>
+          <i class="fa fa-bookmark save-recipe-btn"></i>
         </section>
         <h2 class="recipe-card-title">${recipe.name}</h2>
       </section>`
@@ -107,12 +124,14 @@ function addEventListenerToRecipeCards() {
 
 function showRecipeView(event) {
   const recipeId = event.target.parentNode.id;
-  recipeTitle.innerText = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId).name;
+  recipeTitle.innerText = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId).name;
   price.innerText = `$${(recipeRepo.recipes.find(recipe => {
-    return "id" + recipe.id === recipeId
+    return `${recipe.id}` === recipeId
   }).calculateRecipeCost() / 100).toFixed(2)}`;
   recipeViewImage.innerHTML = `
-    <img src="${recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId).name}">`
+    <img src="${recipeRepo.recipes.find(recipe => 
+    `${recipe.id}` === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => 
+  `${recipe.id}` === recipeId).name}">`
   show([recipeView]);
   hide([homePage, browsePage, cookbook]);
   displayIngredients(event);
@@ -122,16 +141,18 @@ function showRecipeView(event) {
 function displayIngredients(event) {
   ingredientsList.innerHTML = '';
   const recipeId = event.target.parentNode.id;
-  const currentRecipe = recipeRepo.recipes.find(recipe => 'id' + recipe.id === recipeId);
+  const currentRecipe = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
   currentRecipe.ingredients.forEach(ingredient => {
-    ingredientsList.innerHTML += `<li>${Math.round(ingredient.quantity.amount * 100) / 100} ${ingredient.quantity.unit} ${ingredient.name}</li>`
+    ingredientsList.innerHTML += 
+      `<li>${Math.round(ingredient.quantity.amount * 100) / 100} 
+      ${ingredient.quantity.unit} ${ingredient.name}</li>`
   })
 }
 
 function displayDirections(event) {
   directionsList.innerHTML = '';
   const recipeId = event.target.parentNode.id;
-  const currentRecipe = recipeRepo.recipes.find(recipe => 'id' + recipe.id === recipeId);
+  const currentRecipe = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
   currentRecipe.instructions.forEach(direction => {
     directionsList.innerHTML += `<li>${direction.instruction}</li>`
   })
@@ -152,9 +173,9 @@ function filterRecipes() {
 
 function reassignCurrentRecipes() {
   recipeRepo.filterState === 'all' ?
-  recipeRepo.currentRecipes = recipeRepo.recipes : 
-  recipeRepo.filterState === 'favorites' ?
-  recipeRepo.currentRecipes = user.favorites : null;
+    recipeRepo.currentRecipes = recipeRepo.recipes : 
+    recipeRepo.filterState === 'favorites' ?
+      recipeRepo.currentRecipes = user.favorites : null;
 }
 
 function filterFavorites() {
@@ -172,7 +193,7 @@ function filterFavorites() {
 function toggleFavorites(event) {
   const heartButtons = document.querySelectorAll('.fa-heart');
   const recipeId = event.target.parentNode.id;
-  const thisRecipe = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId);
+  const thisRecipe = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
   user.favorites.includes(thisRecipe) ? 
     user.removeFromFavorites(thisRecipe) :
     user.addToFavorites(thisRecipe);
@@ -187,7 +208,7 @@ function displayRedHearts(list) {
   list.forEach(recipe => {
     user.favorites.includes(recipe) ? 
       heartButtons.forEach(button => {
-        button.parentNode.id === 'id' + recipe.id ? 
+        button.parentNode.id === `${recipe.id}` ? 
           button.classList.add('red') : null;
       }) : null;
   });
@@ -198,7 +219,7 @@ function displayYellowBookmarks(list) {
   list.forEach(recipe => {
     user.cookbook.includes(recipe) ? 
       saveButtons.forEach(button => {
-        button.parentNode.id === 'id' + recipe.id ? 
+        button.parentNode.id === `${recipe.id}` ? 
           button.classList.add('yellow') : null;
       }) : null;
   });
@@ -207,7 +228,7 @@ function displayYellowBookmarks(list) {
 function toggleCookbook(event) {
   const saveButtons = document.querySelectorAll('.fa-bookmark');
   const recipeId = event.target.parentNode.id;
-  const thisRecipe = recipeRepo.recipes.find(recipe => "id" + recipe.id === recipeId);
+  const thisRecipe = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
   user.cookbook.includes(thisRecipe) ? 
     user.removeFromCookbook(thisRecipe) :
     user.addToCookbook(thisRecipe);
@@ -233,7 +254,7 @@ function createCookbook() {
   user.cookbook.forEach(recipe => {
     cookbook.innerHTML += `
       <section class="individual-recipe-card">
-        <section class="recipe-card" id="id${recipe.id}">
+        <section class="recipe-card" id="${recipe.id}">
           <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
             <i class="fa fa-heart heart-btn"></i>
             <i class="fa fa-bookmark save-recipe-btn"></i>
@@ -259,7 +280,7 @@ function updateNavBarButtonColor() {
   allRecipesButton.classList.remove('beige');
   favoritesButton.classList.remove('beige');
   recipeRepo.filterState === 'all' ?
-  allRecipesButton.classList.add('beige') :
-  recipeRepo.filterState === 'favorites' ?
-  favoritesButton.classList.add('beige') : null;
+    allRecipesButton.classList.add('beige') :
+    recipeRepo.filterState === 'favorites' ?
+      favoritesButton.classList.add('beige') : null;
 }
