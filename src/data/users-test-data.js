@@ -142,6 +142,10 @@ const usersData = [
     {
       "ingredient": 2027,
       "amount": 2
+    },
+    {
+      "ingredient": 5100,
+      "amount": 6
     }
   ]
   }];
