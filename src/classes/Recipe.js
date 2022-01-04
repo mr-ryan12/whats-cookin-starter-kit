@@ -2,11 +2,11 @@ import Ingredient from "./Ingredient";
 
 class Recipe {
   constructor(id, image, ingredients = [], instructions = [], name, tags = [], ingredientsData) {
-    this.id = id;
-    this.image = image;
+    this.id = id || 0;
+    this.image = image || 'https://previews.123rf.com/images/pavelstasevich/pavelstasevich1811/pavelstasevich181101027/112815900-no-image-available-icon-flat-vector.jpg';
     this.ingredients = this.createIngredients(ingredients, ingredientsData);
     this.instructions = instructions;
-    this.name = name;
+    this.name = name || '';
     this.tags = tags;
   }
 
