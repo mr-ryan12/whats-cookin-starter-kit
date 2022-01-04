@@ -3,15 +3,10 @@ import Recipe from './Recipe';
 class RecipeRepository {
   constructor(recipes, ingredientsData) {
     this.recipes = this.makeRecipes(recipes, ingredientsData);
-    this.cookbookRecipes = [];
     this.filterTerm = '';
     this.tag = '';
     this.currentRecipes = this.recipes;
     this.filterState = '';
-  }
-
-  addToCookbook(recipe) {
-    this.cookbookRecipes.push(recipe);
   }
 
   addFilter(term) {
@@ -47,7 +42,7 @@ class RecipeRepository {
   }
 
   makeRecipes(recipes, ingredientsData) {
-    return recipes.map(recipe => {
+    return recipes ? recipes.map(recipe => {
       return new Recipe(
         recipe.id,
         recipe.image,
@@ -57,7 +52,7 @@ class RecipeRepository {
         recipe.tags,
         ingredientsData
       )
-    });
+    }) : [];
   }
 }
 
