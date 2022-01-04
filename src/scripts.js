@@ -111,13 +111,13 @@ function displayBrowsePage() {
 }
 
 function addEventListenerToRecipeCards() {
-  const recipeCardImages = document.querySelectorAll(".recipe-card-image");
+  const recipeCardImages = document.querySelectorAll('.recipe-card-image');
   const heartButtons = document.querySelectorAll('.heart-btn');
   const saveButtons = document.querySelectorAll('.save-recipe-btn');
   recipeCardImages.forEach(recipeCardImage => {
     recipeCardImage.addEventListener('click', showRecipeView)
   });
-  heartButtons.forEach(button => button.addEventListener('click', (event) => {
+  heartButtons.forEach(button => button.addEventListener('click', event => {
     toggleFavorites(event);
   }));
   saveButtons.forEach(button => button.addEventListener('click', event => {

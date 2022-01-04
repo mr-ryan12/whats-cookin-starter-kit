@@ -1,8 +1,8 @@
 class User {
   constructor(user) {
-    this.name = user.name;
-    this.id = user.id;
-    this.pantry = user.pantry;
+    this.name = user.name || 'Guest User';
+    this.id = user.id || 0;
+    this.pantry = user.pantry || [];
     this.favorites = [];
     this.cookbook = [];
   }
