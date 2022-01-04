@@ -1,15 +1,13 @@
 // Fetch requests
 
-const usersApi = 
-fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users")
-  .then(response => response.json())
-
-const recipesApi = 
-fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/recipes")
-  .then(response => response.json())
-
-const ingredientsApi = 
-  fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients")
+const retrieveData = (api) => 
+  fetch(`https://what-s-cookin-starter-kit.herokuapp.com/api/v1/${api}`)
     .then(response => response.json())
+
+const usersApi = retrieveData('users');
+
+const recipesApi = retrieveData('recipes');
+
+const ingredientsApi = retrieveData('ingredients');
   
 export {usersApi, recipesApi, ingredientsApi};
