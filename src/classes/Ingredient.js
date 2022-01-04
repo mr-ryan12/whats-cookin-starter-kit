@@ -1,6 +1,6 @@
 class Ingredient {
   constructor(id, quantity, ingredientsData) {
-    this.id = id;
+    this.id = id || 0;
     this.name = this.findIngredientName(ingredientsData);
     this.estimatedCostInCents = this.findEstimatedCostInCents(ingredientsData);
     this.quantity = quantity;
@@ -11,11 +11,15 @@ class Ingredient {
   }
 
   findIngredientName(ingredientsData) {
-    return ingredientsData.find(ingredient => this.id === ingredient.id).name;
+    return ingredientsData ? ingredientsData.find(ingredient => {
+      return this.id === ingredient.id
+    }).name : '';
   }
 
   findEstimatedCostInCents(ingredientsData) {
-    return ingredientsData.find(ingredient => this.id === ingredient.id).estimatedCostInCents;
+    return ingredientsData ? ingredientsData.find(ingredient => {
+      return this.id === ingredient.id
+    }).estimatedCostInCents : 0;
   }
 }
 
