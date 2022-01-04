@@ -1,6 +1,6 @@
 const recipesData = [{
   "id": 10,
-  "image": "https://grillchesse.jpg",
+  "image": "https://grillcheese.jpg",
   "ingredients": [
     {
       "id": 18069,

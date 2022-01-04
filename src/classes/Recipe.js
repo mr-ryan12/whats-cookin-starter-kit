@@ -2,13 +2,11 @@ import Ingredient from "./Ingredient";
 
 class Recipe {
   constructor(id, image, ingredients = [], instructions = [], name, tags = [], ingredientsData) {
-    this.id = id;
-    this.image = image;
-    this.ingredients = ingredients.map(ingredient => {
-      return new Ingredient(ingredient.id, ingredient.quantity, ingredientsData)
-    });
+    this.id = id || 0;
+    this.image = image || 'https://previews.123rf.com/images/pavelstasevich/pavelstasevich1811/pavelstasevich181101027/112815900-no-image-available-icon-flat-vector.jpg';
+    this.ingredients = this.createIngredients(ingredients, ingredientsData);
     this.instructions = instructions;
-    this.name = name;
+    this.name = name || '';
     this.tags = tags;
   }
 
@@ -25,6 +23,12 @@ class Recipe {
 
   listInstructions() {
     return this.instructions.map(instruction => instruction.instruction);
+  }
+
+  createIngredients(ingredients, ingredientsData) {
+    return ingredients.map(ingredient => {
+      return new Ingredient(ingredient.id, ingredient.quantity, ingredientsData)
+    });
   }
 }
 

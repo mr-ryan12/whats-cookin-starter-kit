@@ -35,19 +35,34 @@ describe('User', () => {
     expect(User).to.be.a('function');
     expect(user).to.be.an.instanceof(User);
   });
-
+  
   it('should have a name', () => {
     expect(user.name).to.equal('Saige O\'Kon');
+  });
+
+  it('should have a default name if no name is supplied', () => {
+    const user1 = new User({});
+    expect(user1.name).to.equal('Guest User');
   });
 
   it('should have an id', () => {
     expect(user.id).to.equal(1);
   });
 
+  it('should have a default id if no id is supplied', () => {
+    const user1 = new User({});
+    expect(user1.id).to.equal(0);
+  });
+
   it('should have a pantry', () => {
     expect(user.pantry).to.be.an('array');
     expect(user.pantry[0].amount).to.equal(4);
     expect(user.pantry[0].ingredient).to.equal(11297);
+  });
+
+  it('should have an empty pantry if no pantry is supplied', () => {
+    const user1 = new User({});
+    expect(user1.pantry).to.deep.equal([]);
   });
 
   it('should have a list of favorite recipes', () => {

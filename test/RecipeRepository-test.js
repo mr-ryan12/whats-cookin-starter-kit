@@ -35,23 +35,25 @@ describe('RecipeRepo', () => {
     expect(recipeRepo.recipes).to.be.an('array');
     expect(recipeRepo.recipes.length).to.equal(2);
   });
+
+  it('should not have a list of recipes if none are passed in', () => {
+    const recipeRepo1 = new RecipeRepository();
+    expect(recipeRepo1.recipes).to.deep.equal([]);
+  });
   
   it('should be class instances', () => {
     expect(recipeRepo.recipes[0]).to.be.an.instanceof(Recipe);
     expect(recipeRepo.recipes[1].ingredients[0]).to.be.an.instanceof(Ingredient);
-  })
-
-  it('should have a list of current recipes', () => {
-    expect(recipeRepo.cookbookRecipes).to.be.an('array');
-    expect(recipeRepo.cookbookRecipes.length).to.equal(0);
   });
 
-  it('should be able to add recipes to the cookbook', () => {
-    let grilledCheese = recipeRepo.recipes[0];
-    recipeRepo.addToCookbook(grilledCheese)
+  it('should have a list of current recipes', () => {
+    expect(recipeRepo.currentRecipes).to.be.an('array');
+    expect(recipeRepo.currentRecipes.length).to.equal(2);
+  });
 
-    expect(recipeRepo.cookbookRecipes.length).to.equal(1);
-    expect(recipeRepo.cookbookRecipes[0].id).to.equal(10);
+  it('should not have a list of current recipes if none are given', () => {
+    const recipeRepo1 = new RecipeRepository();
+    expect(recipeRepo1.currentRecipes).to.deep.equal([]);
   });
 
   it('should be able to have a filter term', () => {
@@ -94,7 +96,7 @@ describe('RecipeRepo', () => {
     recipeRepo.addFilter('wInG');
     recipeRepo.filterRecipes();
     expect(recipeRepo.currentRecipes[0].id).to.equal(11);
-  })
+  });
 
   it('should be able to filter by tag', () => {
     recipeRepo.addTag('snack')

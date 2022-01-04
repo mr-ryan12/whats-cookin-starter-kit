@@ -2,27 +2,11 @@ import Recipe from './Recipe';
 
 class RecipeRepository {
   constructor(recipes, ingredientsData) {
-    this.recipes = recipes.reduce((acc, recipe) => {
-      acc.push(new Recipe(
-        recipe.id,
-        recipe.image,
-        recipe.ingredients,
-        recipe.instructions,
-        recipe.name,
-        recipe.tags,
-        ingredientsData
-      ));
-      return acc;
-    }, []);
-    this.cookbookRecipes = [];
+    this.recipes = this.makeRecipes(recipes, ingredientsData);
     this.filterTerm = '';
     this.tag = '';
     this.currentRecipes = this.recipes;
     this.filterState = '';
-  }
-
-  addToCookbook(recipe) {
-    this.cookbookRecipes.push(recipe);
   }
 
   addFilter(term) {
@@ -55,6 +39,20 @@ class RecipeRepository {
   clearFilters() {
     this.filterTerm = '';
     this.tag = '';
+  }
+
+  makeRecipes(recipes, ingredientsData) {
+    return recipes ? recipes.map(recipe => {
+      return new Recipe(
+        recipe.id,
+        recipe.image,
+        recipe.ingredients,
+        recipe.instructions,
+        recipe.name,
+        recipe.tags,
+        ingredientsData
+      )
+    }) : [];
   }
 }
 

@@ -6,15 +6,17 @@ import {usersApi, recipesApi, ingredientsApi} from './apiCalls';
 let user;
 let recipeRepo;
 
-Promise.all([usersApi, recipesApi, ingredientsApi])
-  .then(data => {
-    user = new User(data[0].usersData[getRandomIndex(data[0].usersData)]);
-    recipeRepo = new RecipeRepository(data[1].recipeData, data[2].ingredientsData);
-    createCurrentRecipes();
-    assignFeaturedRecipe();
-    createDropdownTags();
-  })
-  .catch(err => console.log('something went wrong', err));
+const getData = () => {
+  Promise.all([usersApi, recipesApi, ingredientsApi])
+    .then(data => {
+      user = new User(data[0].usersData[getRandomIndex(data[0].usersData)]);
+      recipeRepo = new RecipeRepository(data[1].recipeData, data[2].ingredientsData);
+      createCurrentRecipes();
+      assignFeaturedRecipe();
+      createDropdownTags();
+    })
+    .catch(err => console.log('something went wrong', err));
+}
 
 // Query Selectors
 const recipeTitle = document.querySelector('#recipe-title');
@@ -39,6 +41,7 @@ const whatsCookin = document.getElementById('whats-cookin');
 const tags = document.getElementById('tags');
 
 // Event Listeners
+window.addEventListener('load', getData);
 allRecipesButton.addEventListener('click', displayBrowsePage);
 submitButton.addEventListener('click', filterRecipes);
 favoritesButton.addEventListener('click', filterFavorites);
@@ -108,13 +111,13 @@ function displayBrowsePage() {
 }
 
 function addEventListenerToRecipeCards() {
-  const recipeCardImages = document.querySelectorAll(".recipe-card-image");
+  const recipeCardImages = document.querySelectorAll('.recipe-card-image');
   const heartButtons = document.querySelectorAll('.heart-btn');
   const saveButtons = document.querySelectorAll('.save-recipe-btn');
   recipeCardImages.forEach(recipeCardImage => {
     recipeCardImage.addEventListener('click', showRecipeView)
   });
-  heartButtons.forEach(button => button.addEventListener('click', (event) => {
+  heartButtons.forEach(button => button.addEventListener('click', event => {
     toggleFavorites(event);
   }));
   saveButtons.forEach(button => button.addEventListener('click', event => {
