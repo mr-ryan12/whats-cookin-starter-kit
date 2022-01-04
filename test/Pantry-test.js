@@ -13,12 +13,14 @@ decribe('Pantry', () => {
   let pantry;
   let grilledCheese;
   let wings;
+  let bread;
 
   beforeEach(() => {
     user = new User(userData[0]);
     pantry = new Pantry(user.pantry);
     grilledCheese = new Recipe(recipesData[0]);
     wings = new Recipe(recipesData[1]);
+    bread = new Ingredient(18069, 2, ingredientsData);
   });
 
   it('should be a function', () => {
@@ -52,7 +54,7 @@ decribe('Pantry', () => {
     expect(pantry.view()[0]).to.be.an.instanceof(Ingredient)
   });
 
-  it('should be able to determine if there enough ingredients to cook a meal in the cookbook', () => {
+  it('should be able to determine if there are enough ingredients to cook a meal in the cookbook', () => {
     user.addToCookbook(grilledCheese);
     user.addToCookbook(wings);
 
@@ -60,5 +62,16 @@ decribe('Pantry', () => {
     expect(pantry.findReadyToCookMeals(user.cookbook).length).to.equal(1);
   });
 
-  
+  it('should be able to add ingredients', () => {
+    pantry.addIngredient(bread);
+    expect(pantry.ingredients.length).to.equal(37);
+  });
+
+  it('should be able to update quantities of the ingredients', () => {
+    pantry.addIngredient(bread);
+    pantry.updateQuantity(18069, 10);
+    expect(pantry.ingredients[pantry.ingredients.length - 1].quantity).to.equal(12);
+    pantry.updateQuantity(18069, -5);
+    expect(pantry.ingredients[pantry.ingredients.length - 1].quantity).to.equal(7);
+  });
 });
