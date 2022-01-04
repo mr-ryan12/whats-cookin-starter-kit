@@ -4,9 +4,7 @@ class Recipe {
   constructor(id, image, ingredients = [], instructions = [], name, tags = [], ingredientsData) {
     this.id = id;
     this.image = image;
-    this.ingredients = ingredients.map(ingredient => {
-      return new Ingredient(ingredient.id, ingredient.quantity, ingredientsData)
-    });
+    this.ingredients = this.createIngredients(ingredients, ingredientsData);
     this.instructions = instructions;
     this.name = name;
     this.tags = tags;
@@ -25,6 +23,12 @@ class Recipe {
 
   listInstructions() {
     return this.instructions.map(instruction => instruction.instruction);
+  }
+
+  createIngredients(ingredients, ingredientsData) {
+    return ingredients.map(ingredient => {
+      return new Ingredient(ingredient.id, ingredient.quantity, ingredientsData)
+    });
   }
 }
 
