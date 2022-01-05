@@ -19,9 +19,7 @@ describe.only('Pantry', () => {
     user = new User(userData[0]);
     grilledCheese = new Recipe(recipesData[0]);
     wings = new Recipe(recipesData[1]);
-    // console.log(user)
     bread = new Ingredient(18069, {amount: 2, unit: 'sl'}, ingredientsData);
-    // console.log(user.pantry)
     pantry = new Pantry(user.pantry, ingredientsData);
   });
 
@@ -32,7 +30,7 @@ describe.only('Pantry', () => {
 
   it('should have a list of ingredients', () => {
     expect(pantry.ingredients).to.be.an('array');
-    expect(pantry.ingredients.length).to.equal(36);
+    expect(pantry.ingredients.length).to.equal(5);
   });
 
   it('should be object instaces of the Ingredient class', () => {
@@ -52,7 +50,7 @@ describe.only('Pantry', () => {
 
   it('should be able to view what is in the pantry', () => {
     expect(pantry.view()).to.be.an('array');
-    expect(pantry.view().length).to.equal(36);
+    expect(pantry.view().length).to.equal(5);
     expect(pantry.view()[0]).to.be.an.instanceof(Ingredient)
   });
 
@@ -66,7 +64,7 @@ describe.only('Pantry', () => {
 
   it('should be able to add ingredients', () => {
     pantry.addIngredient(bread);
-    expect(pantry.ingredients.length).to.equal(37);
+    expect(pantry.ingredients.length).to.equal(6);
   });
 
   it('should be able to update quantities of the ingredients', () => {
