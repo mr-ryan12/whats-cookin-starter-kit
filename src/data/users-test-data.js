@@ -21,7 +21,7 @@ const usersData = [
     },
     {
       "ingredient": 18069,
-      "amount": 2
+      "amount": 1
     }
   ]
   }];

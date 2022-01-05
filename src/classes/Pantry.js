@@ -17,17 +17,18 @@ class Pantry {
     const ids = this.ingredients.map(ingredient => {
       return ingredient.id
     })
-    
+
     recipe.ingredients.forEach(ingredient => {
       const thisIngredient = this.ingredients.find(ing => {
         return ing.id === ingredient.id
       })
-      console.log(thisIngredient.quantity)
       !ids.includes(ingredient.id) || thisIngredient.quantity.amount < ingredient.quantity.amount ? canMake = false : null;
     })
 
     return canMake;
   }
+
+  
 }
 
 export default Pantry;
