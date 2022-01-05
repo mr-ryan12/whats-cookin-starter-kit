@@ -146,7 +146,23 @@ const usersData = [
     {
       "ingredient": 5100,
       "amount": 6
-    }
+    },
+    {
+      "ingredient": 11297,
+      "amount": 4
+    },
+    {
+      "ingredient": 1041009,
+      "amount": 2
+    },
+    {
+      "ingredient": 1145,
+      "amount": 2
+    },
+    // {
+    //   "ingredient": 18069,
+    //   "amount": 2
+    // }
   ]
   }];
 

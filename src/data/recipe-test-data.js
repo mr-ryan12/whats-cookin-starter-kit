@@ -75,9 +75,6 @@ const recipesData = [{
       "dinner",
       "snack"
     ]
-  },
-  {
-    
   }
 ];
 

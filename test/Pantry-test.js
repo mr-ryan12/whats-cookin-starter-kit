@@ -1,13 +1,13 @@
 import { expect } from 'chai';
-import Pantry from './classes/Pantry';
-import User from './classes/User';
-import Recipe from './classes/Recipe';
-import Ingredient from './classes/Ingredient';
+import Pantry from '../src/classes/Pantry';
+import User from '../src/classes/User';
+import Recipe from '../src/classes/Recipe';
+import Ingredient from '../src/classes/Ingredient';
 import ingredientsData from '../src/data/ingredients-test-data';
 import recipesData from '../src/data/recipe-test-data';
 import userData from '../src/data/users-test-data';
 
-decribe('Pantry', () => {
+describe.only('Pantry', () => {
 
   let user;
   let pantry;
@@ -17,10 +17,12 @@ decribe('Pantry', () => {
 
   beforeEach(() => {
     user = new User(userData[0]);
-    pantry = new Pantry(user.pantry);
     grilledCheese = new Recipe(recipesData[0]);
     wings = new Recipe(recipesData[1]);
-    bread = new Ingredient(18069, 2, ingredientsData);
+    // console.log(user)
+    bread = new Ingredient(18069, {amount: 2, unit: 'sl'}, ingredientsData);
+    // console.log(user.pantry)
+    pantry = new Pantry(user.pantry, ingredientsData);
   });
 
   it('should be a function', () => {
