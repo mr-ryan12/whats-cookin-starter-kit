@@ -3,6 +3,7 @@ import Ingredient from './Ingredient';
 class Pantry {
   constructor(pantry, data) {
     this.ingredients = this.buildPantry(pantry, data);
+    this.ingredientsData = data;
   }
 
   buildPantry (pantry, data) {
@@ -29,35 +30,22 @@ class Pantry {
   }
 
   determineMissingIngredients(recipe) {
-    // Iterate through the recipe ingredients
-    // If the amount in the recipeINgredientAmout is greater than the pantryIngredientAmount, return the recipeIngredient, else do nothing.
-    // Then iterate over the array of ingredients needed and subtract the amount in the pantry
-    // return the array
-    const ids = this.ingredients.map(ingredient => {
-      return ingredient.id
-    })
 
-    const ingredientsNeeded = recipe.ingredients.reduce((acc, ingredient) => {
-      const thisIngredient = this.ingredients.find(ing => {
-        return ing.id === ingredient.id
-      })
+    const result = recipe.ingredients.reduce((acc, ingredient) => {
+      const ing = this.ingredients.find(ing => ing.id === ingredient.id)
+      !ing || ing.quantity.amount < ingredient.quantity.amount ?
+        acc.push(new Ingredient(
+          ing.id, 
+          {
+            amount: ingredient.quantity.amount - ing.quantity.amount, 
+            unit: ingredient.quantity.unit
+          },
+          this.ingredientsData
+          )) : null;
+          return acc;
+        }, [])
 
-      thisIngredient.quantity.amount < ingredient.quantity.amount ||
-      !ids.includes(ingredient.id) ?
-        acc.push(ingredient) : null;
-
-      return acc;
-    }, [])
-
-    ingredientsNeeded.forEach(ingredient => {
-      const thisIngredient = this.ingredients.find(ing => {
-        return ing.id === ingredient.id
-      })
-      ingredient.quantity.amount -= thisIngredient.quantity.amount
-    })
-    
-    console.log('FROM THE CLASS FILE>>>>>>>', ingredientsNeeded)
-    return ingredientsNeeded;
+    return result;
   }
 }
 

@@ -7,7 +7,7 @@ import ingredientsData from '../src/data/ingredients-test-data';
 import recipesData from '../src/data/recipe-test-data';
 import userData from '../src/data/users-test-data';
 
-describe.only('Pantry', () => {
+describe('Pantry', () => {
 
   let user;
   let pantry;
@@ -58,7 +58,6 @@ describe.only('Pantry', () => {
 
   it('should be able to determine the amount of missing ingredients', () => {
     expect(pantry.determineMissingIngredients(grilledCheese)).to.be.an('array');
-    console.log('FROM THE TEST FILE>>>>>>', pantry.determineMissingIngredients(grilledCheese))
     expect(pantry.determineMissingIngredients(grilledCheese)[0].id).to.equal(18069);
     expect(pantry.determineMissingIngredients(grilledCheese)[0].quantity.amount).to.equal(1);
   });
