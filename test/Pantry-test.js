@@ -17,8 +17,22 @@ describe.only('Pantry', () => {
 
   beforeEach(() => {
     user = new User(userData[0]);
-    grilledCheese = new Recipe(recipesData[0]);
-    wings = new Recipe(recipesData[1]);
+    grilledCheese = new Recipe(
+      recipesData[0].id,
+      recipesData[0].image,
+      recipesData[0].ingredients,
+      recipesData[0].instructions,
+      recipesData[0].name,
+      recipesData[0].tags,
+      ingredientsData)
+    wings = new Recipe(
+      recipesData[1].id,
+      recipesData[1].image,
+      recipesData[1].ingredients,
+      recipesData[1].instructions,
+      recipesData[1].name,
+      recipesData[1].tags,
+      ingredientsData);
     bread = new Ingredient(18069, {amount: 2, unit: 'sl'}, ingredientsData);
     pantry = new Pantry(user.pantry, ingredientsData);
   });
