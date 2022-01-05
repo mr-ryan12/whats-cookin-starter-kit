@@ -58,8 +58,9 @@ describe.only('Pantry', () => {
 
   it('should be able to determine the amount of missing ingredients', () => {
     expect(pantry.determineMissingIngredients(grilledCheese)).to.be.an('array');
+    console.log('FROM THE TEST FILE>>>>>>', pantry.determineMissingIngredients(grilledCheese))
     expect(pantry.determineMissingIngredients(grilledCheese)[0].id).to.equal(18069);
-    expect(pantry.determineMissingIngredients(grilledCheese)[0].quantity.amount).to.equal(2);
+    expect(pantry.determineMissingIngredients(grilledCheese)[0].quantity.amount).to.equal(1);
   });
 
   it('should be able to view what is in the pantry', () => {
