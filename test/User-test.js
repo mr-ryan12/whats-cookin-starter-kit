@@ -56,8 +56,8 @@ describe('User', () => {
 
   it('should have a pantry', () => {
     expect(user.pantry).to.be.an('array');
-    expect(user.pantry[0].amount).to.equal(4);
-    expect(user.pantry[0].ingredient).to.equal(11297);
+    expect(user.pantry[0].amount).to.equal(2);
+    expect(user.pantry[0].ingredient).to.equal(6150);
   });
 
   it('should have an empty pantry if no pantry is supplied', () => {

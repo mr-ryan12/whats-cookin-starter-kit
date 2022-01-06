@@ -23,6 +23,11 @@ const ingredientsData = [
     "id": 6150,
     "name": "bar b que sauce",
     "estimatedCostInCents": 966
+  },
+  {
+    "id": 12345,
+    "name": "hot sauce",
+    "esitmatedCostInCents": 9000
   }
 ];
 

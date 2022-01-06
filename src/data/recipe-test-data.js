@@ -75,6 +75,7 @@ const recipesData = [{
       "dinner",
       "snack"
     ]
-  }];
+  }
+];
 
 export default recipesData;
