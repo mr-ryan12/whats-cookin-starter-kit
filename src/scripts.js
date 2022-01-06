@@ -9,8 +9,9 @@ let recipeRepo;
 const getData = () => {
   Promise.all([usersApi, recipesApi, ingredientsApi])
     .then(data => {
-      user = new User(data[0].usersData[getRandomIndex(data[0].usersData)]);
-      recipeRepo = new RecipeRepository(data[1].recipeData, data[2].ingredientsData);
+      user = new User(data[0][getRandomIndex(data[0])]);
+      console.log(user);
+      recipeRepo = new RecipeRepository(data[1], data[2]);
       createCurrentRecipes();
       assignFeaturedRecipe();
       createDropdownTags();

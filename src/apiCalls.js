@@ -1,7 +1,7 @@
 // Fetch requests
 
 const retrieveData = (api) => 
-  fetch(`https://what-s-cookin-starter-kit.herokuapp.com/api/v1/${api}`)
+  fetch(`http://localhost:3001/api/v1/${api}`)
     .then(response => response.json())
 
 const usersApi = retrieveData('users');
