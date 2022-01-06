@@ -30,7 +30,6 @@ class Pantry {
   }
 
   determineMissingIngredients(recipe) {
-
     const result = recipe.ingredients.reduce((acc, ingredient) => {
       const ing = this.ingredients.find(ing => ing.id === ingredient.id)
       !ing || ing.quantity.amount < ingredient.quantity.amount ?
@@ -46,6 +45,18 @@ class Pantry {
         }, [])
 
     return result;
+  }
+
+  addIngredient(ingredient) {
+    const ids = this.ingredients.map(ingredient => ingredient.id)
+    !ids.includes(ingredient.id) ? this.ingredients.push(ingredient) : null;
+  }
+
+  updateQuantity(ingredient, amount) {
+    const thisIngredient = this.ingredients.find(ing => {
+      return ing.id === ingredient.id
+    });
+    thisIngredient.quantity.amount += amount;
   }
 }
 

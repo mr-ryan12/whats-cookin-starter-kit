@@ -13,6 +13,7 @@ describe('Pantry', () => {
   let pantry;
   let grilledCheese;
   let wings;
+  let tobasco;
   let bread;
 
   beforeEach(() => {
@@ -33,6 +34,7 @@ describe('Pantry', () => {
       recipesData[1].name,
       recipesData[1].tags,
       ingredientsData);
+    tobasco = new Ingredient(12345, {amount: 1, unit: 'btl'}, ingredientsData);
     bread = new Ingredient(18069, {amount: 2, unit: 'sl'}, ingredientsData);
     pantry = new Pantry(user.pantry, ingredientsData);
   });
@@ -62,30 +64,20 @@ describe('Pantry', () => {
     expect(pantry.determineMissingIngredients(grilledCheese)[0].quantity.amount).to.equal(1);
   });
 
-  it('should be able to view what is in the pantry', () => {
-    expect(pantry.view()).to.be.an('array');
-    expect(pantry.view().length).to.equal(5);
-    expect(pantry.view()[0]).to.be.an.instanceof(Ingredient)
-  });
-
-  it('should be able to determine if there are enough ingredients to cook a meal in the cookbook', () => {
-    user.addToCookbook(grilledCheese);
-    user.addToCookbook(wings);
-
-    expect(pantry.findReadyToCookMeals(user.cookbook)).to.be.an('array');
-    expect(pantry.findReadyToCookMeals(user.cookbook).length).to.equal(1);
-  });
-
   it('should be able to add ingredients', () => {
-    pantry.addIngredient(bread);
+    pantry.addIngredient(tobasco);
     expect(pantry.ingredients.length).to.equal(6);
   });
 
-  it('should be able to update quantities of the ingredients', () => {
+  it('should not be able to add an ingredient that already exists', () => {
     pantry.addIngredient(bread);
-    pantry.updateQuantity(18069, 10);
-    expect(pantry.ingredients[pantry.ingredients.length - 1].quantity).to.equal(12);
-    pantry.updateQuantity(18069, -5);
-    expect(pantry.ingredients[pantry.ingredients.length - 1].quantity).to.equal(7);
+    expect(pantry.ingredients.length).to.equal(5);
+  })
+
+  it('should be able to update quantities of the ingredients', () => {
+    pantry.updateQuantity(bread, 10);
+    expect(pantry.ingredients[pantry.ingredients.length - 1].quantity.amount).to.equal(11);
+    pantry.updateQuantity(bread, -5);
+    expect(pantry.ingredients[pantry.ingredients.length - 1].quantity.amount).to.equal(6);
   });
 });
