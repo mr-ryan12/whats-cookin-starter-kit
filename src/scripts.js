@@ -85,7 +85,7 @@ function createCurrentRecipes() {
 
 function displayBrowsePage() {
   recipeRepo.updateFilterState('all');
-  updateNavBarButtonColor();
+  domUpdates.updateNavBarButtonColor(cookbookButton, allRecipesButton, favoritesButton, recipeRepo);
   recipeRepo.clearFilters();
   reassignCurrentRecipes();
   createCurrentRecipes();
@@ -145,7 +145,7 @@ function reassignCurrentRecipes() {
 
 function filterFavorites() {
   recipeRepo.updateFilterState('favorites');
-  updateNavBarButtonColor();
+  domUpdates.updateNavBarButtonColor(cookbookButton, allRecipesButton, favoritesButton, recipeRepo);
   recipeRepo.clearFilters();
   reassignCurrentRecipes();
   createCurrentRecipes();
@@ -183,14 +183,7 @@ function toggleCookbook(event) {
 }
 
 function viewCookbook() {
-  // cookbookButton.classList.add('beige');
-  // allRecipesButton.classList.remove('beige');
-  // favoritesButton.classList.remove('beige');
   createCookbook();
-  // hide([homePage, recipeView, browsePage]);
-  // show([cookbook]);
-  // searchBar.value = '';
-  // tagInput.selectedIndex = 0;
   domUpdates.updateCookbookView(
     cookbookButton,
     allRecipesButton,
@@ -205,18 +198,6 @@ function viewCookbook() {
 }
 
 function createCookbook() {
-  // cookbook.innerHTML = '';
-  // user.cookbook.forEach(recipe => {
-  //   cookbook.innerHTML += `
-  //     <section class="individual-recipe-card">
-  //       <section class="recipe-card" id="${recipe.id}">
-  //         <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
-  //           <i class="fa fa-heart heart-btn"></i>
-  //           <i class="fa fa-bookmark save-recipe-btn"></i>
-  //       </section>
-  //       <h2 class="recipe-card-title">${recipe.name}</h2>
-  //     </section>`
-  // });
   domUpdates.updateCurrentRecipes(cookbook, user.cookbook);
   addEventListenerToRecipeCards();
   displayYellowBookmarks(user.cookbook);
@@ -224,19 +205,5 @@ function createCookbook() {
 }
 
 function displayHomeView() {
-  cookbookButton.classList.remove('beige');
-  allRecipesButton.classList.remove('beige');
-  favoritesButton.classList.remove('beige');
-  hide([browsePage, recipeView, cookbook]);
-  show([homePage]);
-}
-
-function updateNavBarButtonColor() {
-  cookbookButton.classList.remove('beige');
-  allRecipesButton.classList.remove('beige');
-  favoritesButton.classList.remove('beige');
-  recipeRepo.filterState === 'all' ?
-    allRecipesButton.classList.add('beige') :
-    recipeRepo.filterState === 'favorites' ?
-      favoritesButton.classList.add('beige') : null;
+  domUpdates.displayHomeView(cookbookButton, allRecipesButton, favoritesButton, browsePage, recipeView, cookbook, homePage);
 }

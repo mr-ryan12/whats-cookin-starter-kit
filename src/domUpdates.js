@@ -105,15 +105,32 @@ const domUpdates = {
     searchBar,
     tagInput
     ) {
-    cookbookButton.classList.add('beige');
-    allRecipesButton.classList.remove('beige');
-    favoritesButton.classList.remove('beige');
+      cookbookButton.classList.add('grey');
+      allRecipesButton.classList.remove('grey');
+    favoritesButton.classList.remove('grey');
     hide([homePage, recipeView, browsePage]);
     show([cookbook]);
     searchBar.value = '';
     tagInput.selectedIndex = 0;
   },
 
+  displayHomeView(cookbookButton, allRecipesButton, favoritesButton, browsePage, recipeView, cookbook, homePage) {
+    cookbookButton.classList.remove('grey');
+    allRecipesButton.classList.remove('grey');
+    favoritesButton.classList.remove('grey');
+    hide([browsePage, recipeView, cookbook]);
+    show([homePage]);
+  },
+
+  updateNavBarButtonColor(cookbookButton, allRecipesButton, favoritesButton, recipeRepo) {
+    cookbookButton.classList.remove('grey');
+    allRecipesButton.classList.remove('grey');
+    favoritesButton.classList.remove('grey');
+    recipeRepo.filterState === 'all' ?
+      allRecipesButton.classList.add('grey') :
+      recipeRepo.filterState === 'favorites' ?
+        favoritesButton.classList.add('grey') : null;
+  }
 }
 
 export default domUpdates;
