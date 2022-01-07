@@ -76,7 +76,8 @@ function assignFeaturedRecipe() {
 }
 
 function createCurrentRecipes() {
-  domUpdates.updateCurrentRecipes(browsePage, recipeRepo, greeting, user);
+  domUpdates.updateCurrentRecipes(browsePage, recipeRepo.currentRecipes);
+  domUpdates.greetUser(user, greeting);
   addEventListenerToRecipeCards();
   displayRedHearts(recipeRepo.currentRecipes);
   displayYellowBookmarks(recipeRepo.currentRecipes);
@@ -204,18 +205,19 @@ function viewCookbook() {
 }
 
 function createCookbook() {
-  cookbook.innerHTML = '';
-  user.cookbook.forEach(recipe => {
-    cookbook.innerHTML += `
-      <section class="individual-recipe-card">
-        <section class="recipe-card" id="${recipe.id}">
-          <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
-            <i class="fa fa-heart heart-btn"></i>
-            <i class="fa fa-bookmark save-recipe-btn"></i>
-        </section>
-        <h2 class="recipe-card-title">${recipe.name}</h2>
-      </section>`
-  });
+  // cookbook.innerHTML = '';
+  // user.cookbook.forEach(recipe => {
+  //   cookbook.innerHTML += `
+  //     <section class="individual-recipe-card">
+  //       <section class="recipe-card" id="${recipe.id}">
+  //         <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
+  //           <i class="fa fa-heart heart-btn"></i>
+  //           <i class="fa fa-bookmark save-recipe-btn"></i>
+  //       </section>
+  //       <h2 class="recipe-card-title">${recipe.name}</h2>
+  //     </section>`
+  // });
+  domUpdates.updateCurrentRecipes(cookbook, user.cookbook);
   addEventListenerToRecipeCards();
   displayYellowBookmarks(user.cookbook);
   displayRedHearts(user.cookbook);

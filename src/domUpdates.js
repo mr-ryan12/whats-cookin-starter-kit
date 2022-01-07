@@ -15,10 +15,10 @@ const domUpdates = {
   homePage.id = `${featuredRecipe.id}`;
   },
 
-  updateCurrentRecipes(browsePage, recipeRepo, greeting, user) {
-    browsePage.innerHTML = '';
-    recipeRepo.currentRecipes.forEach(recipe => {
-      browsePage.innerHTML += `
+  updateCurrentRecipes(page, source) {
+    page.innerHTML = '';
+      source.forEach(recipe => {
+      page.innerHTML += `
         <section class="individual-recipe-card">
           <section class="recipe-card" id="${recipe.id}">
             <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
@@ -28,7 +28,10 @@ const domUpdates = {
           <h2 class="recipe-card-title">${recipe.name}</h2>
         </section>`
     });
-    greeting.innerText = `Welcome, ${user.name}!`;
+  },
+
+  greetUser(user, greeting) {
+    return greeting.innerText = `Welcome, ${user.name}!`;
   },
 
   updateBrowsePage(homePage, recipeView, cookbook, browsePage, searchBar, tagInput) {
@@ -111,7 +114,6 @@ const domUpdates = {
     tagInput.selectedIndex = 0;
   },
 
-  
 }
 
 export default domUpdates;
