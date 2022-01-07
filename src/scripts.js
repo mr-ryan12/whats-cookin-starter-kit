@@ -2,6 +2,7 @@ import './styles.css';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
 import {usersApi, recipesApi, ingredientsApi} from './apiCalls';
+import domUpdates from './domUpdates';
 
 let user;
 let recipeRepo;
@@ -59,7 +60,6 @@ function getRandomIndex(array) {
 }
 
 function createDropdownTags() {
-  tags.innerHTML = '<option value="">Choose a Tag</option>'
   const allTags = recipeRepo.recipes.reduce((acc, recipe) => {
     recipe.tags.forEach(tag => {
       !acc.includes(tag) ? 
@@ -68,16 +68,12 @@ function createDropdownTags() {
     return acc;
   }, []);
   allTags.sort()
-  allTags.forEach(tag => {
-    tags.innerHTML += `<option value="${tag}">${tag}</option>`
-  });
+  domUpdates.updateTags(allTags)
 }
 
 function assignFeaturedRecipe() {
   const featuredRecipe = recipeRepo.recipes[getRandomIndex(recipeRepo.recipes)];
-  featuredRecipeImg.src = featuredRecipe.image;
-  featuredRecipeName.innerText = featuredRecipe.name;
-  homePage.id = `${featuredRecipe.id}`;
+  domUpdates.updateFeaturedRecipe(featuredRecipe, featuredRecipeImg, featuredRecipeName, homePage);
 }
 
 function createCurrentRecipes() {
