@@ -77,20 +77,8 @@ function assignFeaturedRecipe() {
 }
 
 function createCurrentRecipes() {
-  browsePage.innerHTML = '';
-  recipeRepo.currentRecipes.forEach(recipe => {
-    browsePage.innerHTML += `
-      <section class="individual-recipe-card">
-        <section class="recipe-card" id="${recipe.id}">
-          <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
-          <i class="fa fa-heart heart-btn"></i>
-          <i class="fa fa-bookmark save-recipe-btn"></i>
-        </section>
-        <h2 class="recipe-card-title">${recipe.name}</h2>
-      </section>`
-  });
+  domUpdates.updateCurrentRecipes(browsePage, recipeRepo, greeting, user);
   addEventListenerToRecipeCards();
-  greeting.innerText = `Welcome, ${user.name}!`
   displayRedHearts(recipeRepo.currentRecipes);
   displayYellowBookmarks(recipeRepo.currentRecipes);
 }
@@ -98,13 +86,10 @@ function createCurrentRecipes() {
 function displayBrowsePage() {
   recipeRepo.updateFilterState('all');
   updateNavBarButtonColor();
-  hide([homePage, recipeView, cookbook]);
-  show([browsePage]);
   recipeRepo.clearFilters();
   reassignCurrentRecipes();
-  searchBar.value = '';
-  tagInput.selectedIndex = 0;
   createCurrentRecipes();
+  domUpdates.updateBrowsePage(homePage, recipeView, cookbook, browsePage, searchBar, tagInput);
 }
 
 function addEventListenerToRecipeCards() {
@@ -124,16 +109,7 @@ function addEventListenerToRecipeCards() {
 
 function showRecipeView(event) {
   const recipeId = event.target.parentNode.id;
-  recipeTitle.innerText = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId).name;
-  price.innerText = `$${(recipeRepo.recipes.find(recipe => {
-    return `${recipe.id}` === recipeId
-  }).calculateRecipeCost() / 100).toFixed(2)}`;
-  recipeViewImage.innerHTML = `
-    <img src="${recipeRepo.recipes.find(recipe => 
-    `${recipe.id}` === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => 
-  `${recipe.id}` === recipeId).name}">`
-  show([recipeView]);
-  hide([homePage, browsePage, cookbook]);
+  domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook);
   displayIngredients(event);
   displayDirections(event);
 }
