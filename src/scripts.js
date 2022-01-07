@@ -115,23 +115,15 @@ function showRecipeView(event) {
 }
 
 function displayIngredients(event) {
-  ingredientsList.innerHTML = '';
   const recipeId = event.target.parentNode.id;
   const currentRecipe = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
-  currentRecipe.ingredients.forEach(ingredient => {
-    ingredientsList.innerHTML += 
-      `<li>${Math.round(ingredient.quantity.amount * 100) / 100} 
-      ${ingredient.quantity.unit} ${ingredient.name}</li>`
-  })
+  domUpdates.updateIngredientsDisplay(ingredientsList, currentRecipe);
 }
 
 function displayDirections(event) {
-  directionsList.innerHTML = '';
   const recipeId = event.target.parentNode.id;
   const currentRecipe = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
-  currentRecipe.instructions.forEach(direction => {
-    directionsList.innerHTML += `<li>${direction.instruction}</li>`
-  })
+  domUpdates.updateDirectionsDisplay(directionsList, currentRecipe);
 }
 
 function filterRecipes() {
@@ -140,11 +132,8 @@ function filterRecipes() {
   recipeRepo.addFilter(searchBar.value);
   recipeRepo.filterRecipes();
   createCurrentRecipes();
-  hide([homePage, recipeView, cookbook]);
-  show([browsePage]);
   recipeRepo.clearFilters();
-  searchBar.value = '';
-  tagInput.selectedIndex = 0;
+  domUpdates.updateFilteredRecipes(homePage, recipeView, cookbook, browsePage, searchBar, tagInput)
 }
 
 function reassignCurrentRecipes() {

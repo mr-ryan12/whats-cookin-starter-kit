@@ -50,6 +50,31 @@ const domUpdates = {
     show([recipeView]);
     hide([homePage, browsePage, cookbook]);
   },
+
+  updateIngredientsDisplay(ingredientsList, currentRecipe) {
+    ingredientsList.innerHTML = '';
+    currentRecipe.ingredients.forEach(ingredient => {
+      ingredientsList.innerHTML += 
+        `<li>${Math.round(ingredient.quantity.amount * 100) / 100} 
+        ${ingredient.quantity.unit} ${ingredient.name}</li>`
+    })
+  },
+
+  updateDirectionsDisplay(directionsList, currentRecipe) {
+    directionsList.innerHTML = '';
+    currentRecipe.instructions.forEach(direction => {
+      directionsList.innerHTML += `<li>${direction.instruction}</li>`
+    })
+  },
+
+  updateFilteredRecipes(homePage, recipeView, cookbook, browsePage, searchBar, tagInput) {
+    hide([homePage, recipeView, cookbook]);
+    show([browsePage]);
+    searchBar.value = '';
+    tagInput.selectedIndex = 0;
+  },
+
+  
 }
 
 export default domUpdates;
