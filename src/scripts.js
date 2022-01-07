@@ -149,10 +149,7 @@ function filterFavorites() {
   recipeRepo.clearFilters();
   reassignCurrentRecipes();
   createCurrentRecipes();
-  hide([homePage, recipeView, cookbook]);
-  show([browsePage]);
-  searchBar.value = '';
-  tagInput.selectedIndex = 0;
+  domUpdates.updateFilteredRecipes(homePage, recipeView, cookbook, browsePage, searchBar, tagInput);
 }
 
 function toggleFavorites(event) {
@@ -162,21 +159,12 @@ function toggleFavorites(event) {
   user.favorites.includes(thisRecipe) ? 
     user.removeFromFavorites(thisRecipe) :
     user.addToFavorites(thisRecipe);
-  heartButtons.forEach(button => {
-    button.parentNode.id === recipeId ?
-      button.classList.toggle('red') : null;
-  })
+  domUpdates.updateToggleFavorites(recipeId, heartButtons);
 }
 
 function displayRedHearts(list) {
   const heartButtons = document.querySelectorAll('.fa-heart');
-  list.forEach(recipe => {
-    user.favorites.includes(recipe) ? 
-      heartButtons.forEach(button => {
-        button.parentNode.id === `${recipe.id}` ? 
-          button.classList.add('red') : null;
-      }) : null;
-  });
+  domUpdates.updateRedHearts(list, user, heartButtons);
 }
 
 function displayYellowBookmarks(list) {

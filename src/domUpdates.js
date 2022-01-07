@@ -74,7 +74,22 @@ const domUpdates = {
     tagInput.selectedIndex = 0;
   },
 
-  
+  updateToggleFavorites(recipeId, heartButtons) {
+    heartButtons.forEach(button => {
+      button.parentNode.id === recipeId ?
+        button.classList.toggle('red') : null;
+    })
+  },
+
+  updateRedHearts(list, user, heartButtons) {
+    list.forEach(recipe => {
+      user.favorites.includes(recipe) ? 
+        heartButtons.forEach(button => {
+          button.parentNode.id === `${recipe.id}` ? 
+            button.classList.add('red') : null;
+        }) : null;
+    });
+  },
 }
 
 export default domUpdates;
