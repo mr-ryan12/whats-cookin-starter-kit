@@ -81,12 +81,12 @@ const domUpdates = {
     })
   },
 
-  updateRedHearts(list, user, heartButtons) {
+  updateButtons(list, user, buttons, color, category) {
     list.forEach(recipe => {
-      user.favorites.includes(recipe) ? 
-        heartButtons.forEach(button => {
+      user[category].includes(recipe) ? 
+        buttons.forEach(button => {
           button.parentNode.id === `${recipe.id}` ? 
-            button.classList.add('red') : null;
+            button.classList.add(`${color}`) : null;
         }) : null;
     });
   },

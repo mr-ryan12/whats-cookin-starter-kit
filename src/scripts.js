@@ -164,18 +164,19 @@ function toggleFavorites(event) {
 
 function displayRedHearts(list) {
   const heartButtons = document.querySelectorAll('.fa-heart');
-  domUpdates.updateRedHearts(list, user, heartButtons);
+  domUpdates.updateButtons(list, user, heartButtons, 'red', 'favorites');
 }
 
 function displayYellowBookmarks(list) {
   const saveButtons = document.querySelectorAll('.fa-bookmark');
-  list.forEach(recipe => {
-    user.cookbook.includes(recipe) ? 
-      saveButtons.forEach(button => {
-        button.parentNode.id === `${recipe.id}` ? 
-          button.classList.add('yellow') : null;
-      }) : null;
-  });
+  // list.forEach(recipe => {
+  //   user.cookbook.includes(recipe) ? 
+  //     saveButtons.forEach(button => {
+  //       button.parentNode.id === `${recipe.id}` ? 
+  //         button.classList.add('yellow') : null;
+  //     }) : null;
+  // });
+  domUpdates.updateButtons(list, user, saveButtons, 'yellow', 'cookbook');
 }
 
 function toggleCookbook(event) {
