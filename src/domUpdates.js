@@ -74,10 +74,10 @@ const domUpdates = {
     tagInput.selectedIndex = 0;
   },
 
-  updateToggleFavorites(recipeId, heartButtons) {
-    heartButtons.forEach(button => {
+  updateToggle(recipeId, buttons, color) {
+    buttons.forEach(button => {
       button.parentNode.id === recipeId ?
-        button.classList.toggle('red') : null;
+        button.classList.toggle(`${color}`) : null;
     })
   },
 
@@ -90,6 +90,28 @@ const domUpdates = {
         }) : null;
     });
   },
+
+  updateCookbookView(
+    cookbookButton,
+    allRecipesButton,
+    favoritesButton,
+    homePage,
+    recipeView,
+    browsePage,
+    cookbook,
+    searchBar,
+    tagInput
+    ) {
+    cookbookButton.classList.add('beige');
+    allRecipesButton.classList.remove('beige');
+    favoritesButton.classList.remove('beige');
+    hide([homePage, recipeView, browsePage]);
+    show([cookbook]);
+    searchBar.value = '';
+    tagInput.selectedIndex = 0;
+  },
+
+  
 }
 
 export default domUpdates;

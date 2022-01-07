@@ -11,7 +11,6 @@ const getData = () => {
   Promise.all([usersApi, recipesApi, ingredientsApi])
     .then(data => {
       user = new User(data[0][getRandomIndex(data[0])]);
-      console.log(user);
       recipeRepo = new RecipeRepository(data[1], data[2]);
       createCurrentRecipes();
       assignFeaturedRecipe();
@@ -159,7 +158,7 @@ function toggleFavorites(event) {
   user.favorites.includes(thisRecipe) ? 
     user.removeFromFavorites(thisRecipe) :
     user.addToFavorites(thisRecipe);
-  domUpdates.updateToggleFavorites(recipeId, heartButtons);
+  domUpdates.updateToggle(recipeId, heartButtons, 'red');
 }
 
 function displayRedHearts(list) {
@@ -169,13 +168,6 @@ function displayRedHearts(list) {
 
 function displayYellowBookmarks(list) {
   const saveButtons = document.querySelectorAll('.fa-bookmark');
-  // list.forEach(recipe => {
-  //   user.cookbook.includes(recipe) ? 
-  //     saveButtons.forEach(button => {
-  //       button.parentNode.id === `${recipe.id}` ? 
-  //         button.classList.add('yellow') : null;
-  //     }) : null;
-  // });
   domUpdates.updateButtons(list, user, saveButtons, 'yellow', 'cookbook');
 }
 
@@ -186,21 +178,29 @@ function toggleCookbook(event) {
   user.cookbook.includes(thisRecipe) ? 
     user.removeFromCookbook(thisRecipe) :
     user.addToCookbook(thisRecipe);
-  saveButtons.forEach(button => {
-    button.parentNode.id === recipeId ?
-      button.classList.toggle('yellow') : null;
-  })
+  domUpdates.updateToggle(recipeId, saveButtons, 'yellow');
 }
 
 function viewCookbook() {
-  cookbookButton.classList.add('beige');
-  allRecipesButton.classList.remove('beige');
-  favoritesButton.classList.remove('beige');
+  // cookbookButton.classList.add('beige');
+  // allRecipesButton.classList.remove('beige');
+  // favoritesButton.classList.remove('beige');
   createCookbook();
-  hide([homePage, recipeView, browsePage]);
-  show([cookbook]);
-  searchBar.value = '';
-  tagInput.selectedIndex = 0;
+  // hide([homePage, recipeView, browsePage]);
+  // show([cookbook]);
+  // searchBar.value = '';
+  // tagInput.selectedIndex = 0;
+  domUpdates.updateCookbookView(
+    cookbookButton,
+    allRecipesButton,
+    favoritesButton,
+    homePage,
+    recipeView,
+    browsePage,
+    cookbook,
+    searchBar,
+    tagInput
+  );
 }
 
 function createCookbook() {
