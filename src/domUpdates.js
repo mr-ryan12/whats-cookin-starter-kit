@@ -130,6 +130,15 @@ const domUpdates = {
       allRecipesButton.classList.add('grey') :
       recipeRepo.filterState === 'favorites' ?
         favoritesButton.classList.add('grey') : null;
+  },
+
+  updatePantryView(user, pantry, modal, pantryView) {
+    user.pantry.ingredients.forEach(item => {
+      pantry.innerHTML += `
+      <li>${item.quantity.amount} : ${item.name} </li>
+      `
+    })
+    show([modal, pantryView])
   }
 }
 

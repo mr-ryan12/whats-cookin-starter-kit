@@ -10,7 +10,7 @@ let recipeRepo;
 const getData = () => {
   Promise.all([usersApi, recipesApi, ingredientsApi])
     .then(data => {
-      user = new User(data[0][getRandomIndex(data[0])]);
+      user = new User(data[0][getRandomIndex(data[0])], data[2]);
       recipeRepo = new RecipeRepository(data[1], data[2]);
       createCurrentRecipes();
       assignFeaturedRecipe();
@@ -40,6 +40,13 @@ const featuredRecipeImg = document.querySelector('.featured-recipe-image');
 const featuredRecipeName = document.querySelector('.featured-recipe-name');
 const whatsCookin = document.getElementById('whats-cookin');
 const tags = document.getElementById('tags');
+const pantryButton = document.getElementById('pantry-btn');
+const pantry = document.querySelector('.pantry');
+const modal = document.querySelector('.modal');
+const pantryView = document.querySelector('.pantry-view');
+const shoppingCart = document.querySelector('.shopping-cart');
+const shoppingCartView = document.querySelector('.shopping-cart-view');
+
 
 // Event Listeners
 window.addEventListener('load', getData);
@@ -49,6 +56,7 @@ favoritesButton.addEventListener('click', filterFavorites);
 cookbookButton.addEventListener('click', viewCookbook);
 featuredRecipeImg.addEventListener('click', showRecipeView);
 whatsCookin.addEventListener('click', displayHomeView);
+pantryButton.addEventListener('click', viewPantry);
 
 //Functions
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
@@ -206,4 +214,8 @@ function createCookbook() {
 
 function displayHomeView() {
   domUpdates.displayHomeView(cookbookButton, allRecipesButton, favoritesButton, browsePage, recipeView, cookbook, homePage);
+}
+
+function viewPantry() {
+  domUpdates.updatePantryView(user, pantry, modal, pantryView)
 }
