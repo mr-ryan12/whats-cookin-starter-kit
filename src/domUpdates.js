@@ -1,6 +1,15 @@
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
 
+const capitalizeFistLetters = string => {
+  const arr = string.split(' ')
+  console.log(arr);
+  const result = arr.map(element => {
+    return element.charAt(0).toUpperCase() + element.slice(1)
+  })
+  return result.join(' ')
+}
+
 const domUpdates = {
   updateTags(allTags) {
     tags.innerHTML = '<option value="">Choose a Tag</option>';
@@ -135,7 +144,7 @@ const domUpdates = {
   updatePantryView(user, pantry, modal, pantryView) {
     user.pantry.ingredients.forEach(item => {
       pantry.innerHTML += `
-      <li>${item.quantity.amount} : ${item.name} </li>
+      <li>${capitalizeFistLetters(item.name)} (${item.quantity.amount})</li>
       `
     })
     show([modal, pantryView])
@@ -145,14 +154,15 @@ const domUpdates = {
     hide([modal, pantryView, shoppingCartView])
   }, 
 
-  updateShoppingCartView(currentRecipe, shoppingCart, modal, shoppingCartView) {
+  updateShoppingCartView(currentRecipe, shoppingCart, modal, shoppingCartView, user) {
     currentRecipe.ingredients.forEach(ingredient => {
+      let ing = user.pantry.ingredients.find(ing => ing.id === ingredient.id)
+      !ing ? ing = {quantity: {amount: 0}} : null;
       shoppingCart.innerHTML += `
       <div class="cart-item">
-        <li>${ingredient.name}</li>
-        <section class="counter"> 
-          <input class="counter-input" type="number" value="0" min="0"></input>
-        </section>
+        <li>${capitalizeFistLetters(ingredient.name)}</li>
+        <input class="counter-input" type="number" value="0" min="0"></input>
+        <p>(On hand: ${ing.quantity.amount})</p>
       </div>
       `
     });

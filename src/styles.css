@@ -310,8 +310,7 @@ h5 {
   margin: 0;
 }
 
-.cart-item, 
-.counter {
+.cart-item {
   display: flex;
   flex-direction: row;
 }

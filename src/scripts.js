@@ -234,15 +234,6 @@ function exitModal() {
 }
 
 function viewShoppingCart() {
-  domUpdates.updateShoppingCartView(recipeRepo.currentRecipe, shoppingCart, modal, shoppingCartView);
+  domUpdates.updateShoppingCartView(recipeRepo.currentRecipe, shoppingCart, modal, shoppingCartView, user);
 }
 
-function assignEventListenersToIncrementers() {
-  plusBtns.forEach(btn => {
-    btn.addEventListener('click', incrementCounter);
-  });
-
-  minusBtns.forEach(btn => {
-    btn.addEventListener('click', decrementCounter);
-  });
-}
