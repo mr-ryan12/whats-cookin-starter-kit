@@ -46,6 +46,7 @@ const modal = document.querySelector('.modal');
 const pantryView = document.querySelector('.pantry-view');
 const shoppingCart = document.querySelector('.shopping-cart');
 const shoppingCartView = document.querySelector('.shopping-cart-view');
+const exitModalBtn = document.querySelector('.exit-modal-btn');
 
 
 // Event Listeners
@@ -57,6 +58,7 @@ cookbookButton.addEventListener('click', viewCookbook);
 featuredRecipeImg.addEventListener('click', showRecipeView);
 whatsCookin.addEventListener('click', displayHomeView);
 pantryButton.addEventListener('click', viewPantry);
+exitModalBtn.addEventListener('click', exitModal)
 
 //Functions
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
@@ -217,5 +219,9 @@ function displayHomeView() {
 }
 
 function viewPantry() {
-  domUpdates.updatePantryView(user, pantry, modal, pantryView)
+  domUpdates.updatePantryView(user, pantry, modal, pantryView);
+}
+
+function exitModal() {
+  domUpdates.exitModalView(modal, pantryView, shoppingCartView);
 }

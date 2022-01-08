@@ -139,6 +139,10 @@ const domUpdates = {
       `
     })
     show([modal, pantryView])
+  }, 
+
+  exitModalView(modal, pantryView, shoppingCartView) {
+    hide([modal, pantryView, shoppingCartView])
   }
 }
 
