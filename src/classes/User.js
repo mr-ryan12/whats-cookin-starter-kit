@@ -1,8 +1,10 @@
+import Pantry from './Pantry';
+
 class User {
-  constructor(user) {
+  constructor(user, data) {
     this.name = user.name || 'Guest User';
     this.id = user.id || 0;
-    this.pantry = user.pantry || [];
+    this.pantry = this.createPantry(user.pantry, data)
     this.favorites = [];
     this.cookbook = [];
   }
@@ -23,6 +25,10 @@ class User {
   removeFromCookbook(recipe) {
     const index = this.cookbook.indexOf(recipe);
     this.cookbook.splice(index, 1);
+  }
+
+  createPantry(pantry, data) {
+    return new Pantry(pantry, data)
   }
 }
 
