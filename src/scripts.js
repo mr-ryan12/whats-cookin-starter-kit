@@ -48,6 +48,8 @@ const shoppingCart = document.querySelector('.shopping-cart');
 const shoppingCartView = document.querySelector('.shopping-cart-view');
 const exitModalBtn = document.querySelector('.exit-modal-btn');
 const shoppingCartBtn = document.getElementById('shopping-cart-btn');
+const plusBtns = document.querySelectorAll('.plus');
+const minusBtns = document.querySelectorAll('.minus');
 
 
 // Event Listeners
@@ -61,6 +63,7 @@ whatsCookin.addEventListener('click', displayHomeView);
 pantryButton.addEventListener('click', viewPantry);
 exitModalBtn.addEventListener('click', exitModal);
 shoppingCartBtn.addEventListener('click', viewShoppingCart);
+
 
 //Functions
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
@@ -232,4 +235,14 @@ function exitModal() {
 
 function viewShoppingCart() {
   domUpdates.updateShoppingCartView(recipeRepo.currentRecipe, shoppingCart, modal, shoppingCartView);
+}
+
+function assignEventListenersToIncrementers() {
+  plusBtns.forEach(btn => {
+    btn.addEventListener('click', incrementCounter);
+  });
+
+  minusBtns.forEach(btn => {
+    btn.addEventListener('click', decrementCounter);
+  });
 }

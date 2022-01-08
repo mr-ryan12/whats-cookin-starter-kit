@@ -151,15 +151,13 @@ const domUpdates = {
       <div class="cart-item">
         <li>${ingredient.name}</li>
         <section class="counter"> 
-          <span class="minus">-</span>
-          <p class="counter-input" type="text" value="0">0</p>
-          <span class="plus">+</span>
+          <input class="counter-input" type="number" value="0" min="0"></input>
         </section>
       </div>
       `
     });
     show([modal, shoppingCartView]);
-  }
+  }, 
 }
 
 export default domUpdates;

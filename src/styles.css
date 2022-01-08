@@ -316,20 +316,32 @@ h5 {
   flex-direction: row;
 }
 
-.counter-input {
-  margin: 0;
-}
-
 .cart-item {
   margin: 10px;
 }
 
-li {
-  margin-right: 10px;
+li,
+.counter-input {
+  margin: 10px;
+  vertical-align: middle;
 }
 
 .buy-btn {
   width: 100%;
+}
+
+/* .plus,
+.minus {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  border: 1px solid #888;
+  margin: 2px;
+  padding: 2px;
+} */
+
+.counter-input {
+  width: 40px;
 }
 
 .hidden { 
