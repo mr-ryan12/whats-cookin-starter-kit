@@ -310,6 +310,28 @@ h5 {
   margin: 0;
 }
 
+.cart-item, 
+.counter {
+  display: flex;
+  flex-direction: row;
+}
+
+.counter-input {
+  margin: 0;
+}
+
+.cart-item {
+  margin: 10px;
+}
+
+li {
+  margin-right: 10px;
+}
+
+.buy-btn {
+  width: 100%;
+}
+
 .hidden { 
   display: none;
 }

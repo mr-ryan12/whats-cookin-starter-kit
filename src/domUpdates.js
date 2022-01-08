@@ -148,12 +148,14 @@ const domUpdates = {
   updateShoppingCartView(currentRecipe, shoppingCart, modal, shoppingCartView) {
     currentRecipe.ingredients.forEach(ingredient => {
       shoppingCart.innerHTML += `
-      <li>${ingredient.name}</li>
-      <section> 
-        <span class="minus">-</span>
-        <h2 type="text" value="0">0</h2>
-        <span class="plus">+</span>
-      </section>
+      <div class="cart-item">
+        <li>${ingredient.name}</li>
+        <section class="counter"> 
+          <span class="minus">-</span>
+          <p class="counter-input" type="text" value="0">0</p>
+          <span class="plus">+</span>
+        </section>
+      </div>
       `
     });
     show([modal, shoppingCartView]);
