@@ -255,9 +255,9 @@ h5 {
   align-items: center;
 }
 
-ol {
+/* ol {
   width: 75%;
-}
+} */
 
 .whats-cookin {
   cursor: pointer;
@@ -266,7 +266,7 @@ ol {
 .modal {
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
+  /* padding-top: 100px; */
   left: 0;
   top: 0;
   width: 100%;
@@ -282,17 +282,32 @@ ol {
 .shopping-cart-view {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  overflow: scroll;
+  width: 40%;
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+  bottom: 50px;
 }
 
 .exit-modal-btn {
   font-size: 40px;
+  position: fixed;
+  right: 31%;
+}
+
+.pantry, 
+.shopping-cart {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  width: 100%;
+  align-items: center;
+  padding: 0;
+  margin: 0;
 }
 
 .hidden { 

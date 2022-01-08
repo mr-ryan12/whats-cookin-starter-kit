@@ -143,6 +143,20 @@ const domUpdates = {
 
   exitModalView(modal, pantryView, shoppingCartView) {
     hide([modal, pantryView, shoppingCartView])
+  }, 
+
+  updateShoppingCartView(currentRecipe, shoppingCart, modal, shoppingCartView) {
+    currentRecipe.ingredients.forEach(ingredient => {
+      shoppingCart.innerHTML += `
+      <li>${ingredient.name}</li>
+      <section> 
+        <span class="minus">-</span>
+        <h2 type="text" value="0">0</h2>
+        <span class="plus">+</span>
+      </section>
+      `
+    });
+    show([modal, shoppingCartView]);
   }
 }
 

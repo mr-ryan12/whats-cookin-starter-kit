@@ -47,6 +47,7 @@ const pantryView = document.querySelector('.pantry-view');
 const shoppingCart = document.querySelector('.shopping-cart');
 const shoppingCartView = document.querySelector('.shopping-cart-view');
 const exitModalBtn = document.querySelector('.exit-modal-btn');
+const shoppingCartBtn = document.getElementById('shopping-cart-btn');
 
 
 // Event Listeners
@@ -58,7 +59,8 @@ cookbookButton.addEventListener('click', viewCookbook);
 featuredRecipeImg.addEventListener('click', showRecipeView);
 whatsCookin.addEventListener('click', displayHomeView);
 pantryButton.addEventListener('click', viewPantry);
-exitModalBtn.addEventListener('click', exitModal)
+exitModalBtn.addEventListener('click', exitModal);
+shoppingCartBtn.addEventListener('click', viewShoppingCart);
 
 //Functions
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
@@ -119,6 +121,8 @@ function addEventListenerToRecipeCards() {
 
 function showRecipeView(event) {
   const recipeId = event.target.parentNode.id;
+  const currentRecipe = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
+  recipeRepo.assignCurrentRecipe(currentRecipe);
   domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook);
   displayIngredients(event);
   displayDirections(event);
@@ -224,4 +228,8 @@ function viewPantry() {
 
 function exitModal() {
   domUpdates.exitModalView(modal, pantryView, shoppingCartView);
+}
+
+function viewShoppingCart() {
+  domUpdates.updateShoppingCartView(recipeRepo.currentRecipe, shoppingCart, modal, shoppingCartView);
 }
