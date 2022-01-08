@@ -199,6 +199,17 @@ i {
   justify-content: space-between;
 }
 
+.right-side {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.recipe-view-btns {
+  display: flex;
+  flex-direction: row;
+}
+
 .recipe-info { 
   display: flex;
   flex-direction: column;
@@ -209,7 +220,7 @@ i {
 }
 
 .recipe-view-img {
-  width: 50%;
+  width: 100%;
   margin-top: 8vh;
 }
 
