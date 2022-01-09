@@ -49,7 +49,7 @@ const domUpdates = {
     tagInput.selectedIndex = 0;
   },
 
-  updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook) {
+  updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn) {
     recipeTitle.innerText = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId).name;
     price.innerText = `$${(recipeRepo.recipes.find(recipe => {
       return `${recipe.id}` === recipeId
@@ -58,6 +58,14 @@ const domUpdates = {
       <img src="${recipeRepo.recipes.find(recipe => 
       `${recipe.id}` === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => 
       `${recipe.id}` === recipeId).name}">`
+      if(user.pantry.checkForIngredients(recipeRepo.recipes.find(recipe => 
+        `${recipe.id}` === recipeId))) {
+          cookBtn.disabled = false;
+          canCookMessage.innerText = "You can make this recipe";
+        } else {
+          cookBtn.disabled = true;
+          canCookMessage.innerText = "You don't have enough ingredients in your pantry to cook this recipe"
+        }
     show([recipeView]);
     hide([homePage, browsePage, cookbook]);
   },

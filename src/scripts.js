@@ -49,6 +49,8 @@ const shoppingCartView = document.querySelector('.shopping-cart-view');
 const exitModalBtn = document.querySelector('.exit-modal-btn');
 const shoppingCartBtn = document.getElementById('shopping-cart-btn');
 const buyBtn = document.querySelector('.buy-btn');
+const canCookMessage = document.getElementById('can-cook-message');
+const cookBtn = document.getElementById('cook-btn');
 
 
 // Event Listeners
@@ -126,7 +128,7 @@ function showRecipeView(event) {
   const recipeId = event.target.parentNode.id;
   const currentRecipe = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
   recipeRepo.assignCurrentRecipe(currentRecipe);
-  domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook);
+  domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn);
   displayIngredients(event);
   displayDirections(event);
 }
@@ -263,6 +265,8 @@ function buyIngredients(event) {
   // user.pantry.ingredients = user.pantry.buildPantry()
   usersApi.then(data => {
     user = new User(data.find(person => person.id === user.id))
-    console.log(user)
   })
+  // const recipeId = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
+  // Need to figure out recipeId to pass into the function below
+  domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeRepo.currentRecipe.id, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn);
 }
