@@ -18,7 +18,7 @@ const updatePantry = (data) => {
       'Content-Type': 'application/json'
     }
   }) 
-  .then(resp => resp.json())
+  .then(resp => resp.json());
 }
   
 export {usersApi, recipesApi, ingredientsApi, updatePantry};

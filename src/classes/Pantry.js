@@ -6,7 +6,7 @@ class Pantry {
     this.ingredientsData = data;
   }
 
-  buildPantry (pantry, data) {
+  buildPantry(pantry, data) {
     return pantry.map(item => {
       return new Ingredient(item.ingredient, {amount: item.amount, unit: ''}, data)
     })

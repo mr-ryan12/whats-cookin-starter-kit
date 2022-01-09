@@ -293,6 +293,7 @@ h5 {
   bottom: 50px;
 }
 
+.exit-pantry-btn,
 .exit-modal-btn {
   font-size: 40px;
   position: fixed;
