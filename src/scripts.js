@@ -1,7 +1,7 @@
 import './styles.css';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
-import {usersApi, recipesApi, ingredientsApi} from './apiCalls';
+import {usersApi, recipesApi, ingredientsApi, updatePantry} from './apiCalls';
 import domUpdates from './domUpdates';
 
 let user;
@@ -48,8 +48,7 @@ const shoppingCart = document.querySelector('.shopping-cart');
 const shoppingCartView = document.querySelector('.shopping-cart-view');
 const exitModalBtn = document.querySelector('.exit-modal-btn');
 const shoppingCartBtn = document.getElementById('shopping-cart-btn');
-const plusBtns = document.querySelectorAll('.plus');
-const minusBtns = document.querySelectorAll('.minus');
+const buyBtn = document.querySelector('.buy-btn');
 
 
 // Event Listeners
@@ -63,6 +62,7 @@ whatsCookin.addEventListener('click', displayHomeView);
 pantryButton.addEventListener('click', viewPantry);
 exitModalBtn.addEventListener('click', exitModal);
 shoppingCartBtn.addEventListener('click', viewShoppingCart);
+buyBtn.addEventListener('click', buyIngredients);
 
 
 //Functions
@@ -237,3 +237,28 @@ function viewShoppingCart() {
   domUpdates.updateShoppingCartView(recipeRepo.currentRecipe, shoppingCart, modal, shoppingCartView, user);
 }
 
+function buyIngredients(event) {
+  event.preventDefault()
+  const counterInputs = document.querySelectorAll('.counter-input');
+  counterInputs.forEach(input => {
+    console.log(typeof input.value, input.value)
+    const data = { 
+      userID: user.id, 
+      ingredientID: parseInt(input.id) , 
+      ingredientModification: parseInt(input.value)
+    }
+    console.log(data)
+    const ing = recipeRepo.currentRecipe.ingredients.find(ingredient => {
+      // console.log(input.value)
+      return `${ingredient.id}` === input.id
+    })
+    ing.quantity.amount = 0;
+    if(parseInt(input.value) > 0) {
+      user.pantry.addIngredient(ing)
+      user.pantry.updateQuantity(ing, parseInt(input.value))
+      updatePantry(data)
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+    }
+  })
+}

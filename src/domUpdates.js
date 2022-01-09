@@ -3,7 +3,6 @@ const hide = elements => elements.forEach(element => element.classList.add('hidd
 
 const capitalizeFistLetters = string => {
   const arr = string.split(' ')
-  console.log(arr);
   const result = arr.map(element => {
     return element.charAt(0).toUpperCase() + element.slice(1)
   })
@@ -142,6 +141,10 @@ const domUpdates = {
   },
 
   updatePantryView(user, pantry, modal, pantryView) {
+    pantry.innerHTML = '';
+    user.pantry.ingredients.sort((a,b) => {
+      return (a.name > b.name) - (a.name < b.name)
+    })
     user.pantry.ingredients.forEach(item => {
       pantry.innerHTML += `
       <li>${capitalizeFistLetters(item.name)} (${item.quantity.amount})</li>
@@ -155,13 +158,14 @@ const domUpdates = {
   }, 
 
   updateShoppingCartView(currentRecipe, shoppingCart, modal, shoppingCartView, user) {
+    shoppingCart.innerHTML = '';
     currentRecipe.ingredients.forEach(ingredient => {
       let ing = user.pantry.ingredients.find(ing => ing.id === ingredient.id)
       !ing ? ing = {quantity: {amount: 0}} : null;
       shoppingCart.innerHTML += `
       <div class="cart-item">
         <li>${capitalizeFistLetters(ingredient.name)}</li>
-        <input class="counter-input" type="number" value="0" min="0"></input>
+        <input id="${ingredient.id}" class="counter-input" type="number" value="0" min="0"></input>
         <p>(On hand: ${ing.quantity.amount})</p>
       </div>
       `

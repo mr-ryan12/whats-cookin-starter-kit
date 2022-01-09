@@ -53,10 +53,9 @@ class Pantry {
   }
 
   updateQuantity(ingredient, amount) {
-    const thisIngredient = this.ingredients.find(ing => {
+    this.ingredients.find(ing => {
       return ing.id === ingredient.id
-    });
-    thisIngredient.quantity.amount += amount;
+    }).quantity.amount += amount;
   }
 }
 
