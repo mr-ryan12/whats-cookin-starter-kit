@@ -172,6 +172,10 @@ const domUpdates = {
     });
     show([modal, shoppingCartView]);
   }, 
+
+  resetModal(modal, pantryView, shoppingCartView) {
+    hide([modal, pantryView, shoppingCartView])
+  }
 }
 
 export default domUpdates;

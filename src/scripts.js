@@ -241,15 +241,12 @@ function buyIngredients(event) {
   event.preventDefault()
   const counterInputs = document.querySelectorAll('.counter-input');
   counterInputs.forEach(input => {
-    console.log(typeof input.value, input.value)
     const data = { 
       userID: user.id, 
       ingredientID: parseInt(input.id) , 
       ingredientModification: parseInt(input.value)
     }
-    console.log(data)
     const ing = recipeRepo.currentRecipe.ingredients.find(ingredient => {
-      // console.log(input.value)
       return `${ingredient.id}` === input.id
     })
     ing.quantity.amount = 0;
@@ -260,5 +257,12 @@ function buyIngredients(event) {
       .then(data => console.log(data))
       .catch(err => console.log(err))
     }
+  })
+  let currentUser = user;
+  domUpdates.resetModal(modal, pantryView, shoppingCartView);
+  // user.pantry.ingredients = user.pantry.buildPantry()
+  usersApi.then(data => {
+    user = new User(data.find(person => person.id === user.id))
+    console.log(user)
   })
 }
