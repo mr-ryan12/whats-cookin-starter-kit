@@ -263,6 +263,8 @@ function buyIngredients(event) {
       .then(data => {
         user.pantry.addIngredient(updateIngredient)
         user.pantry.updateQuantity(updateIngredient, parseInt(input.value))
+        domUpdates.resetModal(modal, pantryView, shoppingCartView);
+        domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, `${recipeRepo.currentRecipe.id}`, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn)
         console.log(data);
       })
       .catch(err => console.log(err))
@@ -270,8 +272,7 @@ function buyIngredients(event) {
   })
   let foundRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeRepo.currentRecipe.id)
   let foundRecipeId = `${foundRecipe.id}`
-  domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, foundRecipeId, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn)
-  domUpdates.resetModal(modal, pantryView, shoppingCartView);
+  // console.log(recipeRepo.currentRecipe.id)
   // domUpdates.updatePantryView(user, pantry, modal, pantryView);
   // let currentUser = user;
   // domUpdates.resetModal(modal, pantryView, shoppingCartView);

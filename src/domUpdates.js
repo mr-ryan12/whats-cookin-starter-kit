@@ -50,6 +50,7 @@ const domUpdates = {
   },
 
   updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn) {
+    console.log(typeof recipeId)
     recipeTitle.innerText = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId).name;
     price.innerText = `$${(recipeRepo.recipes.find(recipe => {
       return `${recipe.id}` === recipeId
@@ -59,7 +60,7 @@ const domUpdates = {
       `${recipe.id}` === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => 
       `${recipe.id}` === recipeId).name}">`
       if(user.pantry.checkForIngredients(recipeRepo.recipes.find(recipe => 
-        `${recipe.id}` === recipeId))) {
+        {return `${recipe.id}` === recipeId}))) {
           cookBtn.disabled = false;
           canCookMessage.innerText = "You can make this recipe";
         } else {
