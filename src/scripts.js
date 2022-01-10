@@ -135,6 +135,9 @@ function showRecipeView(event) {
   const currentRecipe = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
   recipeRepo.assignCurrentRecipe(currentRecipe);
   domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn);
+  price.innerText = `$${(recipeRepo.recipes.find(recipe => {
+    return `${recipe.id}` === recipeId
+  }).calculateRecipeCost() / 100).toFixed(2)}`
   displayIngredients(event);
   displayDirections(event);
 }
@@ -258,10 +261,17 @@ function buyIngredients(event) {
     //   return `${ingredient.id}` === input.id;
     // })
     // const newIngredient = new Ingredient(currentIngredient.id, currentIngredient.quantity, ingredientsData)
-    const ingredients = recipeRepo.currentRecipe.ingredients.map(ingredient => {
-      return new Ingredient(ingredient.id, ingredient.quantity, ingredientsData);
+    // const ingredients = recipeRepo.currentRecipe.ingredients.map(ingredient => {
+    //   return new Ingredient(ingredient.id, ingredient.quantity, ingredientsData);
+    // })
+    // const newIngredient = ingredients.find(ingredient => `${ingredient.id}` === input.id);
+    let newIngredient = user.pantry.ingredients.find(ingredient => {
+      return `${ingredient.id}` === input.id
     })
-    const newIngredient = ingredients.find(ingredient => `${ingredient.id}` === input.id);
+    if (!newIngredient) {
+      newIngredient = new Ingredient(parseInt(input.id), {amount: parseInt(input.value), unit: ''}, ingredientsData)
+      user.pantry.addIngredient(newIngredient)
+    }
     if(parseInt(input.value) > 0) {
       makePostRequest(data, newIngredient, parseInt(input.value));
     }
@@ -271,7 +281,6 @@ function buyIngredients(event) {
 function makePostRequest(data, currentIngredient, amount) {
   updatePantry(data)
     .then(data => {
-      user.pantry.addIngredient(currentIngredient)
       user.pantry.updateQuantity(currentIngredient, amount)
       domUpdates.resetModal(modal, pantryView, shoppingCartView);
       domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, `${recipeRepo.currentRecipe.id}`, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn)
@@ -282,7 +291,8 @@ function makePostRequest(data, currentIngredient, amount) {
 
 function cookFood() {
   recipeRepo.currentRecipe.ingredients.forEach(ingredient => {
-  const quantity = -Math.abs(parseInt(Math.round(ingredient.quantity.amount)));
+  console.log(typeof ingredient.quantity.amount)
+  const quantity = -ingredient.quantity.amount;
     const data = { 
       userID: user.id, 
       ingredientID: parseInt(ingredient.id), 

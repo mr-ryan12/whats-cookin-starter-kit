@@ -52,9 +52,6 @@ const domUpdates = {
   updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn) {
     console.log(typeof recipeId)
     recipeTitle.innerText = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId).name;
-    price.innerText = `$${(recipeRepo.recipes.find(recipe => {
-      return `${recipe.id}` === recipeId
-    }).calculateRecipeCost() / 100).toFixed(2)}`;
     recipeViewImage.innerHTML = `
       <img src="${recipeRepo.recipes.find(recipe => 
       `${recipe.id}` === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => 
