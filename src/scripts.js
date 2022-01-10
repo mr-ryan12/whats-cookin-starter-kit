@@ -70,6 +70,7 @@ exitModalBtn.addEventListener('click', exitModal);
 exitPantryBtn.addEventListener('click', exitModal);
 shoppingCartBtn.addEventListener('click', viewShoppingCart);
 buyBtn.addEventListener('click', buyIngredients);
+cookBtn.addEventListener('click', cookFood);
 
 
 //Functions
@@ -253,49 +254,40 @@ function buyIngredients(event) {
       ingredientID: parseInt(input.id), 
       ingredientModification: parseInt(input.value)
     }
-    const ing = recipeRepo.currentRecipe.ingredients.find(ingredient => {
-      return `${ingredient.id}` === input.id
+    // const currentIngredient = recipeRepo.currentRecipe.ingredients.find(ingredient => {
+    //   return `${ingredient.id}` === input.id;
+    // })
+    // const newIngredient = new Ingredient(currentIngredient.id, currentIngredient.quantity, ingredientsData)
+    const ingredients = recipeRepo.currentRecipe.ingredients.map(ingredient => {
+      return new Ingredient(ingredient.id, ingredient.quantity, ingredientsData);
     })
-    let updateIngredient = new Ingredient(ing.id, {amount: 0, unit: ing.quantity.unit}, ingredientsData)
-    // ing.quantity.amount = 0;
+    const newIngredient = ingredients.find(ingredient => `${ingredient.id}` === input.id);
     if(parseInt(input.value) > 0) {
-      updatePantry(data)
-      .then(data => {
-        user.pantry.addIngredient(updateIngredient)
-        user.pantry.updateQuantity(updateIngredient, parseInt(input.value))
-        domUpdates.resetModal(modal, pantryView, shoppingCartView);
-        domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, `${recipeRepo.currentRecipe.id}`, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn)
-        console.log(data);
-      })
-      .catch(err => console.log(err))
+      makePostRequest(data, newIngredient, parseInt(input.value));
     }
   })
-  let foundRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeRepo.currentRecipe.id)
-  let foundRecipeId = `${foundRecipe.id}`
-  // console.log(recipeRepo.currentRecipe.id)
-  // domUpdates.updatePantryView(user, pantry, modal, pantryView);
-  // let currentUser = user;
-  // domUpdates.resetModal(modal, pantryView, shoppingCartView);
-  // usersApi.then(data => {
-  //   user = new User(data.find(person => person.id === user.id), data)
-  // })
-  // const recipeId = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId);
-  // Need to figure out recipeId to pass into the function below
-  // domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeRepo.currentRecipe.id, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn);
-  // let foundRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeRepo.currentRecipe.id)
-  // let foundRecipeId = `${foundRecipe.id}`
-  // domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, foundRecipeId, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn)
-  // domUpdates.resetModal(modal, pantryView, shoppingCartView);
-  // domUpdates.updatePantryView(user, pantry, modal, pantryView);
-  // user.pantry.ingredients = user.pantry.buildPantry();
 }
 
-// function updateUserData() {
-//   Promise.all([usersApi, ingredientsApi])
-//     .then(data => {
-//       user = new User(data[0].find(person => person.id === user.id), data[1])
-//       console.log('DATA><><<><>>>>', data)
-//       console.log('USER<><><><>>>>', user)
-//     })
-//     .catch(err => console.log(err))
-// }
+function makePostRequest(data, currentIngredient, amount) {
+  updatePantry(data)
+    .then(data => {
+      user.pantry.addIngredient(currentIngredient)
+      user.pantry.updateQuantity(currentIngredient, amount)
+      domUpdates.resetModal(modal, pantryView, shoppingCartView);
+      domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, `${recipeRepo.currentRecipe.id}`, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn)
+      console.log(data);
+    })
+    .catch(err => console.log(err))
+}
+
+function cookFood() {
+  recipeRepo.currentRecipe.ingredients.forEach(ingredient => {
+  const quantity = -Math.abs(parseInt(Math.round(ingredient.quantity.amount)));
+    const data = { 
+      userID: user.id, 
+      ingredientID: parseInt(ingredient.id), 
+      ingredientModification: quantity
+    }
+    makePostRequest(data, ingredient, quantity);
+  })
+}
