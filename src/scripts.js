@@ -257,14 +257,6 @@ function buyIngredients(event) {
       ingredientID: parseInt(input.id), 
       ingredientModification: parseInt(input.value)
     }
-    // const currentIngredient = recipeRepo.currentRecipe.ingredients.find(ingredient => {
-    //   return `${ingredient.id}` === input.id;
-    // })
-    // const newIngredient = new Ingredient(currentIngredient.id, currentIngredient.quantity, ingredientsData)
-    // const ingredients = recipeRepo.currentRecipe.ingredients.map(ingredient => {
-    //   return new Ingredient(ingredient.id, ingredient.quantity, ingredientsData);
-    // })
-    // const newIngredient = ingredients.find(ingredient => `${ingredient.id}` === input.id);
     let newIngredient = user.pantry.ingredients.find(ingredient => {
       return `${ingredient.id}` === input.id
     })

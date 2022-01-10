@@ -29,7 +29,7 @@ const domUpdates = {
       page.innerHTML += `
         <section class="individual-recipe-card">
           <section class="recipe-card" id="${recipe.id}">
-            <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
+            <input type="image" src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
             <i class="fa fa-heart heart-btn"></i>
             <i class="fa fa-bookmark save-recipe-btn"></i>
           </section>

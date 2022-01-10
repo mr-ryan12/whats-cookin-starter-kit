@@ -255,10 +255,6 @@ h5 {
   align-items: center;
 }
 
-/* ol {
-  width: 75%;
-} */
-
 .whats-cookin {
   cursor: pointer;
 }
@@ -266,7 +262,6 @@ h5 {
 .modal {
   position: fixed;
   z-index: 1;
-  /* padding-top: 100px; */
   left: 0;
   top: 0;
   width: 100%;
@@ -304,7 +299,6 @@ h5 {
 .shopping-cart {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   width: 100%;
   align-items: center;
   padding: 0;
@@ -329,16 +323,6 @@ li,
 .buy-btn {
   width: 100%;
 }
-
-/* .plus,
-.minus {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: center;
-  border: 1px solid #888;
-  margin: 2px;
-  padding: 2px;
-} */
 
 .counter-input {
   width: 40px;
