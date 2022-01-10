@@ -199,6 +199,17 @@ i {
   justify-content: space-between;
 }
 
+.right-side {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.recipe-view-btns {
+  display: flex;
+  flex-direction: row;
+}
+
 .recipe-info { 
   display: flex;
   flex-direction: column;
@@ -209,7 +220,7 @@ i {
 }
 
 .recipe-view-img {
-  width: 50%;
+  width: 100%;
   margin-top: 8vh;
 }
 
@@ -244,12 +255,77 @@ h5 {
   align-items: center;
 }
 
-ol {
-  width: 75%;
-}
-
 .whats-cookin {
   cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: space-between;
+}
+
+.pantry-view, 
+.shopping-cart-view {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+  bottom: 50px;
+}
+
+.exit-pantry-btn,
+.exit-modal-btn {
+  font-size: 40px;
+  position: fixed;
+  right: 31%;
+}
+
+.pantry, 
+.shopping-cart {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.cart-item {
+  margin: 10px;
+}
+
+li,
+.counter-input {
+  margin: 10px;
+  vertical-align: middle;
+}
+
+.buy-btn {
+  width: 100%;
+}
+
+.counter-input {
+  width: 40px;
 }
 
 .hidden { 

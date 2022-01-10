@@ -6,7 +6,7 @@ class Pantry {
     this.ingredientsData = data;
   }
 
-  buildPantry (pantry, data) {
+  buildPantry(pantry, data) {
     return pantry.map(item => {
       return new Ingredient(item.ingredient, {amount: item.amount, unit: ''}, data)
     })
@@ -53,10 +53,9 @@ class Pantry {
   }
 
   updateQuantity(ingredient, amount) {
-    const thisIngredient = this.ingredients.find(ing => {
+    this.ingredients.find(ing => {
       return ing.id === ingredient.id
-    });
-    thisIngredient.quantity.amount += amount;
+    }).quantity.amount += amount;
   }
 }
 

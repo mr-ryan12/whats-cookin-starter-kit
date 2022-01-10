@@ -7,6 +7,7 @@ class RecipeRepository {
     this.tag = '';
     this.currentRecipes = this.recipes;
     this.filterState = '';
+    this.currentRecipe = {};
   }
 
   addFilter(term) {
@@ -53,6 +54,10 @@ class RecipeRepository {
         ingredientsData
       )
     }) : [];
+  }
+
+  assignCurrentRecipe(recipe) {
+    this.currentRecipe = recipe;
   }
 }
 

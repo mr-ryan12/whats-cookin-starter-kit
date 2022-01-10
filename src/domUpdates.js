@@ -1,6 +1,14 @@
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
 
+const capitalizeFistLetters = string => {
+  const arr = string.split(' ')
+  const result = arr.map(element => {
+    return element.charAt(0).toUpperCase() + element.slice(1)
+  })
+  return result.join(' ')
+}
+
 const domUpdates = {
   updateTags(allTags) {
     tags.innerHTML = '<option value="">Choose a Tag</option>';
@@ -21,7 +29,7 @@ const domUpdates = {
       page.innerHTML += `
         <section class="individual-recipe-card">
           <section class="recipe-card" id="${recipe.id}">
-            <img src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
+            <input type="image" src="${recipe.image}" alt="${recipe.name}" class="recipe-card-image">
             <i class="fa fa-heart heart-btn"></i>
             <i class="fa fa-bookmark save-recipe-btn"></i>
           </section>
@@ -41,15 +49,20 @@ const domUpdates = {
     tagInput.selectedIndex = 0;
   },
 
-  updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook) {
+  updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn) {
     recipeTitle.innerText = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId).name;
-    price.innerText = `$${(recipeRepo.recipes.find(recipe => {
-      return `${recipe.id}` === recipeId
-    }).calculateRecipeCost() / 100).toFixed(2)}`;
     recipeViewImage.innerHTML = `
       <img src="${recipeRepo.recipes.find(recipe => 
       `${recipe.id}` === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => 
       `${recipe.id}` === recipeId).name}">`
+      if(user.pantry.checkForIngredients(recipeRepo.recipes.find(recipe => 
+        {return `${recipe.id}` === recipeId}))) {
+          cookBtn.disabled = false;
+          canCookMessage.innerText = "You can make this recipe";
+        } else {
+          cookBtn.disabled = true;
+          canCookMessage.innerText = "You don't have enough ingredients in your pantry to cook this recipe"
+        }
     show([recipeView]);
     hide([homePage, browsePage, cookbook]);
   },
@@ -130,6 +143,43 @@ const domUpdates = {
       allRecipesButton.classList.add('grey') :
       recipeRepo.filterState === 'favorites' ?
         favoritesButton.classList.add('grey') : null;
+  },
+
+  updatePantryView(user, pantry, modal, pantryView) {
+    pantry.innerHTML = '';
+    user.pantry.ingredients.sort((a,b) => {
+      return (a.name > b.name) - (a.name < b.name)
+    })
+    user.pantry.ingredients.forEach(item => {
+      pantry.innerHTML += `
+      <li>${capitalizeFistLetters(item.name)} (${item.quantity.amount})</li>
+      `
+    })
+    show([modal, pantryView])
+  }, 
+
+  exitModalView(modal, pantryView, shoppingCartView) {
+    hide([modal, pantryView, shoppingCartView])
+  }, 
+
+  updateShoppingCartView(currentRecipe, shoppingCart, modal, shoppingCartView, user) {
+    shoppingCart.innerHTML = '';
+    currentRecipe.ingredients.forEach(ingredient => {
+      let ing = user.pantry.ingredients.find(ing => ing.id === ingredient.id)
+      !ing ? ing = {quantity: {amount: 0}} : null;
+      shoppingCart.innerHTML += `
+      <div class="cart-item">
+        <li>${capitalizeFistLetters(ingredient.name)}</li>
+        <input id="${ingredient.id}" class="counter-input" type="number" value="0" min="0"></input>
+        <p>(On hand: ${ing.quantity.amount})</p>
+      </div>
+      `
+    });
+    show([modal, shoppingCartView]);
+  }, 
+
+  resetModal(modal, pantryView, shoppingCartView) {
+    hide([modal, pantryView, shoppingCartView])
   }
 }
 

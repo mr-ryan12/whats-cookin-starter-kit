@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -10,6 +10,7 @@
       <h1 class="whats-cookin" id="whats-cookin">Whats Cookin</h1>
       <p class="greeting" id="greeting"></p>
       <section class="button-container">
+        <button class="nav-btn" id="pantry-btn">My Pantry</button>
         <button class="nav-btn" id="all-recipes-btn">All Recipes</button>
         <button class="nav-btn" id="favorites-btn">Favorites</button>
         <button class="nav-btn" id="cookbook-btn">Cookbook</button>
@@ -20,7 +21,7 @@
     </nav>
     <main>
       <section class="home-page">
-        <img src="" alt="cookies" class="featured-recipe-image">
+        <input type="image" src="" alt="cookies" class="featured-recipe-image">
         <i class="fa fa-heart heart-btn featured-heart-btn"></i>
         <i class="fa fa-bookmark save-recipe-btn featured-save-recipe-btn"></i>
         <section class="featured-recipe-info-container">
@@ -43,8 +44,28 @@
             <ol class="directions-list"></ol>
           </section>
         </section>
-        <section class="recipe-view-img">
-          <img src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="Cookies">
+        <section class="right-side">
+          <section class="recipe-view-img">
+            <img src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="Cookies">
+          </section>
+          <section class="recipe-view-btns">
+            <button class="recipe-view-btn" id="shopping-cart-btn">Buy Ingredients</button>
+            <button class="recipe-view-btn" id="cook-btn">Cook Now</button>
+            <p id="can-cook-message"></p>
+          </section>
+        </section>
+      </section>
+      <section class="modal hidden">
+        <section class="pantry-view hidden">
+          <ul class="pantry"></ul>
+          <i class="fa fa-times-circle exit-pantry-btn"></i>
+        </section>
+        <section class="shopping-cart-view hidden">
+          <form id="shopping-cart-form">
+            <ol class="shopping-cart"></ol>
+            <button class="buy-btn">Buy</button>
+          </form>
+          <i class="fa fa-times-circle exit-modal-btn"></i>
         </section>
       </section>
     </main>
