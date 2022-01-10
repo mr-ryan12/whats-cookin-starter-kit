@@ -274,7 +274,8 @@ h5 {
 }
 
 .pantry-view, 
-.shopping-cart-view {
+.shopping-cart-view,
+.error-message-section {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -289,7 +290,8 @@ h5 {
 }
 
 .exit-pantry-btn,
-.exit-modal-btn {
+.exit-modal-btn,
+.exit-err-msg-btn {
   font-size: 40px;
   position: fixed;
   right: 31%;
@@ -303,6 +305,12 @@ h5 {
   align-items: center;
   padding: 0;
   margin: 0;
+}
+
+.error-message-section {
+  display: flex;
+  flex-direction: row;
+  width: 50%
 }
 
 .cart-item {

@@ -158,9 +158,9 @@ const domUpdates = {
     show([modal, pantryView])
   }, 
 
-  exitModalView(modal, pantryView, shoppingCartView) {
-    hide([modal, pantryView, shoppingCartView])
-  }, 
+  exitModalView(modal, pantryView, shoppingCartView, errorMessage) {
+    hide([modal, pantryView, shoppingCartView, errorMessage])
+  },
 
   updateShoppingCartView(currentRecipe, shoppingCart, modal, shoppingCartView, user) {
     shoppingCart.innerHTML = '';
@@ -176,10 +176,15 @@ const domUpdates = {
       `
     });
     show([modal, shoppingCartView]);
-  }, 
+  },
 
-  resetModal(modal, pantryView, shoppingCartView) {
-    hide([modal, pantryView, shoppingCartView])
+  showErrorMessage(errorMessage, modal, shoppingCartView) {
+    show([modal, errorMessage])
+    hide([shoppingCartView])
+  },
+
+  resetModal(modal, pantryView, shoppingCartView, errorMessage) {
+    hide([modal, pantryView, shoppingCartView, errorMessage])
   }
 }
 
