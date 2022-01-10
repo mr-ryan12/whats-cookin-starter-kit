@@ -20,8 +20,8 @@ const getData = () => {
       createDropdownTags();
     })
     .catch(err => {
+      domUpdates.showErrorMessage(errorMessageSec, modal, shoppingCartView, pantry)
       console.log('something went wrong', err)
-      // domUpdates.showErrorMessage(errorMessage, modal)
     });
 }
 
@@ -285,7 +285,7 @@ function makePostRequest(data, currentIngredient, amount) {
       console.log(data);
     })
     .catch(err => {
-      domUpdates.showErrorMessage(errorMessageSec, modal, shoppingCartView)
+      domUpdates.showErrorMessage(errorMessageSec, modal, shoppingCartView, pantry)
       console.log(err)
     })
 }

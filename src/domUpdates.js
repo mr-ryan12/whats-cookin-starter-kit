@@ -178,9 +178,9 @@ const domUpdates = {
     show([modal, shoppingCartView]);
   },
 
-  showErrorMessage(errorMessage, modal, shoppingCartView) {
+  showErrorMessage(errorMessage, modal, shoppingCartView, pantry) {
     show([modal, errorMessage])
-    hide([shoppingCartView])
+    hide([shoppingCartView, pantry])
   },
 
   resetModal(modal, pantryView, shoppingCartView, errorMessage) {
