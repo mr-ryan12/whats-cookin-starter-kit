@@ -266,7 +266,7 @@ function buyIngredients(event) {
       return `${ingredient.id}` === input.id
     })
     if (!newIngredient) {
-      newIngredient = new Ingredient(parseInt(input.id), {amount: parseInt(input.value), unit: ''}, ingredientsData)
+      newIngredient = new Ingredient(parseInt(input.id), {amount: 0, unit: ''}, ingredientsData)
       user.pantry.addIngredient(newIngredient)
     }
     if(parseInt(input.value) > 0) {

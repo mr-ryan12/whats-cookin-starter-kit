@@ -4,7 +4,7 @@ class User {
   constructor(user, data) {
     this.name = user.name || 'Guest User';
     this.id = user.id || 0;
-    this.pantry = this.createPantry(user.pantry, data)
+    this.pantry = this.createPantry(user.pantry, data);
     this.favorites = [];
     this.cookbook = [];
   }
