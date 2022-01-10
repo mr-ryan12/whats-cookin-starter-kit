@@ -166,7 +166,9 @@ const domUpdates = {
     shoppingCart.innerHTML = '';
     currentRecipe.ingredients.forEach(ingredient => {
       let ing = user.pantry.ingredients.find(ing => ing.id === ingredient.id)
+      // let value;
       !ing ? ing = {quantity: {amount: 0}} : null;
+      // ingredient.quantity.amount > ing.quantity.amount ? value = ingredient.quantity.amount - ing.quantity.amount : value = 0;
       shoppingCart.innerHTML += `
       <div class="cart-item">
         <li>${capitalizeFistLetters(ingredient.name)}</li>

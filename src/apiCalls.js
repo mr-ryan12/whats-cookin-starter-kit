@@ -1,11 +1,11 @@
 // Fetch requests
-// const throwError = (response) => {
-//   if(response.ok) {
-//     return response.json()
-//   } else {
-//     throw new Error('Something went wrong. Please come back later and try again.')
-//   }
-// }
+const throwError = (response) => {
+  if(response.ok) {
+    return response.json()
+  } else {
+    throw new Error('Something went wrong. Please come back later and try again.')
+  }
+}
 
 const retrieveData = (api) => 
   fetch(`http://localhost:3001/api/v1/${api}`)
@@ -13,7 +13,7 @@ const retrieveData = (api) =>
       return response.json()
     })
 
-const usersApi = retrieveData('user');
+const usersApi = retrieveData('users');
 
 const recipesApi = retrieveData('recipes');
 
@@ -27,7 +27,7 @@ const updatePantry = (data) => {
       'Content-Type': 'application/json'
     }
   }) 
-  .then(response => response.json());
+  .then(response => throwError(response));
 }
   
 export {usersApi, recipesApi, ingredientsApi, updatePantry};
