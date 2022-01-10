@@ -158,15 +158,17 @@ const domUpdates = {
     show([modal, pantryView])
   }, 
 
-  exitModalView(modal, pantryView, shoppingCartView) {
-    hide([modal, pantryView, shoppingCartView])
-  }, 
+  exitModalView(modal, pantryView, shoppingCartView, errorMessage) {
+    hide([modal, pantryView, shoppingCartView, errorMessage])
+  },
 
   updateShoppingCartView(currentRecipe, shoppingCart, modal, shoppingCartView, user) {
     shoppingCart.innerHTML = '';
     currentRecipe.ingredients.forEach(ingredient => {
       let ing = user.pantry.ingredients.find(ing => ing.id === ingredient.id)
+      // let value;
       !ing ? ing = {quantity: {amount: 0}} : null;
+      // ingredient.quantity.amount > ing.quantity.amount ? value = ingredient.quantity.amount - ing.quantity.amount : value = 0;
       shoppingCart.innerHTML += `
       <div class="cart-item">
         <li>${capitalizeFistLetters(ingredient.name)}</li>
@@ -176,10 +178,15 @@ const domUpdates = {
       `
     });
     show([modal, shoppingCartView]);
-  }, 
+  },
 
-  resetModal(modal, pantryView, shoppingCartView) {
-    hide([modal, pantryView, shoppingCartView])
+  showErrorMessage(errorMessage, modal, shoppingCartView, pantry) {
+    show([modal, errorMessage])
+    hide([shoppingCartView, pantry])
+  },
+
+  resetModal(modal, pantryView, shoppingCartView, errorMessage) {
+    hide([modal, pantryView, shoppingCartView, errorMessage])
   }
 }
 

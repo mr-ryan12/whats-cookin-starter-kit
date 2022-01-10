@@ -43,7 +43,6 @@ class Pantry {
           )) : null;
           return acc;
         }, [])
-
     return result;
   }
 

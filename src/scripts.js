@@ -19,7 +19,10 @@ const getData = () => {
       assignFeaturedRecipe();
       createDropdownTags();
     })
-    .catch(err => console.log('something went wrong', err));
+    .catch(err => {
+      domUpdates.showErrorMessage(errorMessageSec, modal, shoppingCartView, pantry)
+      console.log('something went wrong', err)
+    });
 }
 
 // Query Selectors
@@ -51,10 +54,13 @@ const shoppingCart = document.querySelector('.shopping-cart');
 const shoppingCartView = document.querySelector('.shopping-cart-view');
 const exitPantryBtn = document.querySelector('.exit-pantry-btn');
 const exitModalBtn = document.querySelector('.exit-modal-btn');
+const exitErrMsgBtn = document.querySelector('.exit-err-msg-btn');
 const shoppingCartBtn = document.getElementById('shopping-cart-btn');
 const buyBtn = document.querySelector('.buy-btn');
 const canCookMessage = document.getElementById('can-cook-message');
 const cookBtn = document.getElementById('cook-btn');
+const errorMessage = document.getElementById('error-message');
+const errorMessageSec = document.querySelector('.error-message-section');
 
 
 // Event Listeners
@@ -68,14 +74,13 @@ whatsCookin.addEventListener('click', displayHomeView);
 pantryButton.addEventListener('click', viewPantry);
 exitModalBtn.addEventListener('click', exitModal);
 exitPantryBtn.addEventListener('click', exitModal);
+exitErrMsgBtn.addEventListener('click', exitModal);
 shoppingCartBtn.addEventListener('click', viewShoppingCart);
 buyBtn.addEventListener('click', buyIngredients);
 cookBtn.addEventListener('click', cookFood);
 
 
 //Functions
-const show = elements => elements.forEach(element => element.classList.remove('hidden'));
-const hide = elements => elements.forEach(element => element.classList.add('hidden'));
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -241,7 +246,7 @@ function viewPantry() {
 }
 
 function exitModal() {
-  domUpdates.exitModalView(modal, pantryView, shoppingCartView);
+  domUpdates.exitModalView(modal, pantryView, shoppingCartView, errorMessage);
 }
 
 function viewShoppingCart() {
@@ -274,11 +279,15 @@ function makePostRequest(data, currentIngredient, amount) {
   updatePantry(data)
     .then(data => {
       user.pantry.updateQuantity(currentIngredient, amount)
-      domUpdates.resetModal(modal, pantryView, shoppingCartView);
+      domUpdates.resetModal(modal, pantryView, shoppingCartView, errorMessageSec);
+      exitModal();
       domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, `${recipeRepo.currentRecipe.id}`, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn)
       console.log(data);
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      domUpdates.showErrorMessage(errorMessageSec, modal, shoppingCartView, pantry)
+      console.log(err)
+    })
 }
 
 function cookFood() {
