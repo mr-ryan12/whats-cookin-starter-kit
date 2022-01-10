@@ -291,7 +291,6 @@ function makePostRequest(data, currentIngredient, amount) {
 
 function cookFood() {
   recipeRepo.currentRecipe.ingredients.forEach(ingredient => {
-  console.log(typeof ingredient.quantity.amount)
   const quantity = -ingredient.quantity.amount;
     const data = { 
       userID: user.id, 

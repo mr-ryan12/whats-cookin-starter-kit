@@ -50,7 +50,6 @@ const domUpdates = {
   },
 
   updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn) {
-    console.log(typeof recipeId)
     recipeTitle.innerText = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId).name;
     recipeViewImage.innerHTML = `
       <img src="${recipeRepo.recipes.find(recipe => 
