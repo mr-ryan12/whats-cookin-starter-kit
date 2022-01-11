@@ -70,6 +70,9 @@ favoritesButton.addEventListener('click', filterFavorites);
 cookbookButton.addEventListener('click', viewCookbook);
 featuredRecipeImg.addEventListener('click', showRecipeView);
 whatsCookin.addEventListener('click', displayHomeView);
+whatsCookin.addEventListener('keyup', (event) => {
+  return event.code === 'Enter' ? displayHomeView() : null;
+})
 pantryButton.addEventListener('click', viewPantry);
 exitModalBtn.addEventListener('click', exitModal);
 exitPantryBtn.addEventListener('click', exitModal);
