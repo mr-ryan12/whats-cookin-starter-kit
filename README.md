@@ -25,23 +25,32 @@ Search for a specific recipe based on ingredient, name or tag
   
 Search within your favorites  
 ![search-favorites](https://user-images.githubusercontent.com/62816754/145887968-e63ee0ce-eca7-4cb2-a45e-47a88bd62f6a.gif)  
+
+Users are able to see what ingredients they have in thier pantry
+![pantry-view](https://user-images.githubusercontent.com/62816754/148869517-857091e2-d186-4136-817c-84a112618d06.gif)
+
+Users can add ingredients to thier pantry and use ingredients from thier pantry to cook a meal
+![buy-ingredients](https://user-images.githubusercontent.com/62816754/148869680-691fdd24-bf19-484d-a0b4-f3dcd08b4f60.gif)
+
+
    
 ## Technologies  
 JavaScript  
 HTML  
-CSS  
+SCSS  
 Mocha  
 Chai  
 Webpack  
-Node.js  
+Node.js
 
-## Setup
+## Setup 
   
-- Clone this repository down to your local machine by running:  
-  `git@github.com:mr-ryan12/whats-cookin-starter-kit.git`  
-- `cd` into the `whats-cookin` directory
-- Run `npm install`  
-- Run `npm start` to start your local server
+- Clone these repositories down to your local machine by running:  
+  `git@github.com:mr-ryan12/whats-cookin-starter-kit.git` 
+  `https://github.com/turingschool-examples/whats-cookin-api`
+- In seperate tabs, `cd` into `whats-cookin` and `whats-cookin-api` directories
+- In each directory, run `npm install`  
+- In each directory, run `npm start` to start your local server
 - Visit `http://localhost:8080/` in your web browser
    
 ## Links  
