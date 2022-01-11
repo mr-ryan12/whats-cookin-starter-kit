@@ -283,7 +283,6 @@ function makePostRequest(data, currentIngredient, amount) {
       domUpdates.resetModal(modal, pantryView, shoppingCartView, errorMessageSec);
       exitModal();
       domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, `${recipeRepo.currentRecipe.id}`, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn)
-      console.log(data);
     })
     .catch(err => {
       domUpdates.showErrorMessage(errorMessageSec, modal, shoppingCartView, pantry)
