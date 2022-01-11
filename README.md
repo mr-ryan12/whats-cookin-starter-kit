@@ -54,7 +54,7 @@ Node.js
 - Visit `http://localhost:8080/` in your web browser
    
 ## Links  
-Checkout the Turing spec sheet [here](https://frontend.turing.edu/projects/whats-cookin-part-one.html)  
+Checkout the Turing spec sheets [here](https://frontend.turing.edu/projects/whats-cookin-part-one.html) and [here](https://frontend.turing.edu/projects/whats-cookin-part-two.html) 
 
 ## Challenges and Wins  
 This was our first project that included Webpack and utilized fetch calls. It was interesting to learn about the process of fetching data and using it in our application. 
