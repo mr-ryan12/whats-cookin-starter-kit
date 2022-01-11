@@ -1,4 +1,4 @@
-import './styles.css';
+import './styles/index.scss';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
 import {usersApi, recipesApi, ingredientsApi, updatePantry} from './apiCalls';
@@ -45,7 +45,6 @@ const greeting = document.getElementById('greeting');
 const featuredRecipeImg = document.querySelector('.featured-recipe-image');
 const featuredRecipeName = document.querySelector('.featured-recipe-name');
 const whatsCookin = document.getElementById('whats-cookin');
-const tags = document.getElementById('tags');
 const pantryButton = document.getElementById('pantry-btn');
 const pantry = document.querySelector('.pantry');
 const modal = document.querySelector('.modal');
@@ -62,7 +61,6 @@ const cookBtn = document.getElementById('cook-btn');
 const errorMessage = document.getElementById('error-message');
 const errorMessageSec = document.querySelector('.error-message-section');
 
-
 // Event Listeners
 window.addEventListener('load', getData);
 allRecipesButton.addEventListener('click', displayBrowsePage);
@@ -71,6 +69,9 @@ favoritesButton.addEventListener('click', filterFavorites);
 cookbookButton.addEventListener('click', viewCookbook);
 featuredRecipeImg.addEventListener('click', showRecipeView);
 whatsCookin.addEventListener('click', displayHomeView);
+whatsCookin.addEventListener('keyup', (event) => {
+  return event.code === 'Enter' ? displayHomeView() : null;
+})
 pantryButton.addEventListener('click', viewPantry);
 exitModalBtn.addEventListener('click', exitModal);
 exitPantryBtn.addEventListener('click', exitModal);
@@ -94,8 +95,8 @@ function createDropdownTags() {
     });
     return acc;
   }, []);
-  allTags.sort()
-  domUpdates.updateTags(allTags)
+  allTags.sort();
+  domUpdates.updateTags(allTags, tagInput);
 }
 
 function assignFeaturedRecipe() {
@@ -266,10 +267,10 @@ function buyIngredients(event) {
       return `${ingredient.id}` === input.id
     })
     if (!newIngredient) {
-      newIngredient = new Ingredient(parseInt(input.id), {amount: parseInt(input.value), unit: ''}, ingredientsData)
+      newIngredient = new Ingredient(parseInt(input.id), {amount: 0, unit: ''}, ingredientsData)
       user.pantry.addIngredient(newIngredient)
     }
-    if(parseInt(input.value) > 0) {
+    if (parseInt(input.value) > 0) {
       makePostRequest(data, newIngredient, parseInt(input.value));
     }
   })
@@ -282,7 +283,6 @@ function makePostRequest(data, currentIngredient, amount) {
       domUpdates.resetModal(modal, pantryView, shoppingCartView, errorMessageSec);
       exitModal();
       domUpdates.updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, `${recipeRepo.currentRecipe.id}`, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn)
-      console.log(data);
     })
     .catch(err => {
       domUpdates.showErrorMessage(errorMessageSec, modal, shoppingCartView, pantry)
@@ -292,7 +292,7 @@ function makePostRequest(data, currentIngredient, amount) {
 
 function cookFood() {
   recipeRepo.currentRecipe.ingredients.forEach(ingredient => {
-  const quantity = -ingredient.quantity.amount;
+    const quantity = -ingredient.quantity.amount;
     const data = { 
       userID: user.id, 
       ingredientID: parseInt(ingredient.id), 

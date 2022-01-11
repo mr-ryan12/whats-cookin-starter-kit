@@ -7,6 +7,7 @@ class Pantry {
   }
 
   buildPantry(pantry, data) {
+    !pantry ? pantry = [] : null;
     return pantry.map(item => {
       return new Ingredient(item.ingredient, {amount: item.amount, unit: ''}, data)
     })

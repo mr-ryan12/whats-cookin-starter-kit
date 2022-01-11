@@ -1,6 +1,6 @@
 // Fetch requests
 const throwError = (response) => {
-  if(response.ok) {
+  if (response.ok) {
     return response.json()
   } else {
     throw new Error('Something went wrong. Please come back later and try again.')
@@ -27,7 +27,7 @@ const updatePantry = (data) => {
       'Content-Type': 'application/json'
     }
   }) 
-  .then(response => throwError(response));
+    .then(response => throwError(response));
 }
   
 export {usersApi, recipesApi, ingredientsApi, updatePantry};

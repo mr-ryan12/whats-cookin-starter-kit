@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import User from '../src/classes/User';
+import Pantry from '../src/classes/Pantry';
 import Recipe from '../src/classes/Recipe';
 import userData from '../src/data/users-test-data';
 import recipesData from '../src/data/recipe-test-data.js';
@@ -12,7 +13,7 @@ describe('User', () => {
   let wings;
 
   beforeEach(() => {
-    user = new User(userData[0]);
+    user = new User(userData[0], ingredientsData);
     grilledCheese = new Recipe(
       recipesData[0].id,
       recipesData[0].image,
@@ -55,14 +56,14 @@ describe('User', () => {
   });
 
   it('should have a pantry', () => {
-    expect(user.pantry).to.be.an('array');
-    expect(user.pantry[0].amount).to.equal(2);
-    expect(user.pantry[0].ingredient).to.equal(6150);
+    expect(user.pantry).to.be.an.instanceof(Pantry);
+    expect(user.pantry.ingredients[0].quantity.amount).to.equal(2);
+    expect(user.pantry.ingredients[0].id).to.equal(6150);
   });
 
   it('should have an empty pantry if no pantry is supplied', () => {
     const user1 = new User({});
-    expect(user1.pantry).to.deep.equal([]);
+    expect(user1.pantry.ingredients).to.deep.equal([]);
   });
 
   it('should have a list of favorite recipes', () => {
