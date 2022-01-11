@@ -26,11 +26,10 @@ Search for a specific recipe based on ingredient, name or tag
 Search within your favorites  
 ![search-favorites](https://user-images.githubusercontent.com/62816754/145887968-e63ee0ce-eca7-4cb2-a45e-47a88bd62f6a.gif)  
 
-Users are able to see what ingredients they have in thier pantry
-
+Users are able to see what ingredients they have in their pantry  
 ![pantry-view](https://user-images.githubusercontent.com/62816754/148869517-857091e2-d186-4136-817c-84a112618d06.gif)
 
-Users can add ingredients to thier pantry and use ingredients from thier pantry to cook a meal
+Users can add ingredients to their pantry and use ingredients from their pantry to cook a meal  
 ![buy-ingredients](https://user-images.githubusercontent.com/62816754/148869680-691fdd24-bf19-484d-a0b4-f3dcd08b4f60.gif)
 
 
