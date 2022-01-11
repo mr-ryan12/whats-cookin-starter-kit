@@ -1,4 +1,4 @@
-import './styles.css';
+import './styles/index.scss';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
 import {usersApi, recipesApi, ingredientsApi, updatePantry} from './apiCalls';
@@ -60,7 +60,6 @@ const canCookMessage = document.getElementById('can-cook-message');
 const cookBtn = document.getElementById('cook-btn');
 const errorMessage = document.getElementById('error-message');
 const errorMessageSec = document.querySelector('.error-message-section');
-
 
 // Event Listeners
 window.addEventListener('load', getData);

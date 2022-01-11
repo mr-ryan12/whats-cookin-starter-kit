@@ -1,7 +1,9 @@
+@import './_variables.scss';
+
 body {
-  background-color:#FFF;
+  background-color: $background-color;
   margin: 0;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: $main-font;
 }
 
 .nav-bar {
@@ -11,13 +13,12 @@ body {
   justify-content: flex-end;
   align-items: center;
   margin-top: 10px;
-  background-color: rgba(0, 128, 128, .5);
+  background-color: $nav-color;
   position: fixed;
   top: 0;
   height: 8vh;
   margin: 0px;
   z-index: 9999;
-  border-bottom: 1px solid grey;
 }
 
 h1 {
@@ -32,7 +33,7 @@ h1 {
 }
 
 .search-bar::-webkit-input-placeholder {
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: $main-font;
 }
 
 .button-container {
@@ -68,7 +69,7 @@ h1 {
 }
 
 .featured-recipe-info-container {
-  background-color: #FFF;
+  background-color: $background-color;
   width: 100%;
   left: 23%;
   bottom: 20%;
@@ -110,7 +111,7 @@ h1 {
 }
 
 .recipe-card {
-  box-shadow: 10px 10px 5px grey;
+  box-shadow: 10px 10px 5px $light-gray;
   position: relative;
   margin: 0 0 2vh 0;
   height: 72%;
@@ -172,19 +173,19 @@ h1 {
 }
 
 i {
-  color: #D3D3D3;
+  color: $unselected-color;
 }
 
 .red {
-  color: red;
+  color: $favorite-color;
 }
 
 .yellow {
-  color: yellow;
+  color: $cookbook-color;
 }
 
 .grey {
-  background-color: #BABABA;
+  background-color: $light-gray;
 }
 
 .recipe-card:hover {
@@ -216,7 +217,7 @@ i {
   align-items: center;
   width: 50%;
   margin-top: 8vh;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: $main-font;
 }
 
 .recipe-view-img {
@@ -248,7 +249,7 @@ h5 {
 .directions-view {
   display: flex;
   width: 30vw;
-  background-color: lightgrey;
+  background-color: $light-gray;
   margin: 1vh;
   border-radius: 10px;
   flex-direction: column;
@@ -267,8 +268,7 @@ h5 {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: $modal-color;
   display: flex;
   justify-content: space-between;
 }
@@ -279,10 +279,10 @@ h5 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: #fefefe;
+  background-color: $background-color;
   margin: auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid $light-gray;
   width: 40%;
   max-height: calc(100vh - 210px);
   overflow-y: auto;
