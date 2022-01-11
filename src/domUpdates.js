@@ -10,7 +10,7 @@ const capitalizeFistLetters = string => {
 }
 
 const domUpdates = {
-  updateTags(allTags) {
+  updateTags(allTags, tags) {
     tags.innerHTML = '<option value="">Choose a Tag</option>';
     allTags.forEach(tag => {
       tags.innerHTML += `<option value="${tag}">${tag}</option>`
@@ -18,14 +18,14 @@ const domUpdates = {
   },
 
   updateFeaturedRecipe(featuredRecipe, featuredRecipeImg, featuredRecipeName, homePage) {
-  featuredRecipeImg.src = featuredRecipe.image;
-  featuredRecipeName.innerText = featuredRecipe.name;
-  homePage.id = `${featuredRecipe.id}`;
+    featuredRecipeImg.src = featuredRecipe.image;
+    featuredRecipeName.innerText = featuredRecipe.name;
+    homePage.id = `${featuredRecipe.id}`;
   },
 
   updateCurrentRecipes(page, source) {
     page.innerHTML = '';
-      source.forEach(recipe => {
+    source.forEach(recipe => {
       page.innerHTML += `
         <section class="individual-recipe-card">
           <section class="recipe-card" id="${recipe.id}">
@@ -50,19 +50,18 @@ const domUpdates = {
   },
 
   updateRecipeView(recipeTitle, price, recipeRepo, recipeViewImage, recipeId, recipeView, homePage, browsePage, cookbook, canCookMessage, user, cookBtn) {
+    const thisRecipe = recipeRepo.recipes.find(recipe => {
+      return `${recipe.id}` === recipeId
+    });
     recipeTitle.innerText = recipeRepo.recipes.find(recipe => `${recipe.id}` === recipeId).name;
-    recipeViewImage.innerHTML = `
-      <img src="${recipeRepo.recipes.find(recipe => 
-      `${recipe.id}` === recipeId).image}" alt="${recipeRepo.recipes.find(recipe => 
-      `${recipe.id}` === recipeId).name}">`
-      if(user.pantry.checkForIngredients(recipeRepo.recipes.find(recipe => 
-        {return `${recipe.id}` === recipeId}))) {
-          cookBtn.disabled = false;
-          canCookMessage.innerText = "You can make this recipe";
-        } else {
-          cookBtn.disabled = true;
-          canCookMessage.innerText = "You don't have enough ingredients in your pantry to cook this recipe"
-        }
+    recipeViewImage.innerHTML = `<img src="${thisRecipe.image}" alt="${thisRecipe.name}">`
+    if (user.pantry.checkForIngredients(thisRecipe)) {
+      cookBtn.disabled = false;
+      canCookMessage.innerText = "You can make this recipe";
+    } else {
+      cookBtn.disabled = true;
+      canCookMessage.innerText = "You don't have enough ingredients in your pantry to cook this recipe"
+    }
     show([recipeView]);
     hide([homePage, browsePage, cookbook]);
   },
@@ -117,9 +116,9 @@ const domUpdates = {
     cookbook,
     searchBar,
     tagInput
-    ) {
-      cookbookButton.classList.add('grey');
-      allRecipesButton.classList.remove('grey');
+  ) {
+    cookbookButton.classList.add('grey');
+    allRecipesButton.classList.remove('grey');
     favoritesButton.classList.remove('grey');
     hide([homePage, recipeView, browsePage]);
     show([cookbook]);
@@ -147,7 +146,7 @@ const domUpdates = {
 
   updatePantryView(user, pantry, modal, pantryView) {
     pantry.innerHTML = '';
-    user.pantry.ingredients.sort((a,b) => {
+    user.pantry.ingredients.sort((a, b) => {
       return (a.name > b.name) - (a.name < b.name)
     })
     user.pantry.ingredients.forEach(item => {

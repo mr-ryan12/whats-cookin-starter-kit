@@ -45,7 +45,6 @@ const greeting = document.getElementById('greeting');
 const featuredRecipeImg = document.querySelector('.featured-recipe-image');
 const featuredRecipeName = document.querySelector('.featured-recipe-name');
 const whatsCookin = document.getElementById('whats-cookin');
-const tags = document.getElementById('tags');
 const pantryButton = document.getElementById('pantry-btn');
 const pantry = document.querySelector('.pantry');
 const modal = document.querySelector('.modal');
@@ -94,8 +93,8 @@ function createDropdownTags() {
     });
     return acc;
   }, []);
-  allTags.sort()
-  domUpdates.updateTags(allTags)
+  allTags.sort();
+  domUpdates.updateTags(allTags, tagInput);
 }
 
 function assignFeaturedRecipe() {
@@ -269,7 +268,7 @@ function buyIngredients(event) {
       newIngredient = new Ingredient(parseInt(input.id), {amount: 0, unit: ''}, ingredientsData)
       user.pantry.addIngredient(newIngredient)
     }
-    if(parseInt(input.value) > 0) {
+    if (parseInt(input.value) > 0) {
       makePostRequest(data, newIngredient, parseInt(input.value));
     }
   })
@@ -292,7 +291,7 @@ function makePostRequest(data, currentIngredient, amount) {
 
 function cookFood() {
   recipeRepo.currentRecipe.ingredients.forEach(ingredient => {
-  const quantity = -ingredient.quantity.amount;
+    const quantity = -ingredient.quantity.amount;
     const data = { 
       userID: user.id, 
       ingredientID: parseInt(ingredient.id), 

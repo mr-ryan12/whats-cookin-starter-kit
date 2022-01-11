@@ -10,7 +10,6 @@ import userData from '../src/data/users-test-data';
 describe('Pantry', () => {
 
   let user;
-  let pantry;
   let grilledCheese;
   let wings;
   let tobasco;
