@@ -51,6 +51,7 @@ h1 {
   font-family: inherit;
   border: none;
   border-radius: 5px;
+  background-color: $button-color;
 }
 
 .home-page {
@@ -317,12 +318,30 @@ li,
   vertical-align: middle;
 }
 
-.buy-btn {
-  width: 100%;
-}
-
 .counter-input {
   width: 40px;
+}
+
+.recipe-view-btn,
+.buy-btn {
+  border: none;
+  border-radius: 5px;
+  background-color: $button-color;
+  margin: 10px;
+  padding: 5px;
+}
+
+.recipe-view-btn,
+.buy-btn:hover {
+  cursor: pointer;
+}
+
+.recipe-view-btn:disabled:hover {
+  cursor: default;
+}
+
+.buy-btn {
+  width: 100%;
 }
 
 .hidden { 
