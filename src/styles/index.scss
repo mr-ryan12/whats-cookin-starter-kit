@@ -1,4 +1,5 @@
 @import './_variables.scss';
+@import './_mixins.scss';
 
 body {
   background-color: $background-color;
@@ -8,8 +9,7 @@ body {
 
 .nav-bar {
   width: 100%;
-  display: flex;
-  flex-direction: row;
+  @include display-flex-row();
   justify-content: flex-end;
   align-items: center;
   margin-top: 10px;
@@ -17,7 +17,7 @@ body {
   position: fixed;
   top: 0;
   height: 8vh;
-  margin: 0px;
+  margin: 0;
   z-index: 9999;
 }
 
@@ -54,10 +54,8 @@ h1 {
 }
 
 .home-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  @include display-flex-column();
+  @include center();
   position: relative;
   margin-top: 8vh;
 }
@@ -195,26 +193,22 @@ i {
 }
 
 .recipe-view {
-  display: flex;
-  flex-direction: row;
+  @include display-flex-row();
   justify-content: space-between;
 }
 
 .right-side {
-  display: flex;
-  flex-direction: column;
+  @include display-flex-column();
   width: 50%;
 }
 
 .recipe-view-btns {
-  display: flex;
-  flex-direction: row;
+  @include display-flex-row();
 }
 
 .recipe-info { 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include display-flex-column();
+  @include center();
   width: 50%;
   margin-top: 8vh;
   font-family: $main-font;
@@ -247,12 +241,11 @@ h5 {
 
 .ingredients-view,
 .directions-view {
-  display: flex;
+  @include display-flex-column();
   width: 30vw;
   background-color: $light-gray;
   margin: 1vh;
   border-radius: 10px;
-  flex-direction: column;
   align-items: center;
 }
 
@@ -276,8 +269,7 @@ h5 {
 .pantry-view, 
 .shopping-cart-view,
 .error-message-section {
-  display: flex;
-  flex-direction: row;
+  @include display-flex-row();
   justify-content: center;
   background-color: $background-color;
   margin: auto;
@@ -299,8 +291,7 @@ h5 {
 
 .pantry, 
 .shopping-cart {
-  display: flex;
-  flex-direction: column;
+  @include display-flex-column();
   width: 100%;
   align-items: center;
   padding: 0;
@@ -308,14 +299,12 @@ h5 {
 }
 
 .error-message-section {
-  display: flex;
-  flex-direction: row;
+  @include display-flex-row();
   width: 50%
 }
 
 .cart-item {
-  display: flex;
-  flex-direction: row;
+  @include display-flex-row();
 }
 
 .cart-item {
